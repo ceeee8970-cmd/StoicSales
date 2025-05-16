@@ -92,10 +92,8 @@ const JournalPage: React.FC = () => {
   return (
     <div className="p-6 md:p-10">
       <div className="mb-8">
-        <Link href="/">
-          <a className="text-accent hover:text-accent-dark transition-colors">
-            &larr; Back to Dashboard
-          </a>
+        <Link href="/" className="text-accent hover:text-accent-dark transition-colors">
+          &larr; Back to Dashboard
         </Link>
         <h1 className="font-heading text-3xl font-bold text-primary mt-4 mb-2">
           Stoic Sales Journal

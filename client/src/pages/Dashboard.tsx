@@ -69,11 +69,9 @@ const Dashboard: React.FC = () => {
       <div className="mb-12">
         <div className="flex items-center justify-between mb-6">
           <h2 className="font-heading text-xl font-bold text-primary">Continue Learning</h2>
-          <Link href="/modules">
-            <a className="text-sm text-accent hover:text-accent-dark font-medium flex items-center">
-              View all modules
-              <ChevronRightIcon className="h-4 w-4 ml-1" />
-            </a>
+          <Link href="/modules" className="text-sm text-accent hover:text-accent-dark font-medium flex items-center">
+            View all modules
+            <ChevronRightIcon className="h-4 w-4 ml-1" />
           </Link>
         </div>
         

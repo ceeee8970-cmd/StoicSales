@@ -99,21 +99,19 @@ const ModuleCard: React.FC<ModuleCardProps> = ({
           </div>
           
           <Link href={isLocked ? "#" : `/modules/${id}`}>
-            <a>
-              <button 
-                className={cn(
-                  "rounded-lg px-4 py-2 text-sm transition duration-200",
-                  status === "completed" 
-                    ? "border border-primary text-primary hover:bg-primary hover:text-white" 
-                    : status === "in-progress"
-                      ? "bg-primary hover:bg-primary-dark text-white" 
-                      : "bg-neutral-light text-neutral-medium cursor-not-allowed"
-                )}
-                disabled={isLocked}
-              >
-                {status === "completed" ? "Review" : status === "in-progress" ? "Continue" : "Start"}
-              </button>
-            </a>
+            <button 
+              className={cn(
+                "rounded-lg px-4 py-2 text-sm transition duration-200",
+                status === "completed" 
+                  ? "border border-primary text-primary hover:bg-primary hover:text-white" 
+                  : status === "in-progress"
+                    ? "bg-primary hover:bg-primary-dark text-white" 
+                    : "bg-neutral-light text-neutral-medium cursor-not-allowed"
+              )}
+              disabled={isLocked}
+            >
+              {status === "completed" ? "Review" : status === "in-progress" ? "Continue" : "Start"}
+            </button>
           </Link>
         </div>
       </div>

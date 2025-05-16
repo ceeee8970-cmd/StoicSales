@@ -31,14 +31,13 @@ const Sidebar: React.FC = () => {
     children: React.ReactNode 
   }) => (
     <li>
-      <Link href={to}>
-        <a className={cn(
+      <Link href={to} 
+        className={cn(
           "flex items-center text-white hover:opacity-100 transition-opacity",
           isActive(to) ? "opacity-90" : "opacity-70"
         )}>
           <Icon className="h-5 w-5 mr-3" />
           {children}
-        </a>
       </Link>
     </li>
   );
