@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import UserWelcome from "@/components/dashboard/UserWelcome";
 import DailyWisdom from "@/components/dashboard/DailyWisdom";
 import ModuleCard from "@/components/dashboard/ModuleCard";
@@ -8,6 +8,7 @@ import SalesCallSimulator from "@/components/practice/SalesCallSimulator";
 import JournalEntry from "@/components/practice/JournalEntry";
 import { ChevronRightIcon } from "@/assets/icons";
 import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 
 const Dashboard: React.FC = () => {
   // In a real implementation, this user data would come from an API
@@ -17,31 +18,30 @@ const Dashboard: React.FC = () => {
     maxPoints: 100
   };
   
-  const moduleData = [
-    {
-      id: 1,
-      title: "Module 1: Introduction to Stoic Selling",
-      description: "Understand the philosophy behind a more intentional approach to sales.",
-      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300",
-      status: "completed" as const
-    },
-    {
-      id: 2,
-      title: "Module 2: Core Stoic Principles for Sales",
-      description: "Master the four key stoic principles that transform how you approach sales conversations.",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300",
-      status: "in-progress" as const,
-      completed: 2,
-      total: 4
-    },
-    {
-      id: 3,
-      title: "Module 3: Human-Centered Sales Techniques",
-      description: "Learn to sell with presence and permission rather than pressure and persuasion.",
-      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300",
-      status: "not-started" as const
+  // Fetch modules from the API
+  const { data: modulesData, isLoading, error } = useQuery({
+    queryKey: ['/api/modules'],
+    queryFn: async () => {
+      const response = await fetch('/api/modules');
+      if (!response.ok) {
+        throw new Error('Failed to fetch modules');
+      }
+      return response.json();
     }
-  ];
+  });
+  
+  // Transform the API data to the format needed by ModuleCard
+  const moduleData = modulesData?.map((module: any, index: number) => ({
+    id: module.id,
+    title: module.title,
+    description: module.description,
+    image: module.imageUrl || `https://images.unsplash.com/photo-${1506126613408 + index}-eca07ce68773?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300`,
+    status: index === 0 ? "completed" as const : 
+            index === 1 ? "in-progress" as const : 
+            "not-started" as const,
+    completed: index === 1 ? 2 : undefined,
+    total: index === 1 ? 4 : undefined
+  })) || [];
   
   const teamChallenge = {
     title: "Dichotomy of Control Challenge",
@@ -69,25 +69,34 @@ const Dashboard: React.FC = () => {
       <div className="mb-12">
         <div className="flex items-center justify-between mb-6">
           <h2 className="font-heading text-xl font-bold text-primary">Continue Learning</h2>
-          <Link href="/modules" className="text-sm text-accent hover:text-accent-dark font-medium flex items-center">
+          {/* Fixed link to existing route */}
+          <Link href="/" className="text-sm text-accent hover:text-accent-dark font-medium flex items-center">
             View all modules
             <ChevronRightIcon className="h-4 w-4 ml-1" />
           </Link>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {moduleData.map(module => (
-            <ModuleCard
-              key={module.id}
-              id={module.id}
-              title={module.title}
-              description={module.description}
-              image={module.image}
-              status={module.status}
-              completed={module.completed}
-              total={module.total}
-            />
-          ))}
+          {isLoading ? (
+            <p>Loading modules...</p>
+          ) : error ? (
+            <p>Error loading modules. Please try again.</p>
+          ) : moduleData && moduleData.length > 0 ? (
+            moduleData.map(module => (
+              <ModuleCard
+                key={module.id}
+                id={module.id}
+                title={module.title}
+                description={module.description}
+                image={module.image}
+                status={module.status}
+                completed={module.completed}
+                total={module.total}
+              />
+            ))
+          ) : (
+            <p>No modules found.</p>
+          )}
         </div>
       </div>
       
