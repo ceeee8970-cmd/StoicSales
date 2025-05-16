@@ -8,6 +8,7 @@ import Dashboard from "@/pages/Dashboard";
 import ModulePage from "@/pages/ModulePage";
 import SalesCallPractice from "@/pages/SalesCallPractice";
 import JournalPage from "@/pages/JournalPage";
+import ResourcesPage from "@/pages/ResourcesPage";
 import NotFound from "@/pages/not-found";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileHeader from "@/components/layout/MobileHeader";
@@ -78,6 +79,7 @@ function Router() {
           <Route path="/modules/:id" component={ModulePage} />
           <Route path="/practice/sales-calls" component={SalesCallPractice} />
           <Route path="/journal" component={JournalPage} />
+          <Route path="/resources" component={ResourcesPage} />
           <Route component={NotFound} />
         </Switch>
       </div>

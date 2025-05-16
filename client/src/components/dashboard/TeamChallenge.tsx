@@ -58,15 +58,11 @@ const TeamChallenge: React.FC<TeamChallengeProps> = ({
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/practice/challenges/team">
-                <a className="bg-primary hover:bg-primary-dark text-white rounded-lg px-6 py-3 text-sm font-medium transition duration-200 text-center">
-                  Continue Challenge
-                </a>
+              <Link href="/practice/challenges/team" className="bg-primary hover:bg-primary-dark text-white rounded-lg px-6 py-3 text-sm font-medium transition duration-200 text-center">
+                Continue Challenge
               </Link>
-              <Link href="/progress/team">
-                <a className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-lg px-6 py-3 text-sm font-medium transition duration-200 text-center">
-                  View Team Progress
-                </a>
+              <Link href="/progress/team" className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-lg px-6 py-3 text-sm font-medium transition duration-200 text-center">
+                View Team Progress
               </Link>
             </div>
           </div>
