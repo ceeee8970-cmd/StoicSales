@@ -34,7 +34,7 @@ const Sidebar: React.FC = () => {
       <Link href={to} 
         className={cn(
           "flex items-center hover:opacity-100 transition-opacity font-medium",
-          isActive(to) ? "text-white opacity-90" : "text-neutral-50 opacity-90"
+          isActive(to) ? "text-white font-bold" : "text-white opacity-80"
         )}>
           <Icon className="h-5 w-5 mr-3" />
           {children}

@@ -9,7 +9,7 @@
   --foreground: 24 10% 10%;
   
   --muted: 60 4.8% 95.9%;
-  --muted-foreground: 25 5.3% 44.7%;
+  --muted-foreground: 25 5.3% 35%;
   
   --popover: 0 0% 100%;
   --popover-foreground: 24 10% 10%;
@@ -31,10 +31,17 @@
   --accent: 36 18% 52%;
   --accent-foreground: 0 0% 100%;
   
+  --accent-dark: 36 25% 35%;
+  
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 60 9.1% 97.8%;
   
   --ring: 24 5.4% 63.9%;
+  
+  --neutral-dark: 24 10% 10%;
+  --neutral-medium: 25 5% 25%;
+  --neutral-light: 25 5% 85%;
+  --neutral-lightest: 25 5% 95%;
   
   --radius: 0.5rem;
 }
