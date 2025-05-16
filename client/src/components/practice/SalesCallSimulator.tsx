@@ -2,15 +2,35 @@ import React, { useState, useReducer, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import AudioRecorder from "@/components/ui/audio-recorder";
-import { MicrophoneIcon, PlayIcon } from "@/assets/icons";
+import { MicrophoneIcon, PlayIcon, CheckCircleIcon } from "@/assets/icons";
 import { initialState, recorderReducer } from "@/lib/audioRecorder";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+import { Progress } from "@/components/ui/progress";
 
 interface Scenario {
   id: string;
   title: string;
   type: string;
   scenario: string;
+}
+
+interface StoicPrinciple {
+  principle: string;
+  application: string;
+}
+
+interface AIAnalysis {
+  summary: string;
+  strengths: string[];
+  improvements: string[];
+  stoicPrinciples: StoicPrinciple[];
+  score: number;
+}
+
+interface AnalysisResponse {
+  transcript: string;
+  analysis: AIAnalysis;
 }
 
 const scenarios: Scenario[] = [
@@ -44,6 +64,9 @@ const SalesCallSimulator: React.FC = () => {
   const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
   const [recorderState, recorderDispatch] = useReducer(recorderReducer, initialState);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResponse | null>(null);
+  const [showResults, setShowResults] = useState(false);
   const { toast } = useToast();
   
   const currentScenario = scenarios[currentScenarioIndex];
@@ -65,6 +88,8 @@ const SalesCallSimulator: React.FC = () => {
   const resetRecording = () => {
     recorderDispatch({ type: "RESET_RECORDER" });
     setIsPlaying(false);
+    setShowResults(false);
+    setAnalysisResult(null);
   };
   
   const togglePlayback = () => {
@@ -76,6 +101,54 @@ const SalesCallSimulator: React.FC = () => {
       title: "Example Responses",
       description: "In a real implementation, this would open example responses for this scenario.",
     });
+  };
+  
+  const analyzeRecording = async () => {
+    if (!recorderState.audio) {
+      toast({
+        title: "No recording available",
+        description: "Please record your response first.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    try {
+      setIsAnalyzing(true);
+      
+      // Convert the audio URL to a blob
+      const response = await fetch(recorderState.audio);
+      const audioBlob = await response.blob();
+      
+      // Create a FormData object to send the audio file
+      const formData = new FormData();
+      formData.append("audio", audioBlob, "recording.webm");
+      formData.append("scenarioText", currentScenario.scenario);
+      
+      // Send the audio for analysis
+      const result = await apiRequest<AnalysisResponse>({
+        url: "/api/analyze-recording",
+        method: "POST",
+        body: formData,
+        headers: {
+          // Don't set Content-Type header when using FormData
+          // browser will set it with the correct boundary
+        },
+      });
+      
+      setAnalysisResult(result);
+      setShowResults(true);
+      
+    } catch (error) {
+      console.error("Error analyzing recording:", error);
+      toast({
+        title: "Analysis failed",
+        description: "There was an error analyzing your recording. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
   
   // Handle audio playback

@@ -7,6 +7,7 @@ import { promisify } from "util";
 import multer from "multer";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
+import { analyzeSalesResponse, transcribeAudio } from "./services/ai-analysis";
 import { 
   insertUserSchema, 
   insertModuleSchema, 
@@ -444,12 +445,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // AI Analysis endpoint
+  app.post("/api/analyze-recording", upload.single("audio"), async (req: Request, res: Response) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "No audio file provided" });
+      }
+
+      const { scenarioText } = req.body;
+      
+      if (!scenarioText) {
+        return res.status(400).json({ message: "Scenario text is required" });
+      }
+      
+      // In a real implementation, we would use a speech-to-text service
+      // For this demo, we use a mock transcription
+      const transcript = await transcribeAudio(req.file.buffer);
+      
+      // Analyze the transcribed text using Claude
+      const analysis = await analyzeSalesResponse(scenarioText, transcript);
+      
+      res.json({
+        transcript,
+        analysis
+      });
+    } catch (err: any) {
+      handleApiError(err, res);
+    }
+  });
+
   // Serve static audio files
   app.use("/uploads", (req, res, next) => {
     const filePath = join(UPLOADS_DIR, req.path);
     res.sendFile(filePath, err => {
       if (err) {
-        if (err.code === "ENOENT") {
+        if ((err as any).code === "ENOENT") {
           return res.status(404).json({ message: "Recording file not found" });
         }
         return res.status(500).json({ message: "Error serving recording file" });

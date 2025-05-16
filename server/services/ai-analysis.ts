@@ -56,6 +56,9 @@ export async function analyzeSalesResponse(
     });
 
     // Extract the JSON from the response
+    if (response.content[0].type !== 'text') {
+      throw new Error('Expected text response from Claude');
+    }
     const jsonString = response.content[0].text;
     const feedback = JSON.parse(jsonString) as AIFeedback;
     
