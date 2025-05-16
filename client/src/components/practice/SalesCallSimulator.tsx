@@ -6,6 +6,7 @@ import { MicrophoneIcon, PlayIcon, CheckCircleIcon } from "@/assets/icons";
 import { initialState, recorderReducer } from "@/lib/audioRecorder";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
 interface Scenario {
@@ -117,8 +118,8 @@ const SalesCallSimulator: React.FC = () => {
       setIsAnalyzing(true);
       
       // Convert the audio URL to a blob
-      const response = await fetch(recorderState.audio);
-      const audioBlob = await response.blob();
+      const audioResponse = await fetch(recorderState.audio);
+      const audioBlob = await audioResponse.blob();
       
       // Create a FormData object to send the audio file
       const formData = new FormData();
@@ -126,17 +127,17 @@ const SalesCallSimulator: React.FC = () => {
       formData.append("scenarioText", currentScenario.scenario);
       
       // Send the audio for analysis
-      const result = await apiRequest<AnalysisResponse>({
-        url: "/api/analyze-recording",
-        method: "POST",
+      const analysisResponse = await fetch('/api/analyze-recording', {
+        method: 'POST',
         body: formData,
-        headers: {
-          // Don't set Content-Type header when using FormData
-          // browser will set it with the correct boundary
-        },
       });
       
-      setAnalysisResult(result);
+      if (!analysisResponse.ok) {
+        throw new Error(`Analysis failed with status: ${analysisResponse.status}`);
+      }
+      
+      const result = await analysisResponse.json();
+      setAnalysisResult(result as AnalysisResponse);
       setShowResults(true);
       
     } catch (error) {
@@ -188,39 +189,132 @@ const SalesCallSimulator: React.FC = () => {
           Practice handling objections with calm and clarity. Record your response to challenging scenarios.
         </p>
         
-        {/* Recording Interface */}
-        <div className="bg-neutral-lightest rounded-lg p-5 mb-5">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white mr-3">
-                <MicrophoneIcon className="h-4 w-4" />
+        {!showResults ? (
+          /* Recording Interface */
+          <div className="bg-neutral-lightest rounded-lg p-5 mb-5">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white mr-3">
+                  <MicrophoneIcon className="h-4 w-4" />
+                </div>
+                <div>
+                  <h4 className="font-medium">{currentScenario.title}</h4>
+                  <p className="text-xs text-neutral-medium">{currentScenario.type}</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-medium">{currentScenario.title}</h4>
-                <p className="text-xs text-neutral-medium">{currentScenario.type}</p>
-              </div>
+              
+              {recorderState.audio && (
+                <button 
+                  className="bg-accent text-white rounded-full w-10 h-10 flex items-center justify-center"
+                  onClick={togglePlayback}
+                  aria-label={isPlaying ? "Pause recording" : "Play recording"}
+                >
+                  <PlayIcon className="h-5 w-5" />
+                </button>
+              )}
             </div>
             
+            <p className="text-sm mb-4 bg-white p-3 rounded-lg border border-neutral-light italic">
+              "{currentScenario.scenario}"
+            </p>
+            
+            <AudioRecorder 
+              recorderState={recorderState}
+              recorderDispatch={recorderDispatch}
+            />
+            
             {recorderState.audio && (
-              <button 
-                className="bg-accent text-white rounded-full w-10 h-10 flex items-center justify-center"
-                onClick={togglePlayback}
-                aria-label={isPlaying ? "Pause recording" : "Play recording"}
-              >
-                <PlayIcon className="h-5 w-5" />
-              </button>
+              <div className="mt-4 flex justify-end">
+                <Button 
+                  onClick={analyzeRecording} 
+                  disabled={isAnalyzing}
+                  className="w-full md:w-auto"
+                >
+                  {isAnalyzing ? "Analyzing..." : "Analyze My Response"}
+                </Button>
+              </div>
             )}
           </div>
-          
-          <p className="text-sm mb-4 bg-white p-3 rounded-lg border border-neutral-light italic">
-            "{currentScenario.scenario}"
-          </p>
-          
-          <AudioRecorder 
-            recorderState={recorderState}
-            recorderDispatch={recorderDispatch}
-          />
-        </div>
+        ) : (
+          /* Analysis Results Interface */
+          <div className="bg-neutral-lightest rounded-lg p-5 mb-5">
+            {analysisResult && (
+              <div className="space-y-5">
+                {/* Overall Score */}
+                <div className="bg-white p-4 rounded-lg border border-neutral-light">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-heading font-bold">Stoic Sales Score</h4>
+                    <span className="font-bold text-xl text-primary">
+                      {analysisResult.analysis.score}/10
+                    </span>
+                  </div>
+                  <Progress 
+                    value={analysisResult.analysis.score * 10} 
+                    className="h-2 mt-1 mb-2" 
+                  />
+                  <p className="text-sm text-neutral-medium mt-2">
+                    {analysisResult.analysis.summary}
+                  </p>
+                </div>
+                
+                {/* Transcription */}
+                <div className="bg-white p-4 rounded-lg border border-neutral-light">
+                  <h4 className="font-heading font-bold mb-2">Your Response</h4>
+                  <p className="text-sm italic">
+                    "{analysisResult.transcript}"
+                  </p>
+                </div>
+                
+                {/* Strengths */}
+                <div className="bg-white p-4 rounded-lg border border-neutral-light">
+                  <h4 className="font-heading font-bold mb-2 text-emerald-700">Strengths</h4>
+                  <ul className="space-y-2">
+                    {analysisResult.analysis.strengths.map((strength, index) => (
+                      <li key={index} className="flex items-start">
+                        <CheckCircleIcon className="h-5 w-5 text-emerald-500 mr-2 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm">{strength}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Areas for Improvement */}
+                <div className="bg-white p-4 rounded-lg border border-neutral-light">
+                  <h4 className="font-heading font-bold mb-2 text-amber-700">Areas for Improvement</h4>
+                  <ul className="space-y-2">
+                    {analysisResult.analysis.improvements.map((improvement, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="h-5 w-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0">•</span>
+                        <span className="text-sm">{improvement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Stoic Principles */}
+                <div className="bg-white p-4 rounded-lg border border-neutral-light">
+                  <h4 className="font-heading font-bold mb-3 text-primary">Stoic Principles to Apply</h4>
+                  {analysisResult.analysis.stoicPrinciples.map((principle, index) => (
+                    <div key={index} className="mb-3 last:mb-0">
+                      <h5 className="font-medium text-sm">{principle.principle}</h5>
+                      <p className="text-sm text-neutral-medium mt-1">{principle.application}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            <div className="mt-4">
+              <Button 
+                variant="outline" 
+                onClick={resetRecording} 
+                className="w-full"
+              >
+                Practice Again
+              </Button>
+            </div>
+          </div>
+        )}
         
         <div className="flex justify-between">
           <div className="space-x-2">
@@ -228,7 +322,7 @@ const SalesCallSimulator: React.FC = () => {
               variant="outline"
               size="sm"
               onClick={handlePreviousScenario}
-              disabled={currentScenarioIndex === 0}
+              disabled={currentScenarioIndex === 0 || showResults}
             >
               Previous
             </Button>
@@ -237,13 +331,16 @@ const SalesCallSimulator: React.FC = () => {
               variant="outline"
               size="sm"
               onClick={handleNextScenario}
-              disabled={currentScenarioIndex === scenarios.length - 1}
+              disabled={currentScenarioIndex === scenarios.length - 1 || showResults}
             >
               Next
             </Button>
           </div>
           
-          <Button onClick={handleViewExamples}>
+          <Button 
+            onClick={handleViewExamples}
+            disabled={showResults}
+          >
             View Examples
           </Button>
         </div>
