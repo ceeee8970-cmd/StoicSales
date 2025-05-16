@@ -142,9 +142,36 @@ export class MemStorage implements IStorage {
       imageUrl: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300"
     };
     
+    const module4: Module = {
+      id: this.currentIds.module++,
+      title: "Module 4: Mindfulness Practices",
+      description: "Specific mindfulness exercises and rituals for before, during, and after sales interactions.",
+      order: 4,
+      imageUrl: "https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300"
+    };
+    
+    const module5: Module = {
+      id: this.currentIds.module++,
+      title: "Module 5: Real-World Language & Messaging",
+      description: "Practical application of stoic principles in your communication and messaging.",
+      order: 5,
+      imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300"
+    };
+    
+    const module6: Module = {
+      id: this.currentIds.module++,
+      title: "Module 6: Stoic Journaling for Sales Professionals",
+      description: "Daily reflection practices to improve your sales approach and mindset.",
+      order: 6,
+      imageUrl: "https://images.unsplash.com/photo-1517971071642-34a2d3ecc9cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300"
+    };
+    
     this.modules.set(module1.id, module1);
     this.modules.set(module2.id, module2);
     this.modules.set(module3.id, module3);
+    this.modules.set(module4.id, module4);
+    this.modules.set(module5.id, module5);
+    this.modules.set(module6.id, module6);
     
     // Add lessons for Module 1
     const module1Lessons = [
