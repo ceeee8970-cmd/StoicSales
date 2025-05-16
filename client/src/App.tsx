@@ -53,7 +53,7 @@ function Router() {
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Desktop Sidebar */}
-      <div className="hidden md:block">
+      <div className="hidden md:block bg-primary p-6 text-white">
         <Sidebar />
       </div>
       
