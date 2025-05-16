@@ -33,8 +33,8 @@ const Sidebar: React.FC = () => {
     <li>
       <Link href={to} 
         className={cn(
-          "flex items-center text-white hover:opacity-100 transition-opacity",
-          isActive(to) ? "opacity-90" : "opacity-70"
+          "flex items-center hover:opacity-100 transition-opacity font-medium",
+          isActive(to) ? "text-white opacity-90" : "text-neutral-50 opacity-90"
         )}>
           <Icon className="h-5 w-5 mr-3" />
           {children}
@@ -53,7 +53,7 @@ const Sidebar: React.FC = () => {
       
       <nav className="space-y-6 flex-grow">
         <div>
-          <p className="text-secondary-light text-xs font-medium uppercase tracking-wider mb-3">LEARN</p>
+          <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">LEARN</p>
           <ul className="space-y-3">
             <NavItem to="/" icon={BookIcon}>
               Modules
@@ -65,7 +65,7 @@ const Sidebar: React.FC = () => {
         </div>
         
         <div>
-          <p className="text-secondary-light text-xs font-medium uppercase tracking-wider mb-3">PRACTICE</p>
+          <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">PRACTICE</p>
           <ul className="space-y-3">
             <NavItem to="/practice/sales-calls" icon={MicrophoneIcon}>
               Sales Calls
@@ -77,7 +77,7 @@ const Sidebar: React.FC = () => {
         </div>
         
         <div>
-          <p className="text-secondary-light text-xs font-medium uppercase tracking-wider mb-3">REFLECT</p>
+          <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">REFLECT</p>
           <ul className="space-y-3">
             <NavItem to="/journal" icon={JournalIcon}>
               Journal
