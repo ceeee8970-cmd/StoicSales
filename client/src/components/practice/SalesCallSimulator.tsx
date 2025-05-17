@@ -26,18 +26,18 @@ const exampleResponses = {
   "1": [
     {
       quality: "poor",
-      text: "Look, our price is our price for a reason. We offer premium features that those cheaper solutions just can't match. I can maybe knock off 5% but that's really the best I can do. You're getting what you pay for here.",
-      explanation: "This response is defensive and combative. It immediately frames the discussion as adversarial and focuses solely on justifying the price rather than understanding the client's concerns."
+      text: "I understand you're already using some tools, but our solution is much better. I'd love to schedule a demo to show you how superior our platform is compared to whatever you're using. We have tons of features those other tools probably don't have.",
+      explanation: "This response is pushy and dismissive of the prospect's current situation. It makes assumptions about their needs and existing tools without gathering any information. The salesperson is focused only on pitching rather than understanding the prospect's specific challenges."
     },
     {
       quality: "good",
-      text: "I understand your concern about the price point. Many clients initially feel the same way. Can you help me understand which aspects of our solution are most valuable to you? That way, I might be able to suggest a configuration that better aligns with your budget while still addressing your core needs.",
-      explanation: "This response acknowledges the concern with empathy and shifts toward understanding the client's priorities. It's solution-oriented and opens a collaborative discussion."
+      text: "Thanks for taking my call. I appreciate your candor about already using several tools. Many of our clients were in a similar position before working with us. Could I ask which specific challenges you're currently facing with your existing solutions? Understanding that would help me determine if our approach might offer something different.",
+      explanation: "This response shows respect for the prospect's time and current setup. It acknowledges their situation without dismissing it and seeks to understand specific pain points. The approach is consultative rather than purely promotional."
     },
     {
       quality: "excellent",
-      text: "I appreciate your honesty about the price. That's valuable feedback. If you don't mind, I'd like to take a step back and focus on the outcomes you're hoping to achieve. Our solution represents an investment, and I want to ensure we're addressing the right challenges for your business. Could you share which specific problems you're most urgently trying to solve? This will help me determine if there's a way to deliver the value you need within your investment parameters.",
-      explanation: "This response embodies Stoic principles by focusing on what can be controlled (understanding needs) rather than dwelling on price. It demonstrates genuine curiosity, reframes the conversation around value/outcomes, and treats objection as an opportunity for deeper understanding."
+      text: "Thank you for your candor - I appreciate you sharing that perspective. You're right to be cautious about adding another tool to your stack. Rather than assume our solution would help, I'm curious to learn more about your current processes. What specific business outcomes are most important to you right now, and where do you feel your current tools might be falling short? Understanding this context would help me determine whether what we offer truly addresses a need you have, or if your current setup is already serving you well.",
+      explanation: "This response embodies the Stoic virtue of wisdom by not rushing to judgment. It shows genuine curiosity and respect for the prospect's current situation, acknowledging they may not need a new solution. It focuses on understanding their business outcomes rather than pushing features, and demonstrates the Stoic principles of focusing on truth and accepting reality rather than forcing a sale."
     }
   ],
   "2": [
@@ -60,18 +60,18 @@ const exampleResponses = {
   "3": [
     {
       quality: "poor",
-      text: "I understand, but our solution is priced that way because it's superior to cheaper alternatives. Maybe you could find room in next quarter's budget? Or we could split the payments over time if that helps.",
-      explanation: "This response dismisses the budget concern without exploring it and immediately jumps to pushy payment solutions that don't address the fundamental value question."
+      text: "Great! So I can put you down for a purchase then? I'll send over the contract right now and we can get you started immediately. You won't regret this decision - it's going to transform your business! Let me know which credit card you'd like to use.",
+      explanation: "This response rushes the close without addressing the prospect's hesitation. It ignores their statement about not being ready to decide and assumes the sale prematurely. The aggressive approach disregards the client's need for space and information to make a thoughtful decision."
     },
     {
       quality: "good",
-      text: "I appreciate you being straightforward about your budget constraints. We do have different tiers of service that might better align with your current situation. Could you share what range would work for you? That would help me identify if we have options that could meet your needs now.",
-      explanation: "This response acknowledges the constraint and offers practical alternatives, showing flexibility and a desire to find a workable solution."
+      text: "I understand you need more time before making a final decision, which is completely reasonable. The next steps would typically involve finalizing a proposal that matches your specific needs, reviewing the implementation timeline, and discussing the onboarding process. Would it be helpful if I sent you a detailed overview of these steps so you can share it with your team as you consider moving forward?",
+      explanation: "This response respects the prospect's decision timeline while providing clear next steps. It offers valuable information without pressure and proposes a helpful resource they can use in their internal discussions. The approach is service-oriented rather than purely focused on closing."
     },
     {
       quality: "excellent",
-      text: "Thank you for being candid about your budget considerations - that's very helpful. Budget constraints are a reality all businesses face, and I respect that. What I'd like to understand is which specific outcomes are most critical for you right now? Our solution has several components, and sometimes we can create a phased approach that addresses your most urgent needs first, while creating a roadmap for adding capabilities as your situation evolves. This way, we can respect your current budget while still building toward your longer-term goals.",
-      explanation: "This response embodies Stoic wisdom by accepting reality without frustration and focusing on creative solutions. It demonstrates deep respect for the client's constraints while suggesting a thoughtful, customized approach that aligns with both current limitations and future aspirations."
+      text: "I appreciate your transparency about not being ready to make a decision yet. That's a thoughtful approach—important decisions shouldn't be rushed. If you were to move forward, our next steps would involve creating a tailored implementation plan specifically for your team's needs and priorities. Before we get there though, I'm curious—what specific factors will be most important in your decision process? Understanding these would help me ensure you have all the relevant information to make the right choice for your organization, whether that's with us or another solution.",
+      explanation: "This response embodies Stoic principles by accepting the reality of the prospect's timeline without frustration. It demonstrates patience and wisdom by not forcing a premature decision. Instead, it shows genuine interest in the prospect's decision-making process and offers to provide exactly what would be most helpful to them. This approach prioritizes the client's genuine needs over the salesperson's desire to close quickly, reflecting the Stoic virtue of justice."
     }
   ],
   "4": [
@@ -96,26 +96,26 @@ const exampleResponses = {
 const scenarios: Scenario[] = [
   {
     id: "1",
-    title: "Scenario #1",
-    type: "Price objection",
-    scenario: "I appreciate the presentation, but honestly, your solution is priced way above what we were expecting to invest. Can you do better on the price?"
+    title: "Opening Call",
+    type: "Cold outreach",
+    scenario: "Hi, this is [prospect name] speaking. I received your message, but I'm not sure how your solution would help our company. We're already using several tools."
   },
   {
     id: "2",
-    title: "Scenario #2",
-    type: "Need more time",
-    scenario: "This all sounds interesting, but I need to think about it and discuss with my team. Can we reconnect in a few weeks?"
+    title: "Price Objection",
+    type: "Handling objections",
+    scenario: "I appreciate the presentation, but honestly, your solution is priced way above what we were expecting to invest. Can you do better on the price?"
   },
   {
     id: "3",
-    title: "Scenario #3",
-    type: "Budget objection",
-    scenario: "I like what you're offering, but honestly, it's just outside our budget right now. We need to go with something more affordable."
+    title: "Closing the Deal",
+    type: "Closing techniques",
+    scenario: "Everything sounds good, but I'm still not sure if we're ready to make a decision right now. What would be the next steps if we were to move forward?"
   },
   {
     id: "4",
-    title: "Scenario #4",
-    type: "Competitor comparison",
+    title: "Competitor Comparison",
+    type: "Handling objections",
     scenario: "We're already talking to your competitor and their solution seems pretty similar but at a lower price point. Why should we go with you?"
   }
 ];
