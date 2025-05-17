@@ -470,7 +470,7 @@ const SalesCallPractice: React.FC = () => {
                       </div>
                       <span className="text-sm">Completed</span>
                     </div>
-                    <Button>
+                    <Button onClick={() => alert("This challenge will be available in the next update!")}>
                       Continue Challenge
                     </Button>
                   </div>
