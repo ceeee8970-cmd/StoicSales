@@ -5,11 +5,10 @@ interface StoicSellerEbookProps {
   onClose: () => void;
 }
 
-// Using the fixed version with commas instead of em dashes
 const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
   // Function to trigger download
   const handleDownload = () => {
-    // Create a blob with the HTML content with all em dashes replaced with commas
+    // Create a blob with the HTML content (with em dashes replaced with commas)
     const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -505,7 +504,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       <p>But take a Stoic pause: Can you control their internal budget discussion? Their leadership's shift in direction? No. What is in your control is how well you understood their needs, how clearly you communicated, and how professionally you respond.</p>
       
       <div class="quote">
-        You have power over your mind — not outside events. Realize this, and you will find strength.
+        You have power over your mind, not outside events. Realize this, and you will find strength.
         <div class="quote-attribution">– Marcus Aurelius</div>
       </div>
       
@@ -559,7 +558,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="quote-attribution">– Marcus Aurelius</div>
       </div>
       
-      <p>In sales, we are constantly being tested by rejection, no-shows, ghosting, or silence. It's easy to get discouraged or take it personally. But the Stoic Seller chooses a different lens — Amor Fati, the love of fate. Not just accepting what happens, but embracing it as fuel for growth.</p>
+      <p>In sales, we are constantly being tested by rejection, no-shows, ghosting, or silence. It's easy to get discouraged or take it personally. But the Stoic Seller chooses a different lens, Amor Fati, the love of fate. Not just accepting what happens, but embracing it as fuel for growth.</p>
       
       <p>Amor Fati means seeing each "no," each disappointment, as part of a necessary process. Instead of resisting outcomes, we integrate them into our practice, trusting that every interaction, good or bad, is shaping us into better professionals and more resilient humans.</p>
       
@@ -572,7 +571,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="challenge-box">
         <div class="challenge-title">Assignment</div>
-        <p>The next time something doesn't go your way — a deal lost, a prospect goes cold, a miscommunication occurs — write down what happened. Then ask yourself:</p>
+        <p>The next time something doesn't go your way, a deal lost, a prospect goes cold, a miscommunication occurs, write down what happened. Then ask yourself:</p>
         <ul>
           <li>What part of this is asking me to grow?</li>
           <li>What would a Stoic learn from this?</li>
@@ -581,7 +580,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <p>Bonus: If you're up for it, end your entry with the phrase, "Amor Fati," as a quiet act of acceptance. Let it become your emotional signature in the face of adversity.</p>
       </div>
       
-      <p>Sometimes, Amor Fati also means accepting that you're not the right fit for someone — and that they're not the right fit for you. It means recognizing that even if your solution feels perfect in your eyes, the prospect may see things differently. They may choose a competitor who, from your perspective, lacks quality, clarity, or care. But their choice is based on their context, their fears, and their frame of reference — not yours.</p>
+      <p>Sometimes, Amor Fati also means accepting that you're not the right fit for someone, and that they're not the right fit for you. It means recognizing that even if your solution feels perfect in your eyes, the prospect may see things differently. They may choose a competitor who, from your perspective, lacks quality, clarity, or care. But their choice is based on their context, their fears, and their frame of reference, not yours.</p>
       
       <p>This is where the Stoic Seller practices humility. Instead of reacting with frustration, they step back and ask: Am I confusing my perception with the prospect's perspective?</p>
       
@@ -600,15 +599,15 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       <div class="challenge-box">
         <div class="challenge-title">Exercise</div>
         <p>Send one message to a prospect who's gone quiet. Choose honesty over pressure:</p>
-        <p>"Hi [Name], I'm mindful of your time and priorities. If this is no longer a fit or not the right moment, that's completely okay. I appreciate the conversation we've had — and if it makes sense later on, I'll be here."</p>
+        <p>"Hi [Name], I'm mindful of your time and priorities. If this is no longer a fit or not the right moment, that's completely okay. I appreciate the conversation we've had, and if it makes sense later on, I'll be here."</p>
         <p>Then let it go. Amor Fati.</p>
       </div>
       
       <div class="challenge-box">
         <div class="bonus-title">Bonus Message Template: Scheduled Check-Ins</div>
         <p>When a prospect disappears but you still feel there's potential, try this message to maintain presence without pressure:</p>
-        <p>"Hi [Name], I understand things can get busy. Since I haven't heard back, I'll plan to check in again in [X days/weeks] unless I hear otherwise. That way we both stay in the loop, and I'm also honoring both our time. If priorities have shifted, just let me know — either way, I really appreciated the dialogue so far."</p>
-        <p>This kind of message communicates two things: you respect their silence, and you respect your time. It also establishes a gentle boundary and gives them a graceful way to opt out or reengage — without pressure.</p>
+        <p>"Hi [Name], I understand things can get busy. Since I haven't heard back, I'll plan to check in again in [X days/weeks] unless I hear otherwise. That way we both stay in the loop, and I'm also honoring both our time. If priorities have shifted, just let me know, either way, I really appreciated the dialogue so far."</p>
+        <p>This kind of message communicates two things: you respect their silence, and you respect your time. It also establishes a gentle boundary and gives them a graceful way to opt out or reengage, without pressure.</p>
       </div>
       
       <h3>4. Memento Mori (Remember You Will Die)</h3>
@@ -618,11 +617,11 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="quote-attribution">– Marcus Aurelius</div>
       </div>
       
-      <p>Memento Mori is not morbid, it is liberating. It reminds us that time is finite, and that awareness can fuel urgency, clarity, and presence in everything we do — including how we sell.</p>
+      <p>Memento Mori is not morbid, it is liberating. It reminds us that time is finite, and that awareness can fuel urgency, clarity, and presence in everything we do, including how we sell.</p>
       
       <p>Sales is often filled with waiting. Waiting for replies, for budgets, for decisions. We stretch timelines, we delay truth, we stall on uncomfortable conversations. Memento Mori cuts through the delay. If today were your last opportunity to serve this client, what kind of presence would you bring?</p>
       
-      <p>As a Stoic Seller, this principle reminds you that the value of your time — and theirs — is sacred. You are not here to perform, chase, or people-please. You are here to connect honestly, to guide thoughtfully, and to leave a meaningful impression, regardless of the outcome.</p>
+      <p>As a Stoic Seller, this principle reminds you that the value of your time, and theirs, is sacred. You are not here to perform, chase, or people-please. You are here to connect honestly, to guide thoughtfully, and to leave a meaningful impression, regardless of the outcome.</p>
       
       <div class="reflection-box">
         <div class="reflection-title">Reflect</div>
@@ -636,14 +635,14 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
           <li>If I had only this one shot to connect with this person, how can I make it count?</li>
           <li>What would I say if I had nothing to prove, only something to offer?</li>
         </ul>
-        <p>After the call, journal one insight or moment where you were truly present. Let it be a reminder: you're not just selling, you're showing up fully — and that matters.</p>
+        <p>After the call, journal one insight or moment where you were truly present. Let it be a reminder: you're not just selling, you're showing up fully, and that matters.</p>
       </div>
       
       <p>But presence also means patience.</p>
       
       <p>In a world of instant responses and aggressive follow-ups, the Stoic Seller practices restraint. How do you feel when someone pushes you, follows up repeatedly, or makes you feel rushed into a decision? It creates resistance, not trust. Don't become the thing you dislike. Respect the other person's timeline as much as your own.</p>
       
-      <p>There's nothing passive about patience — it's an active choice to honor the pace of real human decision-making.</p>
+      <p>There's nothing passive about patience, it's an active choice to honor the pace of real human decision-making.</p>
       
       <div class="reflection-box">
         <div class="reflection-title">Reflect</div>
@@ -654,21 +653,21 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="challenge-title">Assignment</div>
         <p>If you're in a waiting phase with a prospect, try this script instead of a push:</p>
         <ul>
-          <li>"I know your time and priorities matter. Just wanted to check in and see if this is still on your radar — no rush, happy to pick this up whenever it feels right."</li>
-          <li>"No pressure at all — I simply want to make sure I'm showing up when it's helpful, not adding noise. Let me know if you'd like to revisit this next week or further ahead."</li>
+          <li>"I know your time and priorities matter. Just wanted to check in and see if this is still on your radar, no rush, happy to pick this up whenever it feels right."</li>
+          <li>"No pressure at all, I simply want to make sure I'm showing up when it's helpful, not adding noise. Let me know if you'd like to revisit this next week or further ahead."</li>
           <li>"I trust your timing, and I'm here when you're ready. Let me know how I can support your decision-making process."</li>
         </ul>
         <p>These are not delays. These are trust deposits.</p>
-        <p>Patience is not waiting passively — it's waiting with presence, readiness, and respect.</p>
+        <p>Patience is not waiting passively, it's waiting with presence, readiness, and respect.</p>
       </div>
       
-      <p>To bring this into perspective, think of Cato the Younger — a Roman Stoic senator known for his calm resistance and incredible patience. In politics, he often chose principle over pressure, holding his ground in silence when others were swept away by emotion or impulse. His patience wasn't passivity, it was strength rooted in clarity. In a world where rushing decisions was the norm, he chose timing over tension.</p>
+      <p>To bring this into perspective, think of Cato the Younger, a Roman Stoic senator known for his calm resistance and incredible patience. In politics, he often chose principle over pressure, holding his ground in silence when others were swept away by emotion or impulse. His patience wasn't passivity, it was strength rooted in clarity. In a world where rushing decisions was the norm, he chose timing over tension.</p>
       
       <p>Or take Abraham Lincoln. He often endured months of political and military pressure before acting, because he believed true understanding required time. That patience led to some of the most profound and lasting decisions in U.S. history.</p>
       
       <p>In your sales practice, ask yourself: Are you trying to win quickly, or are you trying to build something that lasts?</p>
       
-      <p>Rushed sales close fast and fall apart faster. Relationships, trust, and aligned timing — those take patience. But they stay closed, because they were never forced open.</p>
+      <p>Rushed sales close fast and fall apart faster. Relationships, trust, and aligned timing, those take patience. But they stay closed, because they were never forced open.</p>
       
       <div class="chapter-divider">•••</div>
       
@@ -678,9 +677,9 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <h2>Human-Centered Sales Techniques</h2>
       </div>
       
-      <p>The Stoic Seller doesn't sell to impress, persuade, or win. They sell to serve. This module translates your inner mindset into outer action — a way of speaking, listening, and guiding that builds trust and unlocks genuine connection.</p>
+      <p>The Stoic Seller doesn't sell to impress, persuade, or win. They sell to serve. This module translates your inner mindset into outer action, a way of speaking, listening, and guiding that builds trust and unlocks genuine connection.</p>
       
-      <p>Where traditional sales relies on pressure and persuasion, human-centered sales starts with presence and permission. It's not about what you say — it's about how you show up.</p>
+      <p>Where traditional sales relies on pressure and persuasion, human-centered sales starts with presence and permission. It's not about what you say, it's about how you show up.</p>
       
       <p>This chapter focuses on four foundational techniques:</p>
       
@@ -691,9 +690,9 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="quote-attribution">– Epictetus</div>
       </div>
       
-      <p>Epictetus reminds us that true understanding comes from humility. By asking instead of assuming, you let go of the need to appear smart, and step into the mindset of service. Curiosity isn't weakness — it's a form of respect.</p>
+      <p>Epictetus reminds us that true understanding comes from humility. By asking instead of assuming, you let go of the need to appear smart, and step into the mindset of service. Curiosity isn't weakness, it's a form of respect.</p>
       
-      <p>Great sellers ask real questions — not as a tactic, but from genuine curiosity. Instead of "qualifying" a lead, you're trying to understand a person. The goal isn't to prove your solution is right — it's to explore if it's right for them.</p>
+      <p>Great sellers ask real questions, not as a tactic, but from genuine curiosity. Instead of "qualifying" a lead, you're trying to understand a person. The goal isn't to prove your solution is right, it's to explore if it's right for them.</p>
       
       <p>Try:</p>
       <ul>
@@ -703,7 +702,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="reflection-box">
         <div class="reflection-title">Reflect</div>
-        <p>Do your questions serve your prospect — or just your pipeline?</p>
+        <p>Do your questions serve your prospect, or just your pipeline?</p>
       </div>
       
       <div class="challenge-box">
@@ -718,13 +717,13 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="quote-attribution">– Epictetus</div>
       </div>
       
-      <p>In a noisy world, being deeply heard is rare — and powerful. Stoics practiced listening not to reply, but to understand. Mirroring isn't mimicry, it's confirmation: I heard you. I'm with you.</p>
+      <p>In a noisy world, being deeply heard is rare, and powerful. Stoics practiced listening not to reply, but to understand. Mirroring isn't mimicry, it's confirmation: I heard you. I'm with you.</p>
       
-      <p>People feel heard when they hear their own language reflected back. You don't need to paraphrase perfectly — you just need to stay close to their reality.</p>
+      <p>People feel heard when they hear their own language reflected back. You don't need to paraphrase perfectly, you just need to stay close to their reality.</p>
       
       <p>Try:</p>
       <ul>
-        <li>"You mentioned earlier that [insert phrasing] — can we explore that a little more?"</li>
+        <li>"You mentioned earlier that [insert phrasing], can we explore that a little more?"</li>
         <li>"When you say [key phrase], what does that mean to you in practice?"</li>
       </ul>
       
@@ -740,13 +739,13 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="quote-attribution">– Epictetus</div>
       </div>
       
-      <p>Urgency often comes from fear — fear of losing the deal, of running out of time. The Stoic Seller calms the room by calming themselves first. In that space, trust emerges.</p>
+      <p>Urgency often comes from fear, fear of losing the deal, of running out of time. The Stoic Seller calms the room by calming themselves first. In that space, trust emerges.</p>
       
       <p>Urgency is often manufactured. But trust grows in calm. The Stoic Seller creates an environment where people feel safe to think, speak, and decide.</p>
       
       <p>Try:</p>
       <ul>
-        <li>"There's no rush here — I want you to feel this is the right next step, not just the next one."</li>
+        <li>"There's no rush here, I want you to feel this is the right next step, not just the next one."</li>
         <li>"If you need more time to think it through, that's totally fine. Want to set a touchpoint in a few days?"</li>
       </ul>
       
@@ -762,9 +761,9 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="quote-attribution">– Marcus Aurelius</div>
       </div>
       
-      <p>Don't push to close. Stand still, and let alignment emerge. Closing with clarity and care is an act of integrity — not just for you, but for your buyer. That's what Stoic leadership looks like.</p>
+      <p>Don't push to close. Stand still, and let alignment emerge. Closing with clarity and care is an act of integrity, not just for you, but for your buyer. That's what Stoic leadership looks like.</p>
       
-      <p>Closing should feel like a mutual decision, not a victory lap. A yes should come with clarity and energy — not obligation.</p>
+      <p>Closing should feel like a mutual decision, not a victory lap. A yes should come with clarity and energy, not obligation.</p>
       
       <p>Try:</p>
       <ul>
@@ -774,7 +773,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="challenge-box">
         <div class="challenge-title">Assignment</div>
-        <p>Reflect on your last 3 closes. Were they mutual agreements — or did they require a final push? How could you invite more transparency next time?</p>
+        <p>Reflect on your last 3 closes. Were they mutual agreements, or did they require a final push? How could you invite more transparency next time?</p>
       </div>
       
       <h3>Book & Voice Mastery: Calm as a Sales Advantage</h3>
@@ -783,7 +782,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <p>Marcus Aurelius reminds us: "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it." This includes how we speak under pressure.</p>
       
-      <p>When your tone is calm, slow, and grounded — especially in moments when others might rush or panic — you create contrast. That contrast builds credibility.</p>
+      <p>When your tone is calm, slow, and grounded, especially in moments when others might rush or panic, you create contrast. That contrast builds credibility.</p>
       
       <div class="reflection-box">
         <div class="reflection-title">Real Example</div>
@@ -798,13 +797,13 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="challenge-box">
         <div class="challenge-title">Script Tip</div>
-        <p>"Let's pause for a moment — what would be most helpful for you right now?"</p>
+        <p>"Let's pause for a moment, what would be most helpful for you right now?"</p>
         <p>That one line, delivered with calm confidence, can reset an entire call.</p>
       </div>
       
       <div class="reflection-box">
         <div class="reflection-title">Personal Reflection</div>
-        <p>Think of a time outside of sales — maybe in your personal life — when someone's tone made you feel heard, respected, or safe. That's the effect you want to create.</p>
+        <p>Think of a time outside of sales, maybe in your personal life, when someone's tone made you feel heard, respected, or safe. That's the effect you want to create.</p>
       </div>
       
       <p>Sales isn't just about what you say. It's how you say it. And how you say it depends on who you are when you say it.</p>
@@ -822,7 +821,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="quote-attribution">– Publilius Syrus</div>
       </div>
       
-      <p>Your language reflects your mindset. In Stoicism, clarity and simplicity are virtues. Your words should serve the message — not distract from it.</p>
+      <p>Your language reflects your mindset. In Stoicism, clarity and simplicity are virtues. Your words should serve the message, not distract from it.</p>
       
       <h3>Principle 1: Clarity Over Cleverness</h3>
       
@@ -867,7 +866,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         </tr>
         <tr>
           <td>I'll follow up next week...</td>
-          <td>If now isn't the right time, I'm happy to revisit this later — your call</td>
+          <td>If now isn't the right time, I'm happy to revisit this later, your call</td>
         </tr>
         <tr>
           <td>Let's get you onboarded ASAP</td>
@@ -877,11 +876,11 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <h3>Adapting Tone to Your Prospect</h3>
       
-      <p>The Stoic Seller meets people where they are — without losing themselves.</p>
+      <p>The Stoic Seller meets people where they are, without losing themselves.</p>
       
-      <p>If a prospect is rushed and speaks fast, you don't need to match their pace. Instead, slow your rhythm slightly. Your calm creates contrast — and contrast creates awareness.</p>
+      <p>If a prospect is rushed and speaks fast, you don't need to match their pace. Instead, slow your rhythm slightly. Your calm creates contrast, and contrast creates awareness.</p>
       
-      <p>If someone is analytical, mirror their logic. If they're casual, match their warmth. But always stay anchored in authenticity. Adjusting tone is not manipulation — it's recognition.</p>
+      <p>If someone is analytical, mirror their logic. If they're casual, match their warmth. But always stay anchored in authenticity. Adjusting tone is not manipulation, it's recognition.</p>
       
       <div class="challenge-box">
         <div class="challenge-title">Tip</div>
@@ -900,25 +899,25 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       <p>Ways to sound confident:</p>
       <ul>
         <li>Lower your tone slightly and slow your pace</li>
-        <li>Pause after key points — don't rush to fill silence</li>
+        <li>Pause after key points, don't rush to fill silence</li>
         <li>Replace fillers with breathing ("um" becomes space)</li>
         <li>Let your message land instead of pushing it</li>
       </ul>
       
       <div class="challenge-box">
         <div class="challenge-title">Practice</div>
-        <p>End your next call with one calm, confident statement — not to convince, but to close the moment with clarity. Example: "Whatever you decide, I appreciate the time you gave this."</p>
+        <p>End your next call with one calm, confident statement, not to convince, but to close the moment with clarity. Example: "Whatever you decide, I appreciate the time you gave this."</p>
       </div>
       
       <h3>It's Okay to Say 'I Don't Know'</h3>
       
-      <p>The Stoic Seller embraces imperfection. In fact, admitting you don't know something in a conversation — rather than bluffing — builds trust. It shows humility and makes you more relatable. People don't buy from robots. They buy from humans.</p>
+      <p>The Stoic Seller embraces imperfection. In fact, admitting you don't know something in a conversation, rather than bluffing, builds trust. It shows humility and makes you more relatable. People don't buy from robots. They buy from humans.</p>
       
-      <p>If you fumble a line, pause awkwardly, or admit you need to check something and get back to them, you show you're real. And that's powerful. Research even shows that people tend to trust — and buy from — those who display vulnerability in small ways. Confidence doesn't require perfection. It thrives in honesty.</p>
+      <p>If you fumble a line, pause awkwardly, or admit you need to check something and get back to them, you show you're real. And that's powerful. Research even shows that people tend to trust, and buy from, those who display vulnerability in small ways. Confidence doesn't require perfection. It thrives in honesty.</p>
       
       <p>Try saying:</p>
       <ul>
-        <li>"That's a great question — and I want to give you the most accurate answer. Let me double-check and circle back shortly."</li>
+        <li>"That's a great question, and I want to give you the most accurate answer. Let me double-check and circle back shortly."</li>
         <li>"I hadn't considered that. Would you mind sharing more of your thinking?"</li>
       </ul>
       
@@ -928,16 +927,16 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <h3>Bonus Roleplay: Cold Call – The Stoic Seller in Action</h3>
       
-      <p>The scene: A calm, composed SDR calls a Sales Director who is rushed, skeptical, and fast-paced. This roleplay shows how Stoic principles — presence, patience, control of tone, and detachment from outcomes — turn a tense moment into a meaningful interaction.</p>
+      <p>The scene: A calm, composed SDR calls a Sales Director who is rushed, skeptical, and fast-paced. This roleplay shows how Stoic principles, presence, patience, control of tone, and detachment from outcomes, turn a tense moment into a meaningful interaction.</p>
       
       <div class="script-box">
         <p><span class="script-speaker">SDR (Alex):</span> Hi, this is Alex from The Stoic Seller. I know you weren't expecting my call. Would you prefer I try again later?</p>
         
         <p><span class="script-speaker">Sales Director:</span> What's this about? I've got literally one minute.</p>
         
-        <p><span class="script-speaker">SDR:</span> I appreciate that. I'll keep it respectful — and brief. <span class="principle-annotation">(Dichotomy of Control)</span></p>
+        <p><span class="script-speaker">SDR:</span> I appreciate that. I'll keep it respectful, and brief. <span class="principle-annotation">(Dichotomy of Control)</span></p>
         
-        <p>I'm reaching out to introduce a course that combines Stoic philosophy with real-world sales skills. It's built for directors like you who want their team to stay grounded while still hitting numbers. Before I go further — can I ask: what kind of pressure is your team facing right now?</p>
+        <p>I'm reaching out to introduce a course that combines Stoic philosophy with real-world sales skills. It's built for directors like you who want their team to stay grounded while still hitting numbers. Before I go further, can I ask: what kind of pressure is your team facing right now?</p>
         
         <p><span class="script-speaker">Sales Director:</span> (sighs) Honestly, it's chaos. Targets are up. Team's burning out. But I don't have time for another soft-skills course.</p>
         
@@ -945,7 +944,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         
         <p><span class="script-speaker">Sales Director:</span> Sounds nice, but we don't have time to slow down.</p>
         
-        <p><span class="script-speaker">SDR:</span> I get that. But what if slowing down helped them connect more — and perform better? When reps show up with clarity, they don't burn out. They build trust. <span class="principle-annotation">(Premeditatio Malorum)</span></p>
+        <p><span class="script-speaker">SDR:</span> I get that. But what if slowing down helped them connect more, and perform better? When reps show up with clarity, they don't burn out. They build trust. <span class="principle-annotation">(Premeditatio Malorum)</span></p>
         
         <p><span class="script-speaker">Sales Director:</span> Maybe. I'm skeptical.</p>
         
@@ -953,7 +952,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         
         <p><span class="script-speaker">Sales Director:</span> Alright. Send it. If I like it, maybe we can chat next week.</p>
         
-        <p><span class="script-speaker">SDR:</span> Sounds great. I'll send it over with no pressure. Thanks for your honesty — and for giving me a shot. <span class="principle-annotation">(Letting Go of Outcome)</span></p>
+        <p><span class="script-speaker">SDR:</span> Sounds great. I'll send it over with no pressure. Thanks for your honesty, and for giving me a shot. <span class="principle-annotation">(Letting Go of Outcome)</span></p>
         
         <p>[Hangs up. Breathes. Amor Fati.]</p>
       </div>
@@ -966,7 +965,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <h2>The 5-Day Stoic Seller Practice Challenge</h2>
       </div>
       
-      <p>Reading is one thing — practicing is another. This is your real-world dojo. Each day below is a hands-on challenge that helps you embody Stoic principles in action — through interactions, personal reflection, roleplay, and real conversation. Invite a friend or colleague to join, or go solo and keep a journal.</p>
+      <p>Reading is one thing, practicing is another. This is your real-world dojo. Each day below is a hands-on challenge that helps you embody Stoic principles in action, through interactions, personal reflection, roleplay, and real conversation. Invite a friend or colleague to join, or go solo and keep a journal.</p>
       
       <h3>Day 1 – The Circle of Control (Epictetus)</h3>
       
@@ -989,7 +988,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="challenge-box">
         <div class="challenge-title">Challenge</div>
-        <p>Record yourself handling a worst-case objection (price, timing, skepticism). No script. Just your breath, your clarity, your calm. Watch it back — alone or with a friend — and rate your tone, patience, and presence.</p>
+        <p>Record yourself handling a worst-case objection (price, timing, skepticism). No script. Just your breath, your clarity, your calm. Watch it back, alone or with a friend, and rate your tone, patience, and presence.</p>
       </div>
       
       <div class="challenge-box">
@@ -1036,7 +1035,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="challenge-box">
         <div class="bonus-title">Team Exercise</div>
-        <p>Pair with a teammate and roleplay a discovery call — but your only goal is to mirror. Not sell.</p>
+        <p>Pair with a teammate and roleplay a discovery call, but your only goal is to mirror. Not sell.</p>
       </div>
       
       <div class="quote">
@@ -1058,7 +1057,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="challenge-box">
         <div class="bonus-title">Recommended Listen</div>
-        <p>The Daily Stoic Podcast — "Confidence Without Arrogance."</p>
+        <p>The Daily Stoic Podcast, "Confidence Without Arrogance."</p>
       </div>
       
       <h3>Bonus Practices</h3>
@@ -1138,7 +1137,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="script-box">
         <p><strong>Final Call Script (Prospect Doesn't Convert)</strong></p>
-        <p>"Thanks again for exploring this with me. I completely respect where you're at — sometimes it's not the right time or the right fit. I'm here if things shift. Either way, I'm grateful we connected."</p>
+        <p>"Thanks again for exploring this with me. I completely respect where you're at, sometimes it's not the right time or the right fit. I'm here if things shift. Either way, I'm grateful we connected."</p>
       </div>
       
       <h3>Your Daily Journal Template</h3>
@@ -1182,9 +1181,9 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <h3>What Skeptics Might Say</h3>
       
-      <p>Not everyone will resonate with the Stoic Seller approach. Some might argue that this mindset sounds too soft, too slow, or incompatible with the urgent nature of modern sales. They may believe that strong results come from high-pressure tactics, tight control, and persuasive mastery — not calm presence and philosophical reflection.</p>
+      <p>Not everyone will resonate with the Stoic Seller approach. Some might argue that this mindset sounds too soft, too slow, or incompatible with the urgent nature of modern sales. They may believe that strong results come from high-pressure tactics, tight control, and persuasive mastery, not calm presence and philosophical reflection.</p>
       
-      <p>But that's exactly the point: pressure works in the short term, until it doesn't. This approach isn't about abandoning ambition — it's about sustaining it. It's about leading with presence instead of performance, and seeing long-term trust as a better conversion tool than short-term urgency.</p>
+      <p>But that's exactly the point: pressure works in the short term, until it doesn't. This approach isn't about abandoning ambition, it's about sustaining it. It's about leading with presence instead of performance, and seeing long-term trust as a better conversion tool than short-term urgency.</p>
       
       <div class="chapter-divider">•••</div>
       
@@ -1194,7 +1193,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <h2>Conclusion</h2>
       </div>
       
-      <p>The Stoic Seller is not a script, a trick, or a hack. It's a mindset rooted in ancient wisdom and modern emotional intelligence. It's about showing up differently — with patience, presence, and principles — in a world that moves too fast and listens too little.</p>
+      <p>The Stoic Seller is not a script, a trick, or a hack. It's a mindset rooted in ancient wisdom and modern emotional intelligence. It's about showing up differently, with patience, presence, and principles, in a world that moves too fast and listens too little.</p>
       
       <p>You won't always get the deal. But you can always choose to be grounded, curious, and clear. You can choose to treat people like people, not targets. And over time, that choice becomes your competitive edge.</p>
       
@@ -1203,7 +1202,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="quote-attribution">– Marcus Aurelius</div>
       </div>
       
-      <p>This is your invitation to bring intention back into your sales career — and your life.</p>
+      <p>This is your invitation to bring intention back into your sales career, and your life.</p>
       
       <p>Let this be your edge. Let this be your practice. Let this be your philosophy in motion.</p>
       
