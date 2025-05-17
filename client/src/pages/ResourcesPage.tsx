@@ -8,6 +8,7 @@ import { ResourcesIcon, BookIcon } from "@/assets/icons";
 import { Search } from "lucide-react";
 import ArticleView from "@/components/resources/ArticleView";
 import StoicSellerEbook from "@/components/resources/StoicSellerEbook";
+import SDRTeamTraining from "@/components/resources/SDRTeamTraining";
 
 interface Resource {
   id: number;
