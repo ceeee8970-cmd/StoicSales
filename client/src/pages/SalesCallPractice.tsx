@@ -69,10 +69,16 @@ const SalesCallPractice: React.FC = () => {
           &larr; Back to Dashboard
         </Link>
         <h1 className="font-heading text-3xl font-bold text-primary mt-4 mb-2">
-          Sales Call Practice
+          {activeTab === "breathwork" ? "Breathwork Practice" : 
+           activeTab === "recordings" ? "My Call Recordings" :
+           activeTab === "challenges" ? "Practice Challenges" :
+           "Sales Call Practice"}
         </h1>
         <p className="text-neutral-medium">
-          Practice handling different sales scenarios with stoic principles
+          {activeTab === "breathwork" ? "Breathing exercises to improve focus, composure, and sales performance" : 
+           activeTab === "recordings" ? "Review and learn from your previous practice sessions" :
+           activeTab === "challenges" ? "Put your stoic sales practice to the test" :
+           "Practice handling different sales scenarios with stoic principles"}
         </p>
       </div>
 
