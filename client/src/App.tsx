@@ -83,6 +83,7 @@ function Router() {
           <Route path="/sales-call-practice" component={SalesCallPractice} />
           <Route path="/journal" component={JournalPage} />
           <Route path="/resources" component={ResourcesPage} />
+          <Route path="/progress" component={ProgressPage} />
           <Route component={NotFound} />
         </Switch>
       </div>
