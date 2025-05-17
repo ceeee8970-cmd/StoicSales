@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "wouter";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
 import { ResourcesIcon, BookIcon } from "@/assets/icons";
+import { Search } from "lucide-react";
 
 interface Resource {
   id: number;
@@ -14,12 +17,13 @@ interface Resource {
 }
 
 const RESOURCES: Resource[] = [
+  // Classic Stoic Texts
   {
     id: 1,
     title: "Meditations",
     description: "Marcus Aurelius's private notes to himself, now considered one of the most significant works of ancient Stoic philosophy.",
     type: "book",
-    url: "#",
+    url: "https://www.amazon.com/Meditations-New-Translation-Marcus-Aurelius/dp/0812968255",
     author: "Marcus Aurelius"
   },
   {
@@ -27,61 +31,187 @@ const RESOURCES: Resource[] = [
     title: "Letters from a Stoic",
     description: "Collection of moral letters written by Seneca to improve the character of his friend Lucilius.",
     type: "book",
-    url: "#",
+    url: "https://www.amazon.com/Letters-Penguin-Classics-Lucius-Annaeus/dp/0140442103",
     author: "Seneca"
   },
   {
     id: 3,
+    title: "Discourses and Selected Writings",
+    description: "Epictetus's teachings on Stoic philosophy that emphasize self-control as a means to overcome destructive emotions.",
+    type: "book",
+    url: "https://www.amazon.com/Discourses-Selected-Writings-Penguin-Classics/dp/0140449469",
+    author: "Epictetus"
+  },
+  
+  // Modern Stoic Books
+  {
+    id: 4,
     title: "The Obstacle Is the Way",
     description: "Modern guide on how to apply Stoic philosophy to overcome challenges in everyday life and business.",
     type: "book",
-    url: "#",
+    url: "https://www.amazon.com/Obstacle-Way-Timeless-Turning-Triumph/dp/1591846358",
     author: "Ryan Holiday"
-  },
-  {
-    id: 4,
-    title: "How to Think Like a Roman Emperor",
-    description: "Modern retelling of the life of Marcus Aurelius and how to apply his stoic principles to modern challenges.",
-    type: "book",
-    url: "#",
-    author: "Donald Robertson"
   },
   {
     id: 5,
-    title: "The Daily Stoic Podcast",
-    description: "Daily podcast featuring short lessons on Stoic wisdom and how to apply it to modern life.",
-    type: "podcast",
-    url: "#",
-    author: "Ryan Holiday"
+    title: "How to Think Like a Roman Emperor",
+    description: "Modern retelling of the life of Marcus Aurelius and how to apply his stoic principles to modern challenges.",
+    type: "book",
+    url: "https://www.amazon.com/How-Think-Like-Roman-Emperor/dp/1250196620",
+    author: "Donald Robertson"
   },
   {
     id: 6,
+    title: "A Guide to the Good Life: The Ancient Art of Stoic Joy",
+    description: "A practical guide to using ancient Stoic techniques and wisdom to find tranquility and joy in modern life.",
+    type: "book",
+    url: "https://www.amazon.com/Guide-Good-Life-Ancient-Stoic/dp/0195374614",
+    author: "William B. Irvine"
+  },
+  
+  // Podcasts
+  {
+    id: 7,
+    title: "The Daily Stoic Podcast",
+    description: "Daily podcast featuring short lessons on Stoic wisdom and how to apply it to modern life.",
+    type: "podcast",
+    url: "https://dailystoic.com/podcast/",
+    author: "Ryan Holiday"
+  },
+  {
+    id: 8,
+    title: "Stoic Solutions Podcast",
+    description: "Practical wisdom from Stoic philosophy for everyday challenges, including discussions with Stoicism experts.",
+    type: "podcast",
+    url: "https://anchor.fm/stoicsolutions",
+    author: "Justin Vacula"
+  },
+  {
+    id: 9,
+    title: "Practical Stoicism",
+    description: "Explores practical applications of Stoic philosophy, with episodes on specific techniques and exercises.",
+    type: "podcast",
+    url: "https://anchor.fm/practicalstoicism",
+    author: "Simon Drew"
+  },
+  
+  // Articles
+  {
+    id: 10,
     title: "Stoicism and Sales: The Unexpected Connection",
     description: "Article exploring how Stoic principles can transform your sales approach and resilience.",
     type: "article",
-    url: "#",
-    author: "Marcus Stoic Seller"
+    url: "https://dailystoic.com/stoicism-in-business/",
+    author: "The Daily Stoic"
+  },
+  {
+    id: 11,
+    title: "The Stoic Approach to Customer Objections",
+    description: "Leveraging Stoic principles to handle rejections and objections in a sales context.",
+    type: "article",
+    url: "https://medium.com/stoicism-philosophy-as-a-way-of-life/the-stoic-approach-to-business-9dfa326a4485",
+    author: "Medium Stoicism"
+  },
+  {
+    id: 12,
+    title: "Dichotomy of Control in Sales Conversations",
+    description: "How to focus on what you can control and let go of what you can't in sales interactions.",
+    type: "article",
+    url: "https://dailystoic.com/what-you-can-control/",
+    author: "The Daily Stoic"
+  },
+  
+  // Videos
+  {
+    id: 13,
+    title: "Stoicism in Sales - Handling Rejection",
+    description: "Video lecture on using Stoic principles to build resilience against rejection in sales.",
+    type: "video",
+    url: "https://www.youtube.com/watch?v=R9OCA6UFE-0",
+    author: "TED-Ed"
+  },
+  {
+    id: 14,
+    title: "The Practicing Stoic: Philosophical Foundations",
+    description: "Introduction to Stoic philosophy with practical examples for business professionals.",
+    type: "video",
+    url: "https://www.youtube.com/watch?v=vOj5KLcymgA",
+    author: "YouTube"
+  },
+  {
+    id: 15,
+    title: "Stoicism for Sales Teams - Training Workshop",
+    description: "Full workshop recording on implementing Stoic principles in sales team management.",
+    type: "video",
+    url: "https://www.youtube.com/watch?v=A4_ESUNuYBk",
+    author: "YouTube"
   }
 ];
 
 const ResourceTypeIcon = ({ type }: { type: Resource['type'] }) => {
+  let icon;
+  let bgColor = "bg-primary-light";
+  
   switch (type) {
     case "book":
-      return (
-        <div className="w-10 h-10 rounded-full bg-primary-light bg-opacity-10 text-primary flex items-center justify-center mr-3">
-          <BookIcon className="h-5 w-5" />
-        </div>
-      );
+      icon = <BookIcon className="h-5 w-5" />;
+      bgColor = "bg-emerald-100";
+      break;
+    case "podcast":
+      icon = <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+      </svg>;
+      bgColor = "bg-blue-100";
+      break;
+    case "video":
+      icon = <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>;
+      bgColor = "bg-red-100";
+      break;
+    case "article":
+      icon = <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+      </svg>;
+      bgColor = "bg-purple-100";
+      break;
     default:
-      return (
-        <div className="w-10 h-10 rounded-full bg-primary-light bg-opacity-10 text-primary flex items-center justify-center mr-3">
-          <ResourcesIcon className="h-5 w-5" />
-        </div>
-      );
+      icon = <ResourcesIcon className="h-5 w-5" />;
+      break;
   }
+  
+  return (
+    <div className={`w-10 h-10 rounded-full ${bgColor} text-primary flex items-center justify-center mr-3`}>
+      {icon}
+    </div>
+  );
 };
 
 const ResourcesPage: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState("all");
+  
+  // Filter resources based on search term and active tab
+  const filteredResources = RESOURCES.filter(resource => {
+    const matchesSearch = 
+      resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.author.toLowerCase().includes(searchTerm.toLowerCase());
+      
+    const matchesTab = activeTab === "all" || resource.type === activeTab;
+    
+    return matchesSearch && matchesTab;
+  });
+  
+  const resourceStats = {
+    all: RESOURCES.length,
+    book: RESOURCES.filter(r => r.type === "book").length,
+    article: RESOURCES.filter(r => r.type === "article").length,
+    podcast: RESOURCES.filter(r => r.type === "podcast").length,
+    video: RESOURCES.filter(r => r.type === "video").length
+  };
+  
   return (
     <div className="p-6 md:p-10">
       <div className="mb-8">
@@ -95,40 +225,85 @@ const ResourcesPage: React.FC = () => {
           Explore these resources to deepen your understanding of Stoic philosophy and its application to sales
         </p>
       </div>
+      
+      {/* Search and filter */}
+      <div className="mb-8">
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="relative flex-1">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-neutral-medium" />
+            </div>
+            <Input
+              type="text"
+              placeholder="Search resources..."
+              className="pl-10"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+        
+        <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="mb-6">
+            <TabsTrigger value="all">All ({resourceStats.all})</TabsTrigger>
+            <TabsTrigger value="book">Books ({resourceStats.book})</TabsTrigger>
+            <TabsTrigger value="article">Articles ({resourceStats.article})</TabsTrigger>
+            <TabsTrigger value="podcast">Podcasts ({resourceStats.podcast})</TabsTrigger>
+            <TabsTrigger value="video">Videos ({resourceStats.video})</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
 
       <div className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {RESOURCES.map(resource => (
-            <Card key={resource.id} className="overflow-hidden">
-              <CardHeader className="pb-4">
-                <div className="flex items-center mb-2">
-                  <ResourceTypeIcon type={resource.type} />
-                  <div>
-                    <CardTitle className="text-lg">{resource.title}</CardTitle>
-                    <p className="text-xs text-neutral-medium">{resource.author}</p>
+        {filteredResources.length === 0 ? (
+          <div className="text-center py-8">
+            <p className="text-neutral-medium">No resources found matching your search.</p>
+            <Button variant="outline" className="mt-4" onClick={() => { setSearchTerm(""); setActiveTab("all"); }}>
+              Clear filters
+            </Button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredResources.map(resource => (
+              <Card key={resource.id} className="overflow-hidden">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center mb-2">
+                    <ResourceTypeIcon type={resource.type} />
+                    <div>
+                      <CardTitle className="text-lg">{resource.title}</CardTitle>
+                      <p className="text-xs text-neutral-medium">{resource.author}</p>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-neutral-medium text-sm mb-4">
-                  {resource.description}
-                </p>
-                <div className="flex items-center">
-                  <span className="bg-secondary bg-opacity-30 text-accent-dark rounded-full px-3 py-1 text-xs mr-auto">
-                    {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
-                  </span>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => window.open(resource.url, "_blank")}
-                  >
-                    Explore
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                </CardHeader>
+                <CardContent className="pb-3">
+                  <p className="text-neutral-medium text-sm mb-3">
+                    {resource.description}
+                  </p>
+                </CardContent>
+                <CardFooter className="pt-0">
+                  <div className="flex items-center w-full">
+                    <span className={`
+                      rounded-full px-3 py-1 text-xs mr-auto
+                      ${resource.type === "book" ? "bg-emerald-100 text-emerald-800" : ""}
+                      ${resource.type === "article" ? "bg-purple-100 text-purple-800" : ""}
+                      ${resource.type === "podcast" ? "bg-blue-100 text-blue-800" : ""}
+                      ${resource.type === "video" ? "bg-red-100 text-red-800" : ""}
+                    `}>
+                      {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
+                    </span>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => window.open(resource.url, "_blank")}
+                    >
+                      Explore
+                    </Button>
+                  </div>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        )}
 
         <Card className="mt-10">
           <CardHeader>
