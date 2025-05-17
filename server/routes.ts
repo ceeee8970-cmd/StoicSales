@@ -452,15 +452,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "No audio file provided" });
       }
 
-      const { scenarioText } = req.body;
+      const { scenarioText, userTranscript } = req.body;
       
       if (!scenarioText) {
         return res.status(400).json({ message: "Scenario text is required" });
       }
       
-      // In a real implementation, we would use a speech-to-text service
-      // For this demo, we use a mock transcription
-      const transcript = await transcribeAudio(req.file.buffer);
+      // Use user-provided transcript if available
+      let transcript: string;
+      if (userTranscript) {
+        console.log("Using user-provided transcript:", userTranscript);
+        transcript = userTranscript;
+      } else {
+        // For this demo, we use a mock transcription as fallback
+        console.log("No user transcript provided, generating one");
+        transcript = await transcribeAudio(req.file.buffer);
+      }
       
       // Analyze the transcribed text using Claude
       const analysis = await analyzeSalesResponse(scenarioText, transcript);
