@@ -24,7 +24,7 @@ const RESOURCES: Resource[] = [
     title: "The Stoic Seller LinkedIn Group",
     description: "Join our weekly discussions on applying Stoic principles to sales challenges. Network with other sales professionals who use philosophy to improve their approach.",
     type: "article",
-    url: "#linkedin-group",
+    url: "https://www.linkedin.com/groups/10116099/",
     author: "The Stoic Seller Team"
   },
   
