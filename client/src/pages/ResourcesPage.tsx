@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { ResourcesIcon, BookIcon } from "@/assets/icons";
 import { Search } from "lucide-react";
+import ArticleView from "@/components/resources/ArticleView";
 
 interface Resource {
   id: number;
@@ -95,56 +96,56 @@ const RESOURCES: Resource[] = [
     author: "Simon Drew"
   },
   
-  // Articles
+  // Articles - Original Content
   {
     id: 10,
-    title: "Stoicism and Sales: The Unexpected Connection",
-    description: "Article exploring how Stoic principles can transform your sales approach and resilience.",
+    title: "The Stoic Seller: Applying Ancient Wisdom to Modern Sales",
+    description: "An in-depth exploration of how the four Stoic virtues can be applied directly to sales challenges.",
     type: "article",
-    url: "https://dailystoic.com/stoicism-in-business/",
-    author: "The Daily Stoic"
+    url: "#stoic-seller-article",
+    author: "The Stoic Seller Team"
   },
   {
     id: 11,
-    title: "The Stoic Approach to Customer Objections",
-    description: "Leveraging Stoic principles to handle rejections and objections in a sales context.",
+    title: "Handling Rejection Like a Stoic: A Sales Professional's Guide",
+    description: "Learn practical techniques for developing resilience to rejection using Stoic principles.",
     type: "article",
-    url: "https://medium.com/stoicism-philosophy-as-a-way-of-life/the-stoic-approach-to-business-9dfa326a4485",
-    author: "Medium Stoicism"
+    url: "#rejection-resilience",
+    author: "The Stoic Seller Team"
   },
   {
     id: 12,
-    title: "Dichotomy of Control in Sales Conversations",
-    description: "How to focus on what you can control and let go of what you can't in sales interactions.",
+    title: "The Dichotomy of Control in Sales: Focus on What You Can Change",
+    description: "How to identify what's in your control during sales processes and let go of the rest.",
     type: "article",
-    url: "https://dailystoic.com/what-you-can-control/",
-    author: "The Daily Stoic"
+    url: "#dichotomy-of-control",
+    author: "The Stoic Seller Team"
   },
   
-  // Videos
+  // Videos - From Reliable Sources
   {
     id: 13,
-    title: "Stoicism in Sales - Handling Rejection",
-    description: "Video lecture on using Stoic principles to build resilience against rejection in sales.",
+    title: "Ryan Holiday: Stoicism in Business and Sales",
+    description: "Ryan Holiday discusses how Stoic principles like focusing on what you can control apply to modern business challenges.",
     type: "video",
-    url: "https://www.youtube.com/watch?v=R9OCA6UFE-0",
-    author: "TED-Ed"
+    url: "https://www.youtube.com/watch?v=gIP9_j6eTnA",
+    author: "London Real"
   },
   {
     id: 14,
-    title: "The Practicing Stoic: Philosophical Foundations",
-    description: "Introduction to Stoic philosophy with practical examples for business professionals.",
+    title: "Stoicism & The Art of Not Caring",
+    description: "TED Talk on applying Stoic philosophy to overcome anxiety about outcomes beyond your control.",
     type: "video",
-    url: "https://www.youtube.com/watch?v=vOj5KLcymgA",
-    author: "YouTube"
+    url: "https://www.youtube.com/watch?v=uLOB6hj3M_Q",
+    author: "William Irvine | TEDxIthacaCollege"
   },
   {
     id: 15,
-    title: "Stoicism for Sales Teams - Training Workshop",
-    description: "Full workshop recording on implementing Stoic principles in sales team management.",
+    title: "The Philosophy of Stoicism",
+    description: "Animated introduction to Stoic philosophy and its practical applications in modern life.",
     type: "video",
-    url: "https://www.youtube.com/watch?v=A4_ESUNuYBk",
-    author: "YouTube"
+    url: "https://www.youtube.com/watch?v=R9OCA6UFE-0",
+    author: "TED-Ed"
   }
 ];
 
@@ -191,6 +192,7 @@ const ResourceTypeIcon = ({ type }: { type: Resource['type'] }) => {
 const ResourcesPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
+  const [viewingArticle, setViewingArticle] = useState<string | null>(null);
   
   // Filter resources based on search term and active tab
   const filteredResources = RESOURCES.filter(resource => {
@@ -212,113 +214,140 @@ const ResourcesPage: React.FC = () => {
     video: RESOURCES.filter(r => r.type === "video").length
   };
   
+  const handleResourceClick = (resource: Resource) => {
+    // If it's one of our internal articles, show the article view
+    if (resource.url.startsWith('#')) {
+      setViewingArticle(resource.url.substring(1)); // Remove the # prefix
+    } else {
+      // Otherwise, open the external URL
+      window.open(resource.url, "_blank");
+    }
+  };
+  
   return (
     <div className="p-6 md:p-10">
-      <div className="mb-8">
-        <Link href="/" className="text-accent hover:text-accent-dark transition-colors">
-          &larr; Back to Dashboard
-        </Link>
-        <h1 className="font-heading text-3xl font-bold text-primary mt-4 mb-2">
-          Stoic Resources
-        </h1>
-        <p className="text-neutral-medium">
-          Explore these resources to deepen your understanding of Stoic philosophy and its application to sales
-        </p>
-      </div>
-      
-      {/* Search and filter */}
-      <div className="mb-8">
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-neutral-medium" />
+      {viewingArticle ? (
+        <>
+          <div className="mb-8">
+            <Button
+              variant="ghost"
+              className="text-accent hover:text-accent-dark transition-colors"
+              onClick={() => setViewingArticle(null)}
+            >
+              &larr; Back to Resources
+            </Button>
+          </div>
+          <ArticleView articleId={viewingArticle} onClose={() => setViewingArticle(null)} />
+        </>
+      ) : (
+        <>
+          <div className="mb-8">
+            <Link href="/" className="text-accent hover:text-accent-dark transition-colors">
+              &larr; Back to Dashboard
+            </Link>
+            <h1 className="font-heading text-3xl font-bold text-primary mt-4 mb-2">
+              Stoic Resources
+            </h1>
+            <p className="text-neutral-medium">
+              Explore these resources to deepen your understanding of Stoic philosophy and its application to sales
+            </p>
+          </div>
+          
+          {/* Search and filter */}
+          <div className="mb-8">
+            <div className="flex flex-col md:flex-row gap-4 mb-6">
+              <div className="relative flex-1">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-neutral-medium" />
+                </div>
+                <Input
+                  type="text"
+                  placeholder="Search resources..."
+                  className="pl-10"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
             </div>
-            <Input
-              type="text"
-              placeholder="Search resources..."
-              className="pl-10"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            
+            <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="mb-6">
+                <TabsTrigger value="all">All ({resourceStats.all})</TabsTrigger>
+                <TabsTrigger value="book">Books ({resourceStats.book})</TabsTrigger>
+                <TabsTrigger value="article">Articles ({resourceStats.article})</TabsTrigger>
+                <TabsTrigger value="podcast">Podcasts ({resourceStats.podcast})</TabsTrigger>
+                <TabsTrigger value="video">Videos ({resourceStats.video})</TabsTrigger>
+              </TabsList>
+            </Tabs>
           </div>
-        </div>
-        
-        <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="mb-6">
-            <TabsTrigger value="all">All ({resourceStats.all})</TabsTrigger>
-            <TabsTrigger value="book">Books ({resourceStats.book})</TabsTrigger>
-            <TabsTrigger value="article">Articles ({resourceStats.article})</TabsTrigger>
-            <TabsTrigger value="podcast">Podcasts ({resourceStats.podcast})</TabsTrigger>
-            <TabsTrigger value="video">Videos ({resourceStats.video})</TabsTrigger>
-          </TabsList>
-        </Tabs>
-      </div>
 
-      <div className="space-y-6">
-        {filteredResources.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-neutral-medium">No resources found matching your search.</p>
-            <Button variant="outline" className="mt-4" onClick={() => { setSearchTerm(""); setActiveTab("all"); }}>
-              Clear filters
-            </Button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredResources.map(resource => (
-              <Card key={resource.id} className="overflow-hidden">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center mb-2">
-                    <ResourceTypeIcon type={resource.type} />
-                    <div>
-                      <CardTitle className="text-lg">{resource.title}</CardTitle>
-                      <p className="text-xs text-neutral-medium">{resource.author}</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="pb-3">
-                  <p className="text-neutral-medium text-sm mb-3">
-                    {resource.description}
-                  </p>
-                </CardContent>
-                <CardFooter className="pt-0">
-                  <div className="flex items-center w-full">
-                    <span className={`
-                      rounded-full px-3 py-1 text-xs mr-auto
-                      ${resource.type === "book" ? "bg-emerald-100 text-emerald-800" : ""}
-                      ${resource.type === "article" ? "bg-purple-100 text-purple-800" : ""}
-                      ${resource.type === "podcast" ? "bg-blue-100 text-blue-800" : ""}
-                      ${resource.type === "video" ? "bg-red-100 text-red-800" : ""}
-                    `}>
-                      {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
-                    </span>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => window.open(resource.url, "_blank")}
-                    >
-                      Explore
-                    </Button>
-                  </div>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        )}
+          <div className="space-y-6">
+            {filteredResources.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-neutral-medium">No resources found matching your search.</p>
+                <Button variant="outline" className="mt-4" onClick={() => { setSearchTerm(""); setActiveTab("all"); }}>
+                  Clear filters
+                </Button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredResources.map(resource => (
+                  <Card key={resource.id} className="overflow-hidden h-full flex flex-col">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center mb-2">
+                        <ResourceTypeIcon type={resource.type} />
+                        <div>
+                          <CardTitle className="text-lg">{resource.title}</CardTitle>
+                          <p className="text-xs text-neutral-medium">{resource.author}</p>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pb-3 flex-grow">
+                      <p className="text-neutral-medium text-sm mb-3">
+                        {resource.description}
+                      </p>
+                    </CardContent>
+                    <CardFooter className="pt-0">
+                      <div className="flex items-center w-full">
+                        <span className={`
+                          rounded-full px-3 py-1 text-xs mr-auto
+                          ${resource.type === "book" ? "bg-emerald-100 text-emerald-800" : ""}
+                          ${resource.type === "article" ? "bg-purple-100 text-purple-800" : ""}
+                          ${resource.type === "podcast" ? "bg-blue-100 text-blue-800" : ""}
+                          ${resource.type === "video" ? "bg-red-100 text-red-800" : ""}
+                        `}>
+                          {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
+                        </span>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => handleResourceClick(resource)}
+                        >
+                          {resource.url.startsWith('#') ? 'Read Article' : 'Explore'}
+                        </Button>
+                      </div>
+                    </CardFooter>
+                  </Card>
+                ))}
+              </div>
+            )}
 
-        <Card className="mt-10">
-          <CardHeader>
-            <CardTitle>Want to suggest a resource?</CardTitle>
-            <CardDescription>
-              Help improve our library of Stoic sales resources by recommending your favorites
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button>
-              Suggest a Resource
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
+            <Card className="mt-10">
+              <CardHeader>
+                <CardTitle>Want to suggest a resource?</CardTitle>
+                <CardDescription>
+                  Help improve our library of Stoic sales resources by recommending your favorites
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button>
+                  Suggest a Resource
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </>
+      )}
     </div>
   );
 };
