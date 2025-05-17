@@ -67,8 +67,11 @@ const Sidebar: React.FC = () => {
         <div>
           <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">PRACTICE</p>
           <ul className="space-y-3">
-            <NavItem to="/practice/sales-calls" icon={MicrophoneIcon}>
+            <NavItem to="/sales-call-practice" icon={MicrophoneIcon}>
               Sales Calls
+            </NavItem>
+            <NavItem to="/sales-call-practice?tab=breathwork" icon={ChallengesIcon}>
+              Breathwork
             </NavItem>
             <NavItem to="/practice/challenges" icon={ChallengesIcon}>
               Challenges

@@ -79,6 +79,7 @@ function Router() {
           <Route path="/modules/:id" component={ModulePage} />
           <Route path="/practice/sales-calls" component={SalesCallPractice} /> 
           <Route path="/sales-practice" component={SalesCallPractice} />
+          <Route path="/sales-call-practice" component={SalesCallPractice} />
           <Route path="/journal" component={JournalPage} />
           <Route path="/resources" component={ResourcesPage} />
           <Route component={NotFound} />
