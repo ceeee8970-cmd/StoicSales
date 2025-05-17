@@ -8,6 +8,8 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 interface Scenario {
   id: string;
@@ -68,6 +70,8 @@ const SalesCallSimulator: React.FC = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResponse | null>(null);
   const [showResults, setShowResults] = useState(false);
+  const [userTranscript, setUserTranscript] = useState("");
+  const [showTranscriptInput, setShowTranscriptInput] = useState(false);
   const { toast } = useToast();
   
   const currentScenario = scenarios[currentScenarioIndex];
@@ -91,6 +95,8 @@ const SalesCallSimulator: React.FC = () => {
     setIsPlaying(false);
     setShowResults(false);
     setAnalysisResult(null);
+    setUserTranscript("");
+    setShowTranscriptInput(false);
   };
   
   const togglePlayback = () => {
@@ -104,7 +110,7 @@ const SalesCallSimulator: React.FC = () => {
     });
   };
   
-  const analyzeRecording = async () => {
+  const prepareForAnalysis = () => {
     if (!recorderState.audio) {
       toast({
         title: "No recording available",
@@ -114,10 +120,33 @@ const SalesCallSimulator: React.FC = () => {
       return;
     }
     
+    setShowTranscriptInput(true);
+    // Auto focus on the textarea when it appears
+    setTimeout(() => {
+      const textarea = document.getElementById('transcript-input');
+      if (textarea) {
+        textarea.focus();
+      }
+    }, 100);
+  };
+  
+  const analyzeWithTranscript = async () => {
+    if (!userTranscript.trim()) {
+      toast({
+        title: "Transcript required",
+        description: "Please enter what you said in your recording.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     try {
       setIsAnalyzing(true);
       
-      // Convert the audio URL to a blob
+      // Convert the audio URL to a blob (still sending the audio for verification)
+      if (!recorderState.audio) {
+        throw new Error("No audio recording available");
+      }
       const audioResponse = await fetch(recorderState.audio);
       const audioBlob = await audioResponse.blob();
       
@@ -125,6 +154,7 @@ const SalesCallSimulator: React.FC = () => {
       const formData = new FormData();
       formData.append("audio", audioBlob, "recording.webm");
       formData.append("scenarioText", currentScenario.scenario);
+      formData.append("userTranscript", userTranscript); // Add the user-verified transcript
       
       // Send the audio for analysis
       const analysisResponse = await fetch('/api/analyze-recording', {
@@ -144,7 +174,7 @@ const SalesCallSimulator: React.FC = () => {
       console.error("Error analyzing recording:", error);
       toast({
         title: "Analysis failed",
-        description: "There was an error analyzing your recording. Please try again.",
+        description: "There was an error analyzing your response. Please try again.",
         variant: "destructive"
       });
     } finally {
@@ -223,15 +253,43 @@ const SalesCallSimulator: React.FC = () => {
               recorderDispatch={recorderDispatch}
             />
             
-            {recorderState.audio && (
+            {recorderState.audio && !showTranscriptInput && (
               <div className="mt-4 flex justify-end">
                 <Button 
-                  onClick={analyzeRecording} 
-                  disabled={isAnalyzing}
+                  onClick={prepareForAnalysis} 
                   className="w-full md:w-auto"
                 >
-                  {isAnalyzing ? "Analyzing..." : "Analyze My Response"}
+                  Continue
                 </Button>
+              </div>
+            )}
+            
+            {showTranscriptInput && (
+              <div className="mt-4 space-y-3">
+                <Label htmlFor="transcript-input" className="text-sm font-medium">
+                  Please enter what you said in your response:
+                </Label>
+                <Textarea 
+                  id="transcript-input"
+                  placeholder="Type what you said in your response..."
+                  value={userTranscript}
+                  onChange={(e) => setUserTranscript(e.target.value)}
+                  className="min-h-[100px]"
+                />
+                <div className="flex justify-end space-x-3">
+                  <Button 
+                    variant="outline"
+                    onClick={() => setShowTranscriptInput(false)}
+                  >
+                    Back
+                  </Button>
+                  <Button 
+                    onClick={analyzeWithTranscript} 
+                    disabled={isAnalyzing}
+                  >
+                    {isAnalyzing ? "Analyzing..." : "Analyze My Response"}
+                  </Button>
+                </div>
               </div>
             )}
           </div>
