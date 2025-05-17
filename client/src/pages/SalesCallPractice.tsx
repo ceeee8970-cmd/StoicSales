@@ -59,6 +59,7 @@ const SalesCallPractice: React.FC = () => {
         <TabsList className="mb-6">
           <TabsTrigger value="practice">Practice</TabsTrigger>
           <TabsTrigger value="recordings">My Recordings</TabsTrigger>
+          <TabsTrigger value="breathwork">Breathwork</TabsTrigger>
           <TabsTrigger value="challenges">Challenges</TabsTrigger>
         </TabsList>
 
@@ -273,6 +274,144 @@ const SalesCallPractice: React.FC = () => {
               )}
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="breathwork">
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Box Breathing */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Box Breathing</CardTitle>
+                  <CardDescription>
+                    A powerful technique to calm your nervous system before important calls
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="mb-4">
+                    <h3 className="font-heading font-bold text-lg mb-2">Benefits</h3>
+                    <ul className="list-disc list-inside space-y-1 text-sm text-neutral-medium mb-4">
+                      <li>Reduces stress and anxiety before high-stakes calls</li>
+                      <li>Improves focus and mental clarity</li>
+                      <li>Activates your parasympathetic nervous system</li>
+                      <li>Helps maintain composure during difficult conversations</li>
+                    </ul>
+                    
+                    <h3 className="font-heading font-bold text-lg mb-2">Instructions</h3>
+                    <ol className="list-decimal list-inside space-y-1 text-sm text-neutral-medium">
+                      <li>Sit with your back straight, feet flat on the floor</li>
+                      <li>Inhale slowly through your nose for 4 seconds</li>
+                      <li>Hold your breath for 4 seconds</li>
+                      <li>Exhale completely through your mouth for 4 seconds</li>
+                      <li>Hold your empty lungs for 4 seconds</li>
+                      <li>Repeat 4 times before a call, or whenever needed</li>
+                    </ol>
+                  </div>
+                  
+                  <div className="bg-neutral-lightest p-4 rounded-lg">
+                    <h4 className="font-medium mb-2">Stoic Connection</h4>
+                    <p className="text-sm text-neutral-medium">
+                      "We suffer more in imagination than in reality." - Seneca<br/><br/>
+                      Box breathing embodies the Stoic principle of bringing your attention to the present moment, separating yourself from anxious thoughts about the future or ruminations about the past.
+                    </p>
+                  </div>
+                  
+                  <div className="w-full h-40 mt-4 flex items-center justify-center rounded-lg overflow-hidden bg-primary bg-opacity-5 border border-primary border-opacity-30">
+                    <div className="relative w-20 h-20">
+                      <div className="absolute inset-0 border-2 border-primary animate-pulse rounded-sm"></div>
+                      <div className="absolute inset-0 flex items-center justify-center text-xs text-neutral-medium">
+                        Follow the<br/>square
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              {/* 4-7-8 Technique */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>4-7-8 Breathing Technique</CardTitle>
+                  <CardDescription>
+                    Perfect for quick regulation during challenging sales conversations
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="mb-4">
+                    <h3 className="font-heading font-bold text-lg mb-2">Benefits</h3>
+                    <ul className="list-disc list-inside space-y-1 text-sm text-neutral-medium mb-4">
+                      <li>Quickly regulates emotional responses during difficult objections</li>
+                      <li>Reduces reactivity to allow more thoughtful responses</li>
+                      <li>Can be done subtly during active conversations</li>
+                      <li>Creates a pause that prevents impulsive responses</li>
+                    </ul>
+                    
+                    <h3 className="font-heading font-bold text-lg mb-2">Instructions</h3>
+                    <ol className="list-decimal list-inside space-y-1 text-sm text-neutral-medium">
+                      <li>Close your mouth and inhale quietly through your nose for 4 seconds</li>
+                      <li>Hold your breath for 7 seconds</li>
+                      <li>Exhale completely through your mouth for 8 seconds, making a "whoosh" sound</li>
+                      <li>Repeat the cycle up to 4 times</li>
+                    </ol>
+                  </div>
+                  
+                  <div className="bg-neutral-lightest p-4 rounded-lg">
+                    <h4 className="font-medium mb-2">Stoic Connection</h4>
+                    <p className="text-sm text-neutral-medium">
+                      "Between stimulus and response, there is a space. In that space is our power to choose our response." - Viktor Frankl<br/><br/>
+                      This breathing technique creates that essential space between a customer's objection and your response, allowing you to respond with wisdom rather than react with emotion.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Daily Breathing Practice</CardTitle>
+                <CardDescription>
+                  Develop resilience through consistent practice
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="p-6 bg-neutral-lightest rounded-lg">
+                  <h3 className="font-heading font-bold text-lg mb-4">3-Minute Mindful Breathing</h3>
+                  <p className="text-sm text-neutral-medium mb-4">
+                    Begin your day with this simple practice to build mental fortitude for sales challenges:
+                  </p>
+                  
+                  <ol className="list-decimal list-inside space-y-3 text-sm">
+                    <li className="p-3 rounded bg-white">
+                      <span className="font-medium">Minute 1: Awareness</span>
+                      <p className="text-neutral-medium mt-1">
+                        Simply notice your natural breathing without changing it. Where do you feel the breath most prominently? Notice any tension in your body.
+                      </p>
+                    </li>
+                    <li className="p-3 rounded bg-white">
+                      <span className="font-medium">Minute 2: Focused Attention</span>
+                      <p className="text-neutral-medium mt-1">
+                        Focus completely on the sensation of air entering and leaving your nostrils. When your mind wanders (it will), gently return to this sensation.
+                      </p>
+                    </li>
+                    <li className="p-3 rounded bg-white">
+                      <span className="font-medium">Minute 3: Expansive Awareness</span>
+                      <p className="text-neutral-medium mt-1">
+                        Expand your awareness to your whole body breathing. Feel the subtle movements throughout your torso. Set an intention for handling any sales challenges today with equanimity.
+                      </p>
+                    </li>
+                  </ol>
+                  
+                  <div className="mt-6 text-center">
+                    <Button>
+                      Start Guided Practice (3 min)
+                    </Button>
+                    <p className="text-xs text-neutral-medium mt-2">
+                      When you practice mindful breathing regularly, your capacity to stay composed during stressful sales interactions grows significantly.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
 
         <TabsContent value="challenges">
