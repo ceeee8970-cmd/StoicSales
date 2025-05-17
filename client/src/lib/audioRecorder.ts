@@ -1,4 +1,4 @@
-type RecorderState = {
+export type RecorderState = {
   recordingMinutes: number;
   recordingSeconds: number;
   initRecording: boolean;
@@ -9,7 +9,7 @@ type RecorderState = {
   isPaused: boolean;
 };
 
-type RecorderAction = 
+export type RecorderAction = 
   | { type: "START_RECORDING"; payload: { mediaStream: MediaStream; mediaRecorder: MediaRecorder } } 
   | { type: "STOP_RECORDING" }
   | { type: "PAUSE_RECORDING" }

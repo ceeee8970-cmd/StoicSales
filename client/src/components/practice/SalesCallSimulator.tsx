@@ -191,7 +191,7 @@ const SalesCallSimulator: React.FC = () => {
   }, [isPlaying, recorderState.audio]);
   
   // Colors for quality badges
-  const qualityColors = {
+  const qualityColors: Record<string, string> = {
     poor: "bg-red-100 text-red-800",
     good: "bg-amber-100 text-amber-800",
     excellent: "bg-emerald-100 text-emerald-800"
@@ -295,7 +295,7 @@ const SalesCallSimulator: React.FC = () => {
                     <TabsContent key={example.quality} value={example.quality} className="space-y-4">
                       <div>
                         <div className="flex items-center mb-2">
-                          <Badge className={qualityColors[example.quality]}>
+                          <Badge className={qualityColors[example.quality as keyof typeof qualityColors]}>
                             {example.quality === "poor" ? "Needs Improvement" : 
                              example.quality === "good" ? "Effective" : "Excellent"}
                           </Badge>
