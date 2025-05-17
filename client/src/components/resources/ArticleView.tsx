@@ -10,6 +10,47 @@ interface ArticleViewProps {
 
 const ArticleView: React.FC<ArticleViewProps> = ({ articleId, onClose }) => {
   const articles = {
+    "linkedin-group": {
+      title: "The Stoic Seller LinkedIn Group",
+      author: "The Stoic Seller Team",
+      date: "May 17, 2025",
+      content: `
+        <h2>Join Our LinkedIn Community</h2>
+        
+        <p>We're excited to announce the launch of "The Stoic Seller" LinkedIn Group - a dedicated space for sales professionals interested in applying Stoic philosophy to their daily practice.</p>
+        
+        <h3>What to Expect</h3>
+        
+        <ul>
+          <li><strong>Weekly Content:</strong> Every Monday, we post new content exploring how specific Stoic principles apply to common sales scenarios</li>
+          <li><strong>Interactive Discussions:</strong> Sales professionals from around the world share their experiences applying philosophical principles to client interactions</li>
+          <li><strong>Expert Q&As:</strong> Monthly live sessions with authors, philosophers, and top sales leaders who incorporate Stoicism into their approach</li>
+          <li><strong>Resource Sharing:</strong> Members share articles, books, podcasts, and other resources that have helped them develop philosophical resilience</li>
+        </ul>
+        
+        <h3>Upcoming Weekly Topics</h3>
+        
+        <ul>
+          <li>Week 1: "The Dichotomy of Control in Prospecting" - Focus your energy where it matters most</li>
+          <li>Week 2: "Negative Visualization for Objection Handling" - Prepare for difficult conversations</li>
+          <li>Week 3: "Stoic Responses to Rejection" - Maintaining equanimity when deals fall through</li>
+          <li>Week 4: "Virtue Ethics in Sales Negotiations" - Win with integrity</li>
+        </ul>
+        
+        <h3>How to Join</h3>
+        
+        <p>Our LinkedIn group is free to join for all sales professionals interested in philosophical approaches to sales excellence.</p>
+        
+        <p>To join:</p>
+        <ol>
+          <li>Visit <a href="https://www.linkedin.com/groups/stoicseller" target="_blank">linkedin.com/groups/stoicseller</a></li>
+          <li>Click "Request to join"</li>
+          <li>Answer a quick question about why you're interested in Stoicism and sales</li>
+        </ol>
+        
+        <p>We review and approve new members daily. Once approved, introduce yourself to the community and join the conversation!</p>
+      `
+    },
     "stoic-seller-article": {
       title: "The Stoic Seller: Applying Ancient Wisdom to Modern Sales",
       author: "The Stoic Seller Team",

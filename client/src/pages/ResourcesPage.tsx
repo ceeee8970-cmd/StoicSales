@@ -18,6 +18,16 @@ interface Resource {
 }
 
 const RESOURCES: Resource[] = [
+  // Community
+  {
+    id: 16,
+    title: "The Stoic Seller LinkedIn Group",
+    description: "Join our weekly discussions on applying Stoic principles to sales challenges. Network with other sales professionals who use philosophy to improve their approach.",
+    type: "article",
+    url: "#linkedin-group",
+    author: "The Stoic Seller Team"
+  },
+  
   // Classic Stoic Texts
   {
     id: 1,

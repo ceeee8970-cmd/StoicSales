@@ -20,10 +20,21 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ recorderState, recorderDi
   
   useEffect(() => {
     let interval: NodeJS.Timeout;
+    const MAX_RECORDING_TIME = 30; // 30 seconds maximum recording time
     
     if (recorderState.isRecording && !recorderState.isPaused) {
       interval = setInterval(() => {
-        setRecordingTime(prevTime => prevTime + 1);
+        setRecordingTime(prevTime => {
+          // Check if we've reached the maximum recording time
+          if (prevTime >= MAX_RECORDING_TIME - 1) {
+            // Auto-stop the recording when we hit 30 seconds
+            stopRecording(recorderState);
+            recorderDispatch({ type: "STOP_RECORDING" });
+            clearInterval(interval);
+            return MAX_RECORDING_TIME;
+          }
+          return prevTime + 1;
+        });
         
         const minutes = Math.floor(recordingTime / 60);
         const seconds = recordingTime % 60;
@@ -81,7 +92,13 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ recorderState, recorderDi
       
       {recorderState.isRecording && (
         <div className="text-center mb-4">
-          <p className="text-sm font-medium">{formattedTime}</p>
+          <p className="text-sm font-medium">{formattedTime} <span className="text-neutral-medium">(max 30 sec)</span></p>
+          <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+            <div 
+              className="bg-primary h-2.5 rounded-full transition-all duration-300" 
+              style={{ width: `${(recordingTime / 30) * 100}%` }}
+            ></div>
+          </div>
         </div>
       )}
       

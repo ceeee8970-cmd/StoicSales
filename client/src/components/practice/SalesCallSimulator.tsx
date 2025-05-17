@@ -186,7 +186,7 @@ const SalesCallSimulator: React.FC = () => {
         </div>
         
         <p className="text-neutral-medium text-sm mb-5">
-          Practice handling objections with calm and clarity. Record your response to challenging scenarios.
+          Practice handling objections with calm and clarity. Record a concise 30-second response to challenging scenarios and get AI feedback.
         </p>
         
         {!showResults ? (
