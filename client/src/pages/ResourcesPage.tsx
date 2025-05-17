@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { ResourcesIcon, BookIcon } from "@/assets/icons";
 import { Search } from "lucide-react";
 import ArticleView from "@/components/resources/ArticleView";
+import EbookViewer from "@/components/resources/EbookViewer";
 
 interface Resource {
   id: number;
@@ -24,7 +25,7 @@ const RESOURCES: Resource[] = [
     title: "The Stoic Seller Ebook",
     description: "Our comprehensive guide to applying Stoic philosophy to sales. Learn practical techniques for staying grounded, building authentic connections, and finding meaning in your work.",
     type: "book",
-    url: "/assets/ebook/the-stoic-seller-ebook.html",
+    url: "/src/assets/ebook/the-stoic-seller-ebook.html",
     author: "The Stoic Seller Team"
   },
   
@@ -213,6 +214,7 @@ const ResourcesPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
   const [viewingArticle, setViewingArticle] = useState<string | null>(null);
+  const [viewingEbook, setViewingEbook] = useState<boolean>(false);
   
   // Filter resources based on search term and active tab
   const filteredResources = RESOURCES.filter(resource => {
@@ -238,7 +240,12 @@ const ResourcesPage: React.FC = () => {
     // If it's one of our internal articles, show the article view
     if (resource.url.startsWith('#')) {
       setViewingArticle(resource.url.substring(1)); // Remove the # prefix
-    } else {
+    } 
+    // If it's our ebook, show the ebook viewer
+    else if (resource.id === 17) {
+      setViewingEbook(true);
+    }
+    else {
       // Otherwise, open the external URL
       window.open(resource.url, "_blank");
     }
@@ -259,6 +266,8 @@ const ResourcesPage: React.FC = () => {
           </div>
           <ArticleView articleId={viewingArticle} onClose={() => setViewingArticle(null)} />
         </>
+      ) : viewingEbook ? (
+        <EbookViewer onClose={() => setViewingEbook(false)} />
       ) : (
         <>
           <div className="mb-8">
