@@ -7,9 +7,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { MicrophoneIcon, PlayIcon } from "@/assets/icons";
 
 const PRACTICE_CATEGORIES = [
-  { id: "objections", name: "Handling Objections" },
-  { id: "closing", name: "Closing Techniques" },
-  { id: "discovery", name: "Discovery Questions" }
+  { id: "cold-outreach", name: "Cold Outreach", description: "Practice engaging prospects professionally in initial contacts" },
+  { id: "objections", name: "Handling Objections", description: "Master the art of addressing prospect concerns with stoic principles" },
+  { id: "closing", name: "Closing Techniques", description: "Learn to close deals effectively with patience and wisdom" }
 ];
 
 // Simulating recordings data that would normally come from an API
@@ -39,6 +39,7 @@ const RECORDINGS = [
 
 const SalesCallPractice: React.FC = () => {
   const [activeTab, setActiveTab] = useState("practice");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   return (
     <div className="p-6 md:p-10">
@@ -63,7 +64,91 @@ const SalesCallPractice: React.FC = () => {
 
         <TabsContent value="practice" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <SalesCallSimulator />
+            {selectedCategory ? (
+              <Card>
+                <CardHeader>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle>{PRACTICE_CATEGORIES.find(c => c.id === selectedCategory)?.name} Practice</CardTitle>
+                      <CardDescription>
+                        Practice your {selectedCategory === 'cold-outreach' ? 'opening calls' : selectedCategory === 'closing' ? 'closing techniques' : 'objection handling'}
+                      </CardDescription>
+                    </div>
+                    <Button variant="ghost" size="sm" onClick={() => setSelectedCategory(null)}>
+                      Back to All
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="bg-neutral-lightest p-4 rounded-lg mb-4">
+                    <h3 className="font-heading font-bold mb-2">Stoic Principle: {
+                      selectedCategory === 'cold-outreach' ? "Beginner's Mind (Shoshin)" :
+                      selectedCategory === 'objections' ? "The Dichotomy of Control" :
+                      "Amor Fati (Love of Fate)"
+                    }</h3>
+                    <p className="text-sm text-neutral-medium">
+                      {selectedCategory === "cold-outreach" 
+                        ? "Approach each prospect with genuine curiosity and without assumptions. Your goal is to learn, not just to sell."
+                        : selectedCategory === "objections" 
+                          ? "Focus only on what you can control in the conversation: your questions, your responses, your presence. Let go of the outcome." 
+                          : "Whether the prospect decides to buy or not, embrace it as necessary for your growth. Every interaction has value."
+                      }
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-4 mt-6">
+                    <div 
+                      className="p-4 border border-neutral-light rounded-lg hover:border-primary transition-colors cursor-pointer"
+                      onClick={() => window.location.href = '#/sales-call-practice/simulator'}
+                    >
+                      <div className="flex items-center mb-2">
+                        <div className="w-10 h-10 rounded-full bg-primary-light text-primary flex items-center justify-center mr-3">
+                          <MicrophoneIcon className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium">Practice Scenario: {
+                            selectedCategory === 'cold-outreach' ? 'Initial Contact' :
+                            selectedCategory === 'objections' ? 'Price Objection' :
+                            'Closing the Deal'
+                          }</h4>
+                          <p className="text-xs text-neutral-medium">30-second response practice</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-neutral-medium mb-4">
+                        {selectedCategory === 'cold-outreach' ? 
+                          'Hi, this is [prospect name] speaking. I received your message, but I'm not sure how your solution would help our company. We're already using several tools.' :
+                        selectedCategory === 'objections' ? 
+                          'I appreciate the presentation, but honestly, your solution is priced way above what we were expecting to invest. Can you do better on the price?' :
+                          'Everything sounds good, but I'm still not sure if we're ready to make a decision right now. What would be the next steps if we were to move forward?'
+                        }
+                      </p>
+                      <Button className="w-full">
+                        Start Practice
+                      </Button>
+                    </div>
+                    
+                    <div className="p-4 border border-neutral-light rounded-lg opacity-60">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 rounded-full bg-neutral-light text-neutral-medium flex items-center justify-center mr-3">
+                            <MicrophoneIcon className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <h4 className="font-medium">Additional Scenarios</h4>
+                            <p className="text-xs text-neutral-medium">Coming soon</p>
+                          </div>
+                        </div>
+                        <span className="bg-neutral-light text-neutral-medium px-3 py-1 rounded-full text-xs">
+                          Locked
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ) : (
+              <SalesCallSimulator />
+            )}
             
             <Card>
               <CardHeader>
@@ -77,16 +162,16 @@ const SalesCallPractice: React.FC = () => {
                   {PRACTICE_CATEGORIES.map(category => (
                     <Button 
                       key={category.id}
-                      variant="outline" 
+                      variant={selectedCategory === category.id ? "default" : "outline"}
                       className="w-full justify-start text-left"
-                      onClick={() => {}}
+                      onClick={() => setSelectedCategory(category.id)}
                     >
                       <div className="w-8 h-8 rounded-full bg-primary-light bg-opacity-10 text-primary flex items-center justify-center mr-3">
                         <MicrophoneIcon className="h-4 w-4" />
                       </div>
                       <div>
                         <p className="font-medium">{category.name}</p>
-                        <p className="text-xs text-neutral-medium">10 scenarios</p>
+                        <p className="text-xs text-neutral-medium">{category.description}</p>
                       </div>
                     </Button>
                   ))}
