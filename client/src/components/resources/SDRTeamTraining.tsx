@@ -1212,8 +1212,8 @@ const SDRTeamTraining: React.FC<SDRTeamTrainingProps> = ({ onClose }) => {
                           </h3>
                           <p className="mb-6">
                             {testResults.passed 
-                              ? 'Great job! You've successfully completed this module.' 
-                              : 'Review the material and try again.'}
+                              ? "Great job! You've successfully completed this module."
+                              : "Review the material and try again."}
                           </p>
                           <div className="flex justify-center space-x-4">
                             {!testResults.passed && (
@@ -1287,8 +1287,8 @@ const SDRTeamTraining: React.FC<SDRTeamTrainingProps> = ({ onClose }) => {
                   </h3>
                   <p className="mb-6">
                     {testResults.passed 
-                      ? 'Congratulations! You've successfully completed the SDR training program.' 
-                      : 'Review the modules and try again.'}
+                      ? "Congratulations! You have successfully completed the SDR training program."
+                      : "Review the modules and try again"}
                   </p>
                   
                   {testResults.passed && (

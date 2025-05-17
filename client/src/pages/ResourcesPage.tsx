@@ -20,6 +20,16 @@ interface Resource {
 }
 
 const RESOURCES: Resource[] = [
+  // SDR Team Training (premium)
+  {
+    id: 18,
+    title: "SDR Team Training Program",
+    description: "Complete training system for SDR teams applying Stoic principles to sales outreach. Includes modules on email messaging, LinkedIn outreach, handling resistance, call openers, and follow-ups with assessments.",
+    type: "book",
+    url: "#sdr-training",
+    author: "The Stoic Seller Team"
+  },
+  
   // Ebook (featured)
   {
     id: 17,
@@ -216,6 +226,7 @@ const ResourcesPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [viewingArticle, setViewingArticle] = useState<string | null>(null);
   const [viewingEbook, setViewingEbook] = useState<boolean>(false);
+  const [viewingSDRTraining, setViewingSDRTraining] = useState<boolean>(false);
   
   // Filter resources based on search term and active tab
   const filteredResources = RESOURCES.filter(resource => {
@@ -240,7 +251,11 @@ const ResourcesPage: React.FC = () => {
   const handleResourceClick = (resource: Resource) => {
     // If it's one of our internal articles, show the article view
     if (resource.url.startsWith('#')) {
-      setViewingArticle(resource.url.substring(1)); // Remove the # prefix
+      if (resource.url === '#sdr-training') {
+        setViewingSDRTraining(true);
+      } else {
+        setViewingArticle(resource.url.substring(1)); // Remove the # prefix
+      }
     } 
     // If it's our ebook, show the ebook viewer
     else if (resource.id === 17) {
@@ -269,6 +284,8 @@ const ResourcesPage: React.FC = () => {
         </>
       ) : viewingEbook ? (
         <StoicSellerEbook onClose={() => setViewingEbook(false)} />
+      ) : viewingSDRTraining ? (
+        <SDRTeamTraining onClose={() => setViewingSDRTraining(false)} />
       ) : (
         <>
           <div className="mb-8">
