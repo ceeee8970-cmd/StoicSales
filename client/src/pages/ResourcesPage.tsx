@@ -18,6 +18,16 @@ interface Resource {
 }
 
 const RESOURCES: Resource[] = [
+  // Ebook (featured)
+  {
+    id: 17,
+    title: "The Stoic Seller Ebook",
+    description: "Our comprehensive guide to applying Stoic philosophy to sales. Learn practical techniques for staying grounded, building authentic connections, and finding meaning in your work.",
+    type: "book",
+    url: "/assets/ebook/the-stoic-seller-ebook.html",
+    author: "The Stoic Seller Team"
+  },
+  
   // Community
   {
     id: 16,
