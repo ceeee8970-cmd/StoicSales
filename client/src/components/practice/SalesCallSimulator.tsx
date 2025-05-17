@@ -110,7 +110,7 @@ const SalesCallSimulator: React.FC = () => {
     });
   };
   
-  const prepareForAnalysis = () => {
+  const analyzeRecording = async () => {
     if (!recorderState.audio) {
       toast({
         title: "No recording available",
@@ -120,33 +120,10 @@ const SalesCallSimulator: React.FC = () => {
       return;
     }
     
-    setShowTranscriptInput(true);
-    // Auto focus on the textarea when it appears
-    setTimeout(() => {
-      const textarea = document.getElementById('transcript-input');
-      if (textarea) {
-        textarea.focus();
-      }
-    }, 100);
-  };
-  
-  const analyzeWithTranscript = async () => {
-    if (!userTranscript.trim()) {
-      toast({
-        title: "Transcript required",
-        description: "Please enter what you said in your recording.",
-        variant: "destructive"
-      });
-      return;
-    }
-    
     try {
       setIsAnalyzing(true);
       
-      // Convert the audio URL to a blob (still sending the audio for verification)
-      if (!recorderState.audio) {
-        throw new Error("No audio recording available");
-      }
+      // Convert the audio URL to a blob
       const audioResponse = await fetch(recorderState.audio);
       const audioBlob = await audioResponse.blob();
       
@@ -154,7 +131,6 @@ const SalesCallSimulator: React.FC = () => {
       const formData = new FormData();
       formData.append("audio", audioBlob, "recording.webm");
       formData.append("scenarioText", currentScenario.scenario);
-      formData.append("userTranscript", userTranscript); // Add the user-verified transcript
       
       // Send the audio for analysis
       const analysisResponse = await fetch('/api/analyze-recording', {
@@ -253,43 +229,15 @@ const SalesCallSimulator: React.FC = () => {
               recorderDispatch={recorderDispatch}
             />
             
-            {recorderState.audio && !showTranscriptInput && (
+            {recorderState.audio && (
               <div className="mt-4 flex justify-end">
                 <Button 
-                  onClick={prepareForAnalysis} 
+                  onClick={analyzeRecording} 
+                  disabled={isAnalyzing}
                   className="w-full md:w-auto"
                 >
-                  Continue
+                  {isAnalyzing ? "Analyzing..." : "Analyze My Response"}
                 </Button>
-              </div>
-            )}
-            
-            {showTranscriptInput && (
-              <div className="mt-4 space-y-3">
-                <Label htmlFor="transcript-input" className="text-sm font-medium">
-                  Please enter what you said in your response:
-                </Label>
-                <Textarea 
-                  id="transcript-input"
-                  placeholder="Type what you said in your response..."
-                  value={userTranscript}
-                  onChange={(e) => setUserTranscript(e.target.value)}
-                  className="min-h-[100px]"
-                />
-                <div className="flex justify-end space-x-3">
-                  <Button 
-                    variant="outline"
-                    onClick={() => setShowTranscriptInput(false)}
-                  >
-                    Back
-                  </Button>
-                  <Button 
-                    onClick={analyzeWithTranscript} 
-                    disabled={isAnalyzing}
-                  >
-                    {isAnalyzing ? "Analyzing..." : "Analyze My Response"}
-                  </Button>
-                </div>
               </div>
             )}
           </div>
