@@ -38,7 +38,28 @@ const RECORDINGS = [
 ];
 
 const SalesCallPractice: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("practice");
+  // Check URL for tab parameter
+  const getInitialTab = () => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam && ["practice", "recordings", "breathwork", "challenges"].includes(tabParam)) {
+        return tabParam;
+      }
+    }
+    return "practice";
+  };
+  
+  const [activeTab, setActiveTab] = useState(getInitialTab());
+  
+  // Update URL when tab changes
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    // Update URL without full page reload
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", tab);
+    window.history.pushState({}, "", url.toString());
+  };
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   return (
@@ -55,7 +76,7 @@ const SalesCallPractice: React.FC = () => {
         </p>
       </div>
 
-      <Tabs defaultValue="practice" value={activeTab} onValueChange={setActiveTab}>
+      <Tabs defaultValue="practice" value={activeTab} onValueChange={handleTabChange}>
         <TabsList className="mb-6">
           <TabsTrigger value="practice">Practice</TabsTrigger>
           <TabsTrigger value="recordings">My Recordings</TabsTrigger>
