@@ -1021,7 +1021,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="challenge-box">
         <div class="bonus-title">Optional</div>
-        <p>Listen to Ryan Holiday's talk "The Obstacle is the Way" on YouTube.</p>
+        <p><a href="https://www.youtube.com/watch?v=5EIo3BzGAs8" target="_blank">Listen to Ryan Holiday's talk "The Obstacle is the Way" on YouTube.</a></p>
       </div>
       
       <h3>Day 4 – Listen Twice, Speak Once</h3>
@@ -1076,7 +1076,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
       
       <div class="challenge-box">
         <div class="breathwork-title">10-minute Yoga Nidra practice</div>
-        <p>Box Breathing tutorial by Huberman Lab (YouTube)</p>
+        <p><a href="https://www.youtube.com/watch?v=M0u9GST_j3s" target="_blank">Box Breathing tutorial by Huberman Lab (YouTube)</a></p>
       </div>
       
       <div class="resources-section">
@@ -1085,7 +1085,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="book-recommendation">
           <div class="book-icon">📖</div>
           <div class="book-details">
-            <h4>Meditations by Marcus Aurelius</h4>
+            <h4><a href="https://www.amazon.com/Meditations-New-Translation-Marcus-Aurelius/dp/0812968255" target="_blank">Meditations by Marcus Aurelius</a></h4>
             <p>A series of personal reflections by a Roman emperor on discipline, duty, and inner strength. This is the philosophical backbone of leadership through calm.</p>
           </div>
         </div>
@@ -1093,7 +1093,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="book-recommendation">
           <div class="book-icon">📖</div>
           <div class="book-details">
-            <h4>Letters from a Stoic by Seneca</h4>
+            <h4><a href="https://www.amazon.com/Letters-Penguin-Classics-Lucius-Annaeus/dp/0140442103" target="_blank">Letters from a Stoic by Seneca</a></h4>
             <p>Practical life and mindset advice written in letter form. Clear, modern-feeling insights on dealing with anxiety, wealth, anger, and loss.</p>
           </div>
         </div>
@@ -1101,7 +1101,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="book-recommendation">
           <div class="book-icon">📖</div>
           <div class="book-details">
-            <h4>Discourses by Epictetus</h4>
+            <h4><a href="https://www.amazon.com/Discourses-Selected-Writings-Penguin-Classics/dp/0140449469" target="_blank">Discourses by Epictetus</a></h4>
             <p>A sharp, no-excuses guide to self-control, humility, and what it means to live well, straight from the mouth of a former slave turned philosopher.</p>
           </div>
         </div>
@@ -1109,22 +1109,22 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
         <div class="book-recommendation">
           <div class="book-icon">📖</div>
           <div class="book-details">
-            <h4>The Daily Stoic by Ryan Holiday</h4>
+            <h4><a href="https://www.amazon.com/Daily-Stoic-Meditations-Wisdom-Perseverance/dp/0735211736" target="_blank">The Daily Stoic by Ryan Holiday</a></h4>
             <p>One meditation for each day of the year, blending ancient wisdom with modern business and personal growth insights.</p>
           </div>
         </div>
         
         <h3>Bonus Resources</h3>
         <ul>
-          <li>The Daily Stoic YouTube Channel</li>
-          <li>Modern Wisdom: Stoicism playlist</li>
+          <li><a href="https://www.youtube.com/c/DailyStoic" target="_blank">The Daily Stoic YouTube Channel</a></li>
+          <li><a href="https://www.youtube.com/playlist?list=PL7IctvKqA25JTyM7RzQFK2fGPGYMxZGRd" target="_blank">Modern Wisdom: Stoicism playlist</a></li>
         </ul>
         
         <h3>AI Tools to Support You</h3>
         <ul>
-          <li>ChatGPT – to rewrite outreach emails, practice objection handling, or reflect on your progress</li>
-          <li>Rewind AI – to log and replay calls to evaluate tone and presence</li>
-          <li>Otter.ai – to transcribe and analyze your own sales calls for keyword patterns and clarity</li>
+          <li><a href="https://chat.openai.com/" target="_blank">ChatGPT</a> – to rewrite outreach emails, practice objection handling, or reflect on your progress</li>
+          <li><a href="https://www.rewind.ai/" target="_blank">Rewind AI</a> – to log and replay calls to evaluate tone and presence</li>
+          <li><a href="https://otter.ai/" target="_blank">Otter.ai</a> – to transcribe and analyze your own sales calls for keyword patterns and clarity</li>
         </ul>
       </div>
       
