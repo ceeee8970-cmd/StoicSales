@@ -131,7 +131,7 @@ const SalesCallPractice: React.FC = () => {
                   <div className="space-y-4 mt-6">
                     <div 
                       className="p-4 border border-neutral-light rounded-lg hover:border-primary transition-colors cursor-pointer"
-                      onClick={() => window.location.href = "/#/"}
+                      onClick={() => alert("This practice scenario will be available soon!")}
                     >
                       <div className="flex items-center mb-2">
                         <div className="w-10 h-10 rounded-full bg-primary-light text-primary flex items-center justify-center mr-3">
