@@ -9,6 +9,7 @@ import ModulePage from "@/pages/ModulePage";
 import SalesCallPractice from "@/pages/SalesCallPractice";
 import JournalPage from "@/pages/JournalPage";
 import ResourcesPage from "@/pages/ResourcesPage";
+import ProgressPage from "@/pages/ProgressPage";
 import NotFound from "@/pages/not-found";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileHeader from "@/components/layout/MobileHeader";
