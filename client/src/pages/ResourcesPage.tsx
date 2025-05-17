@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { ResourcesIcon, BookIcon } from "@/assets/icons";
 import { Search } from "lucide-react";
 import ArticleView from "@/components/resources/ArticleView";
-import EbookViewer from "@/components/resources/EbookViewer";
+import StoicSellerEbook from "@/components/resources/StoicSellerEbook";
 
 interface Resource {
   id: number;
@@ -267,7 +267,7 @@ const ResourcesPage: React.FC = () => {
           <ArticleView articleId={viewingArticle} onClose={() => setViewingArticle(null)} />
         </>
       ) : viewingEbook ? (
-        <EbookViewer onClose={() => setViewingEbook(false)} />
+        <StoicSellerEbook onClose={() => setViewingEbook(false)} />
       ) : (
         <>
           <div className="mb-8">
