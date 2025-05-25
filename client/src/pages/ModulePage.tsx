@@ -73,6 +73,92 @@ const modules: Record<string, Module> = {
         reflection: "If this were the last sales conversation you ever had, how would you want it to feel? What would you say differently?"
       }
     ]
+  },
+  "3": {
+    id: 3,
+    title: "Module 3: Mindful Communication",
+    lessons: [
+      {
+        id: "3-1",
+        title: "The Art of Listening",
+        content: "\"We have two ears and one mouth so that we can listen twice as much as we speak.\" – Epictetus\n\nTrue listening is rare in sales. Most of us are planning our next question, waiting for our turn to speak, or mentally rehearsing our pitch. But the Stoic Seller knows that listening is not just a technique — it's a form of service.\n\nWhen you truly listen, you're giving someone the gift of being heard. You're creating space for them to think out loud, to discover their own needs, and to feel understood. This isn't about gathering information to use against them later. It's about honoring their experience and perspective.\n\nListening requires presence, patience, and genuine curiosity. It means setting aside your agenda long enough to understand theirs.",
+        assignment: "For the next three sales conversations, commit to asking one follow-up question for every statement the prospect makes. Instead of moving to your next planned question, dig deeper into what they just shared.\n\nFor example:\nThem: 'We're struggling with efficiency.'\nYou: 'What does that struggle look like day-to-day?'\n\nThem: 'The team is frustrated.'\nYou: 'Help me understand what's driving that frustration.'\n\nNotice how this changes the dynamic of the conversation.",
+        reflection: "When was the last time you felt truly heard by a salesperson? What did they do differently?"
+      },
+      {
+        id: "3-2",
+        title: "Speaking with Intention",
+        content: "\"Think before you speak. Read before you think.\" – Fran Lebowitz (adapted)\n\nEvery word you speak in a sales conversation either adds value or takes it away. There is no neutral. The Stoic Seller chooses their words carefully, speaking only when they have something meaningful to contribute.\n\nThis doesn't mean being silent or passive. It means being intentional. Before you speak, ask yourself: Will this help them think more clearly about their situation? Will this move us toward mutual understanding? Or am I speaking to fill silence, to sound smart, or to push my agenda?\n\nIntentional speaking is about quality over quantity. It's about choosing words that serve the conversation, not your ego.",
+        assignment: "Before your next sales call, write down three questions you want to ask. But here's the challenge: you can only ask these three questions during the entire conversation. Everything else must be follow-up questions based on what they share.\n\nThis forces you to make every question count and to really listen to their answers.",
+        reflection: "What would change about your sales conversations if you spoke 50% less but listened 100% more?"
+      }
+    ]
+  },
+  "4": {
+    id: 4,
+    title: "Module 4: Emotional Regulation",
+    lessons: [
+      {
+        id: "4-1",
+        title: "Managing Rejection",
+        content: "\"It's not what happens to you, but how you react to it that matters.\" – Epictetus\n\nRejection is not personal, even when it feels personal. The prospect is not rejecting you as a human being — they're making a business decision based on their current priorities, constraints, and information.\n\nThe Stoic Seller develops a healthy relationship with rejection. They see it as data, not judgment. Each 'no' teaches them something about their approach, their targeting, or their timing. They use rejection as fuel for improvement, not fuel for discouragement.\n\nThis doesn't mean rejection doesn't sting. It means you don't let that sting define you or derail you.",
+        assignment: "Keep a 'rejection journal' for one week. After each rejection, write down:\n\n1. What specifically was rejected (your timing, your solution, your approach?)\n2. What you learned from the interaction\n3. How you can use this information to improve\n4. One thing you did well, regardless of the outcome\n\nAt the end of the week, review your entries. Look for patterns and insights.",
+        reflection: "How would your relationship with rejection change if you saw every 'no' as valuable market research?"
+      },
+      {
+        id: "4-2",
+        title: "Staying Present Under Pressure",
+        content: "\"You have power over your mind — not outside events. Realize this, and you will find strength.\" – Marcus Aurelius\n\nSales can be high-pressure. Quotas, competition, difficult conversations, technical problems during demos — there are countless ways a sales situation can become stressful. The Stoic Seller learns to find calm in the storm.\n\nPresence under pressure comes from preparation and practice. It comes from knowing that you cannot control outcomes, only your effort and attitude. It comes from trusting in your ability to handle whatever comes up.\n\nWhen you're present under pressure, you make better decisions, ask better questions, and respond more thoughtfully. You become a calm, steady force that prospects can trust.",
+        assignment: "Practice the '4-7-8 breathing technique' before your next high-stakes call:\n\n- Inhale for 4 counts\n- Hold for 7 counts  \n- Exhale for 8 counts\n- Repeat 3 times\n\nNotice how this affects your state of mind and your performance during the call.",
+        reflection: "Describe a time when you stayed calm under pressure in sales. What was the result?"
+      }
+    ]
+  },
+  "5": {
+    id: 5,
+    title: "Module 5: Building Authentic Relationships",
+    lessons: [
+      {
+        id: "5-1",
+        title: "Trust Through Transparency",
+        content: "\"Honesty is the first chapter in the book of wisdom.\" – Thomas Jefferson\n\nAuthentic relationships in sales are built on trust, and trust is built on transparency. This means being honest about your solution's limitations, clear about your pricing, and upfront about your process.\n\nTransparency doesn't mean oversharing or highlighting every flaw. It means being truthful when asked direct questions, setting clear expectations, and not making promises you can't keep.\n\nThe Stoic Seller knows that short-term gains from being less than transparent always lead to long-term losses in trust and reputation.",
+        assignment: "In your next sales conversation, find one opportunity to be more transparent than you normally would be. This might mean:\n\n- Acknowledging a limitation of your solution\n- Being upfront about pricing before they ask\n- Sharing a relevant challenge another client faced\n- Admitting when you don't know something\n\nNotice how this transparency affects the dynamic of the conversation.",
+        reflection: "Think of a salesperson you trust completely. What specific behaviors make them trustworthy?"
+      },
+      {
+        id: "5-2",
+        title: "Serving vs. Selling",
+        content: "\"The best way to find yourself is to lose yourself in the service of others.\" – Mahatma Gandhi\n\nThe highest form of selling is when it doesn't feel like selling at all — when it feels like service. This happens when your primary focus shifts from getting something (a sale, a commission, a quota) to giving something (insight, clarity, value).\n\nService-oriented selling means sometimes recommending a competitor if they're a better fit. It means walking away from deals that aren't right for the prospect. It means prioritizing their success over your commission.\n\nThis approach may seem counterintuitive, but it builds the kind of trust and reputation that leads to more referrals, better relationships, and ultimately more success than any aggressive sales tactic ever could.",
+        assignment: "In your next sales opportunity, ask yourself: 'How can I serve this person, regardless of whether they buy from me?' Then take one specific action based on that question.\n\nThis might be introducing them to a useful contact, sharing a relevant resource, or simply asking better questions to help them think through their challenge.",
+        reflection: "Describe a time when someone 'sold' to you by truly serving your needs. How did that experience feel different?"
+      }
+    ]
+  },
+  "6": {
+    id: 6,
+    title: "Module 6: Long-term Success and Wisdom",
+    lessons: [
+      {
+        id: "6-1",
+        title: "Building a Sustainable Practice",
+        content: "\"It is not the man who has too little, but the man who craves more, who is poor.\" – Seneca\n\nSustainable success in sales comes from building systems and habits that you can maintain over the long term. It's not about grinding harder or working longer hours — it's about working more thoughtfully and efficiently.\n\nThe Stoic Seller builds a practice around consistency rather than intensity. They develop daily habits that compound over time: regular prospecting, continuous learning, mindful preparation, and honest self-reflection.\n\nThey also know when to rest, when to say no, and how to maintain their energy and enthusiasm for the work.",
+        assignment: "Design a daily practice that you can maintain for the next 30 days. Include:\n\n- One prospecting activity (15-30 minutes)\n- One learning activity (reading, podcast, course - 10-15 minutes)\n- One mindfulness practice (meditation, journaling, breathing - 5-10 minutes)\n\nCommit to this practice for 30 days and track your consistency.",
+        reflection: "What does sustainable success look like for you? How would you know when you've achieved it?"
+      },
+      {
+        id: "6-2",
+        title: "Wisdom Through Experience",
+        content: "\"Every new beginning comes from some other beginning's end.\" – Seneca\n\nTrue sales wisdom comes not from knowing all the answers, but from asking better questions. It comes from learning from every interaction, every mistake, every success, and every failure.\n\nThe Stoic Seller maintains a beginner's mind throughout their career. They stay curious, humble, and open to learning. They know that every prospect can teach them something, every lost deal contains a lesson, and every success reveals an opportunity to improve.\n\nWisdom is the ability to see patterns, to understand people, and to respond appropriately to each unique situation. It cannot be rushed or faked — it must be earned through experience and reflection.",
+        assignment: "At the end of each week for the next month, spend 15 minutes reflecting on:\n\n1. What did I learn about myself this week?\n2. What did I learn about selling this week?\n3. What did I learn about people this week?\n4. How can I apply these lessons next week?\n\nWrite down your insights and review them regularly.",
+        reflection: "What's the most important lesson you've learned in your sales career so far? How has it changed your approach?"
+      },
+      {
+        id: "6-3",
+        title: "Your Stoic Seller Journey",
+        content: "\"You could leave life right now. Let that determine what you do and say and think.\" – Marcus Aurelius\n\nCongratulations. You've completed your introduction to the Stoic Seller approach. But this is not an ending — it's a beginning.\n\nThe principles you've learned here are not techniques to master once and move on. They are practices to return to daily, habits to refine continuously, and wisdom to deepen over time.\n\nThe path of the Stoic Seller is one of constant growth, service, and authentic connection. It's about showing up fully in every conversation, treating every interaction as an opportunity to serve, and maintaining your integrity regardless of the outcome.\n\nRemember: You are not just a salesperson. You are a guide, a consultant, a problem-solver, and a trusted advisor. Carry that responsibility with honor.",
+        reflection: "How will you continue to develop as a Stoic Seller? What's your next step on this journey?"
+      }
+    ]
   }
 };
 

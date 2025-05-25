@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircleIcon } from "@/assets/icons";
@@ -26,6 +26,8 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
 }) => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [completedLessons, setCompletedLessons] = useState<Record<string, boolean>>({});
+  const [moduleCompleted, setModuleCompleted] = useState(false);
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
 
   const currentLesson = lessons[currentLessonIndex];
@@ -43,9 +45,23 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
       window.scrollTo(0, 0);
     } else {
       // Module completed
+      setModuleCompleted(true);
       toast({
         title: "Module Completed!",
         description: "You've completed this module. Great work!",
+      });
+    }
+  };
+
+  const handleNextModule = () => {
+    const nextModuleId = moduleId + 1;
+    // Check if next module exists (modules 1-6)
+    if (nextModuleId <= 6) {
+      setLocation(`/modules/${nextModuleId}`);
+    } else {
+      toast({
+        title: "Congratulations!",
+        description: "You've completed all available modules!",
       });
     }
   };
@@ -94,7 +110,7 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
                     currentLessonIndex === index
                       ? 'bg-primary text-white'
                       : completedLessons[lesson.id]
-                        ? 'text-primary'
+                        ? 'text-white bg-primary bg-opacity-80'
                         : 'text-neutral-medium hover:bg-neutral-lightest'
                   }`}
                   onClick={() => setCurrentLessonIndex(index)}
@@ -161,18 +177,56 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
               Previous Lesson
             </Button>
             
-            <Button
-              onClick={handleNextLesson}
-              disabled={currentLessonIndex === lessons.length - 1 && allLessonsCompleted}
-            >
-              {currentLessonIndex < lessons.length - 1
-                ? "Next Lesson"
-                : completedLessons[currentLesson.id]
-                  ? "Module Completed"
-                  : "Complete Module"
-              }
-            </Button>
+            <div className="flex space-x-3">
+              {moduleCompleted && moduleId < 6 && (
+                <Button
+                  onClick={handleNextModule}
+                  className="bg-accent hover:bg-accent-dark text-white"
+                >
+                  Next Module
+                </Button>
+              )}
+              
+              <Button
+                onClick={handleNextLesson}
+                disabled={currentLessonIndex === lessons.length - 1 && allLessonsCompleted}
+              >
+                {currentLessonIndex < lessons.length - 1
+                  ? "Next Lesson"
+                  : completedLessons[currentLesson.id]
+                    ? "Module Completed"
+                    : "Complete Module"
+                }
+              </Button>
+            </div>
           </div>
+          
+          {moduleCompleted && (
+            <Card className="mt-8 p-6 bg-accent bg-opacity-10 border-accent">
+              <h3 className="font-heading text-xl font-bold mb-3 text-accent">
+                🎉 Module Completed!
+              </h3>
+              <p className="text-neutral-medium mb-4">
+                Great work completing this module! You've made significant progress in your Stoic Seller journey.
+              </p>
+              <div className="flex space-x-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setLocation("/")}
+                >
+                  Back to Dashboard
+                </Button>
+                {moduleId < 6 && (
+                  <Button
+                    onClick={handleNextModule}
+                    className="bg-accent hover:bg-accent-dark text-white"
+                  >
+                    Continue to Module {moduleId + 1}
+                  </Button>
+                )}
+              </div>
+            </Card>
+          )}
         </div>
       </div>
     </div>
