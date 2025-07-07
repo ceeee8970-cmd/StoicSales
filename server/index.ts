@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { setupStaticServing } from "./staticHandler";
 
 const app = express();
 app.use(express.json());
@@ -53,13 +54,13 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    serveStatic(app);
+    // Use our improved static handler that can find files in multiple locations
+    setupStaticServing(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
+  // Use PORT environment variable for production (Cloud Run) or default to 5000 for development
+  // This serves both the API and the client.
+  const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
   server.listen({
     port,
     host: "0.0.0.0",
