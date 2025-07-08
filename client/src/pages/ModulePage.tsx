@@ -169,11 +169,33 @@ const ModulePage: React.FC = () => {
   
   useEffect(() => {
     if (match && params?.id) {
-      // Simulate API call
-      setTimeout(() => {
-        setModule(modules[params.id] || null);
-        setLoading(false);
-      }, 500);
+      // Load module and lessons from API
+      const loadModuleData = async () => {
+        try {
+          const moduleResponse = await fetch(`/api/modules/${params.id}`);
+          const lessonsResponse = await fetch(`/api/modules/${params.id}/lessons`);
+          
+          if (moduleResponse.ok && lessonsResponse.ok) {
+            const moduleData = await moduleResponse.json();
+            const lessonsData = await lessonsResponse.json();
+            
+            setModule({
+              id: moduleData.id,
+              title: moduleData.title,
+              lessons: lessonsData
+            });
+          } else {
+            setModule(null);
+          }
+        } catch (error) {
+          console.error('Failed to load module:', error);
+          setModule(null);
+        } finally {
+          setLoading(false);
+        }
+      };
+      
+      loadModuleData();
     }
   }, [match, params?.id]);
   
