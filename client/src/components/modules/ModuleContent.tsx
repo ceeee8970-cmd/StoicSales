@@ -156,11 +156,11 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
           )}
           
           {currentLesson.reflection && (
-            <Card className="p-6 mb-6 bg-primary bg-opacity-10 border-primary">
-              <h3 className="font-heading text-lg font-bold mb-3 !text-white">Reflect</h3>
-              <div className="prose max-w-none prose-p:!text-stone-100">
+            <Card className="p-6 mb-6 bg-green-50 border-green-200 shadow-sm">
+              <h3 className="font-heading text-lg font-bold mb-3 text-green-800">Reflect</h3>
+              <div className="prose max-w-none">
                 {currentLesson.reflection.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx} className="mb-4 !text-stone-100">
+                  <p key={idx} className="mb-4 !text-green-900 font-medium">
                     {paragraph}
                   </p>
                 ))}
