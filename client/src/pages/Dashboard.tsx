@@ -6,6 +6,7 @@ import PracticeCard from "@/components/dashboard/PracticeCard";
 import TeamChallenge from "@/components/dashboard/TeamChallenge";
 import SalesCallSimulator from "@/components/practice/SalesCallSimulator";
 import JournalEntry from "@/components/practice/JournalEntry";
+import EbookBanner from "@/components/dashboard/EbookBanner";
 import { ChevronRightIcon } from "@/assets/icons";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
@@ -62,13 +63,27 @@ const Dashboard: React.FC = () => {
         maxPoints={userData.maxPoints}
       />
       
+      {/* Featured Ebook Banner */}
+      <EbookBanner />
+      
       {/* Daily Wisdom */}
       <DailyWisdom />
       
       {/* Continue Learning */}
       <div className="mb-12">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="font-heading text-xl font-bold text-primary">Continue Learning</h2>
+          <div>
+            <h2 className="font-heading text-xl font-bold text-primary">Continue Learning</h2>
+            <p className="text-sm text-gray-600 mt-1">
+              Want the complete guide? 
+              <button 
+                onClick={() => window.location.href = '/ebook-checkout'} 
+                className="text-accent hover:text-accent-dark font-medium ml-1"
+              >
+                Get the full ebook for $14
+              </button>
+            </p>
+          </div>
           {/* Fixed link to existing route */}
           <Link href="/" className="text-sm text-accent hover:text-accent-dark font-medium flex items-center">
             View all modules
