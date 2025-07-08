@@ -1286,7 +1286,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
             className="bg-accent hover:bg-accent-dark text-white font-semibold"
             onClick={handleDownload}
           >
-            Download Ebook
+            Purchase Ebook - $14
           </Button>
         </div>
       </div>
