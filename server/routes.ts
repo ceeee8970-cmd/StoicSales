@@ -1,5 +1,6 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
+import Stripe from "stripe";
 import { storage } from "./storage";
 import { createWriteStream, mkdir, existsSync } from "fs";
 import { join, dirname } from "path";
@@ -28,6 +29,14 @@ const UPLOADS_DIR = join(process.cwd(), "uploads");
 if (!existsSync(UPLOADS_DIR)) {
   mkdirAsync(UPLOADS_DIR, { recursive: true }).catch(console.error);
 }
+
+// Initialize Stripe
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
+}
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16",
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
@@ -567,5 +576,63 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // ---------- Stripe Payment Routes ----------
+  
+  // Create payment intent for ebook purchase
+  app.post("/api/create-ebook-payment", async (req: Request, res: Response) => {
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: 1400, // $14.00 in cents
+        currency: "usd",
+        metadata: {
+          type: "ebook_purchase",
+          product: "stoic_seller_ebook"
+        }
+      });
+      
+      res.json({ 
+        clientSecret: paymentIntent.client_secret,
+        paymentIntentId: paymentIntent.id
+      });
+    } catch (error: any) {
+      console.error('Stripe payment error:', error);
+      res.status(500).json({ 
+        message: "Error creating payment intent: " + error.message 
+      });
+    }
+  });
+  
+  // Verify payment and provide download
+  app.post("/api/verify-ebook-payment", async (req: Request, res: Response) => {
+    try {
+      const { paymentIntentId } = req.body;
+      
+      if (!paymentIntentId) {
+        return res.status(400).json({ message: "Payment intent ID required" });
+      }
+      
+      // Retrieve payment intent from Stripe
+      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+      
+      if (paymentIntent.status === 'succeeded') {
+        res.json({ 
+          success: true, 
+          message: "Payment verified. Ebook access granted.",
+          canDownload: true
+        });
+      } else {
+        res.status(400).json({ 
+          success: false, 
+          message: "Payment not completed" 
+        });
+      }
+    } catch (error: any) {
+      console.error('Payment verification error:', error);
+      res.status(500).json({ 
+        message: "Error verifying payment: " + error.message 
+      });
+    }
+  });
+
   return httpServer;
 }

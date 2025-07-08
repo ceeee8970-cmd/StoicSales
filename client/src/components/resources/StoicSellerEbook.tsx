@@ -7,7 +7,12 @@ interface StoicSellerEbookProps {
 
 // Using the fixed version with commas instead of em dashes
 const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
-  // Function to trigger download
+  // Function to redirect to checkout
+  const handlePurchase = () => {
+    window.location.href = '/ebook-checkout';
+  };
+
+  // Keep the old download function for reference but don't use it
   const handleDownload = () => {
     // Create a blob with the HTML content with all em dashes replaced with commas
     const htmlContent = `<!DOCTYPE html>
@@ -1284,7 +1289,7 @@ const StoicSellerEbook: React.FC<StoicSellerEbookProps> = ({ onClose }) => {
           <Button 
             size="lg" 
             className="bg-accent hover:bg-accent-dark text-white font-semibold"
-            onClick={handleDownload}
+            onClick={handlePurchase}
           >
 Purchase Ebook - $14.00
           </Button>

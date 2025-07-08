@@ -10,6 +10,7 @@ import SalesCallPractice from "@/pages/SalesCallPractice";
 import JournalPage from "@/pages/JournalPage";
 import ResourcesPage from "@/pages/ResourcesPage";
 import ProgressPage from "@/pages/ProgressPage";
+import EbookCheckout from "@/pages/EbookCheckout";
 import NotFound from "@/pages/not-found";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileHeader from "@/components/layout/MobileHeader";
@@ -84,6 +85,7 @@ function Router() {
           <Route path="/journal" component={JournalPage} />
           <Route path="/resources" component={ResourcesPage} />
           <Route path="/progress" component={ProgressPage} />
+          <Route path="/ebook-checkout" component={EbookCheckout} />
           <Route component={NotFound} />
         </Switch>
       </div>
