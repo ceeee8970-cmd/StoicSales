@@ -156,16 +156,23 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
           )}
           
           {currentLesson.reflection && (
-            <Card className="p-6 mb-6" style={{ backgroundColor: '#f0fdf4', borderColor: '#bbf7d0', color: '#14532d' }}>
-              <h3 className="font-heading text-lg font-bold mb-3" style={{ color: '#166534' }}>Reflect</h3>
-              <div className="prose max-w-none">
+            <div 
+              className="p-6 mb-6 rounded-lg border shadow-sm" 
+              style={{ 
+                backgroundColor: '#f0fdf4 !important', 
+                borderColor: '#bbf7d0 !important', 
+                color: '#14532d !important'
+              }}
+            >
+              <h3 className="font-heading text-lg font-bold mb-3" style={{ color: '#166534 !important' }}>Reflect</h3>
+              <div className="prose max-w-none" style={{ color: '#14532d !important' }}>
                 {currentLesson.reflection.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx} className="mb-4 font-medium" style={{ color: '#14532d' }}>
+                  <p key={idx} className="mb-4 font-medium" style={{ color: '#14532d !important' }}>
                     {paragraph}
                   </p>
                 ))}
               </div>
-            </Card>
+            </div>
           )}
           
           <div className="flex justify-between mt-10">
