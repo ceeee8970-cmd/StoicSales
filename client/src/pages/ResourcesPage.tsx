@@ -9,6 +9,7 @@ import { Search } from "lucide-react";
 import ArticleView from "@/components/resources/ArticleView";
 import StoicSellerEbook from "@/components/resources/StoicSellerEbook";
 import SDRTeamTraining from "@/components/resources/SDRTeamTraining";
+import EbookBanner from "@/components/dashboard/EbookBanner";
 
 interface Resource {
   id: number;
@@ -299,6 +300,9 @@ const ResourcesPage: React.FC = () => {
               Explore these resources to deepen your understanding of Stoic philosophy and its application to sales
             </p>
           </div>
+          
+          {/* Featured Ebook Banner */}
+          <EbookBanner />
           
           {/* Search and filter */}
           <div className="mb-8">
