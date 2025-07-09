@@ -8,10 +8,12 @@ import { LanguageProvider } from "@/lib/i18n";
 import Dashboard from "@/pages/Dashboard";
 import ModulePage from "@/pages/ModulePage";
 import SalesCallPractice from "@/pages/SalesCallPractice";
+import PracticePage from "@/pages/PracticePage";
 import JournalPage from "@/pages/JournalPage";
 import ResourcesPage from "@/pages/ResourcesPage";
 import ProgressPage from "@/pages/ProgressPage";
 import EbookCheckout from "@/pages/EbookCheckout";
+import StoicSellerQuiz from "@/pages/StoicSellerQuiz";
 import NotFound from "@/pages/not-found";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileHeader from "@/components/layout/MobileHeader";
@@ -89,9 +91,12 @@ function Router() {
         <Switch>
           <Route path="/" component={Dashboard} />
           <Route path="/modules/:id" component={ModulePage} />
+          <Route path="/practice" component={PracticePage} />
           <Route path="/practice/sales-calls" component={SalesCallPractice} /> 
           <Route path="/sales-practice" component={SalesCallPractice} />
           <Route path="/sales-call-practice" component={SalesCallPractice} />
+          <Route path="/practice/quiz" component={StoicSellerQuiz} />
+          <Route path="/stoic-seller-quiz" component={StoicSellerQuiz} />
           <Route path="/journal" component={JournalPage} />
           <Route path="/resources" component={ResourcesPage} />
           <Route path="/progress" component={ProgressPage} />
