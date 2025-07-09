@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n";
 import { 
   BookIcon, 
   ResourcesIcon, 
@@ -10,6 +11,7 @@ import {
   ProgressIcon 
 } from "@/assets/icons";
 import { getRandomQuote } from "@/lib/utils";
+import LanguageSelector from "./LanguageSelector";
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -19,6 +21,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const [location] = useLocation();
   const { text, author } = getRandomQuote();
+  const { t } = useLanguage();
 
   const isActive = (path: string) => {
     if (path === '/' && location === path) return true;
@@ -50,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between mb-10">
+      <div className="flex items-center justify-between mb-8">
         <div className="flex items-center">
           <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary mr-3">
             <span className="text-sm font-bold">S</span>
@@ -70,42 +73,47 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         )}
       </div>
       
+      {/* Language Selector */}
+      <div className="mb-6">
+        <LanguageSelector />
+      </div>
+      
       <nav className="space-y-6 flex-grow">
         <div>
           <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">LEARN</p>
           <ul className="space-y-3">
             <NavItem to="/" icon={BookIcon}>
-              Modules
+              {t.nav.modules}
             </NavItem>
             <NavItem to="/resources" icon={ResourcesIcon}>
-              Resources
+              {t.nav.resources}
             </NavItem>
           </ul>
         </div>
         
         <div>
-          <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">PRACTICE</p>
+          <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">{t.dashboard.practiceSection.toUpperCase()}</p>
           <ul className="space-y-3">
             <NavItem to="/sales-call-practice" icon={MicrophoneIcon}>
-              Sales Calls
+              {t.nav.salesCalls}
             </NavItem>
             <NavItem to="/sales-call-practice?tab=breathwork" icon={ChallengesIcon}>
-              Breathwork
+              {t.nav.breathwork}
             </NavItem>
             <NavItem to="/practice/challenges" icon={ChallengesIcon}>
-              Challenges
+              {t.nav.challenges}
             </NavItem>
           </ul>
         </div>
         
         <div>
-          <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">REFLECT</p>
+          <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">{t.dashboard.reflectSection.toUpperCase()}</p>
           <ul className="space-y-3">
             <NavItem to="/journal" icon={JournalIcon}>
-              Journal
+              {t.nav.journal}
             </NavItem>
             <NavItem to="/progress" icon={ProgressIcon}>
-              Progress
+              {t.nav.progress}
             </NavItem>
           </ul>
         </div>

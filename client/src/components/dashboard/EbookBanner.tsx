@@ -2,8 +2,10 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookIcon } from "@/assets/icons";
+import { useLanguage } from "@/lib/i18n";
 
 const EbookBanner: React.FC = () => {
+  const { t } = useLanguage();
   const handlePurchase = () => {
     window.location.href = '/ebook-checkout';
   };
@@ -20,31 +22,30 @@ const EbookBanner: React.FC = () => {
           
           <div className="flex-grow text-center md:text-left">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Get The Complete Guide: The Stoic Seller Ebook
+              {t.ebook.title}
             </h2>
             <p className="text-gray-600 mb-4">
-              Master the art of sales through ancient Stoic wisdom. This comprehensive ebook contains all 6 modules, 
-              practical techniques, reflection exercises, and real-world scripts to transform your sales approach.
+              {t.ebook.description}
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                Complete 6-module curriculum
+                {t.ebook.features.modules}
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                Practical sales scripts & techniques
+                {t.ebook.features.scripts}
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                Reflection exercises & assignments
+                {t.ebook.features.exercises}
               </div>
             </div>
           </div>
           
           <div className="flex-shrink-0 text-center">
             <div className="mb-3">
-              <div className="text-2xl font-bold text-accent">$14.00</div>
+              <div className="text-2xl font-bold text-accent">{t.ebook.price}</div>
               <div className="text-sm text-gray-500">One-time purchase</div>
             </div>
             <Button 
@@ -52,7 +53,7 @@ const EbookBanner: React.FC = () => {
               className="bg-accent hover:bg-accent-dark text-white font-semibold px-8"
               onClick={handlePurchase}
             >
-              Get Your Ebook Now
+              {t.ebook.purchaseButton}
             </Button>
           </div>
         </div>
