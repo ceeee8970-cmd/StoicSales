@@ -94,14 +94,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         <div>
           <p className="text-white text-xs font-bold uppercase tracking-wider mb-3">{t.dashboard.practiceSection.toUpperCase()}</p>
           <ul className="space-y-3">
+            <NavItem to="/practice" icon={ChallengesIcon}>
+              Practice Hub
+            </NavItem>
             <NavItem to="/sales-call-practice" icon={MicrophoneIcon}>
               {t.nav.salesCalls}
             </NavItem>
-            <NavItem to="/sales-call-practice?tab=breathwork" icon={ChallengesIcon}>
-              {t.nav.breathwork}
-            </NavItem>
-            <NavItem to="/practice/challenges" icon={ChallengesIcon}>
-              {t.nav.challenges}
+            <NavItem to="/practice/quiz" icon={BookIcon}>
+              Stoic Seller Quiz
             </NavItem>
           </ul>
         </div>
