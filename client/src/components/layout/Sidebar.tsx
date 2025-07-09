@@ -11,7 +11,12 @@ import {
 } from "@/assets/icons";
 import { getRandomQuote } from "@/lib/utils";
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const [location] = useLocation();
   const { text, author } = getRandomQuote();
 
@@ -32,6 +37,7 @@ const Sidebar: React.FC = () => {
   }) => (
     <li>
       <Link href={to} 
+        onClick={onClose} // Close sidebar when navigating on mobile
         className={cn(
           "flex items-center hover:opacity-100 transition-opacity font-medium",
           isActive(to) ? "text-white font-bold" : "text-white opacity-80"
@@ -44,11 +50,24 @@ const Sidebar: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center mb-10">
-        <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary mr-3">
-          <span className="text-sm font-bold">S</span>
+      <div className="flex items-center justify-between mb-10">
+        <div className="flex items-center">
+          <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary mr-3">
+            <span className="text-sm font-bold">S</span>
+          </div>
+          <h1 className="font-heading text-xl font-bold">Stoic Seller</h1>
         </div>
-        <h1 className="font-heading text-xl font-bold">Stoic Seller</h1>
+        {onClose && (
+          <button 
+            onClick={onClose}
+            className="md:hidden text-white hover:text-secondary transition-colors p-1"
+            aria-label="Close menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
       </div>
       
       <nav className="space-y-6 flex-grow">

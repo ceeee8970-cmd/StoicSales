@@ -22,6 +22,10 @@ function Router() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   // Close sidebar when clicking outside on mobile
   useEffect(() => {
     const handleResize = () => {
@@ -30,7 +34,7 @@ function Router() {
       }
     };
 
-    const handleClickOutside = (e: MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       const sidebar = document.getElementById("mobile-sidebar");
       const toggleButton = document.getElementById("sidebar-toggle");
       
@@ -45,10 +49,12 @@ function Router() {
 
     window.addEventListener("resize", handleResize);
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside); // Add touch support
     
     return () => {
       window.removeEventListener("resize", handleResize);
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [isSidebarOpen]);
 
@@ -65,9 +71,12 @@ function Router() {
           id="mobile-sidebar" 
           className="fixed inset-0 z-50 md:hidden"
         >
-          <div className="absolute inset-0 bg-neutral-dark bg-opacity-50" />
+          <div 
+            className="absolute inset-0 bg-neutral-dark bg-opacity-50" 
+            onClick={closeSidebar}
+          />
           <div className="absolute left-0 top-0 h-full w-64 bg-primary p-6 text-white">
-            <Sidebar />
+            <Sidebar onClose={closeSidebar} />
           </div>
         </div>
       )}
