@@ -109,9 +109,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
           ...module,
           status,
           progress: totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0,
-          isLocked: !req.isAuthenticated() && module.order > 1, // First module is preview
+          isLocked: !req.isAuthenticated() && module.order > 1, // First module is always free, others need auth
           totalLessons,
-          completedLessons
+          completedLessons,
+          hasPreview: module.order > 1, // Modules 2-6 have preview content
+          isFullyAccessible: req.isAuthenticated() || module.order === 1 // Module 1 is fully accessible to everyone
         };
       }));
       
@@ -167,7 +169,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       const lessons = await storage.getLessonsByModule(moduleId);
-      res.json(lessons);
+      
+      // Apply access control based on authentication and module
+      if (!req.isAuthenticated()) {
+        if (module.order === 1) {
+          // Module 1: Full access for everyone
+          res.json(lessons);
+        } else {
+          // Modules 2-6: Only preview lessons for non-authenticated users
+          const previewLessons = lessons.filter(lesson => 
+            lesson.title.includes('Preview') || lesson.order === 1
+          );
+          res.json(previewLessons);
+        }
+      } else {
+        // Authenticated users get full access to all lessons
+        res.json(lessons);
+      }
     } catch (err) {
       handleApiError(err, res);
     }

@@ -3,6 +3,7 @@ import { useRoute } from "wouter";
 import { Link } from "wouter";
 import ModuleContent from "@/components/modules/ModuleContent";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useAuth } from "@/hooks/useAuth";
 
 interface Module {
   id: number;
@@ -20,6 +21,7 @@ const ModulePage: React.FC = () => {
   const [match, params] = useRoute("/modules/:id");
   const [loading, setLoading] = useState(true);
   const [module, setModule] = useState<Module | null>(null);
+  const { isAuthenticated } = useAuth();
   
   useEffect(() => {
     if (match && params?.id) {
@@ -105,6 +107,7 @@ const ModulePage: React.FC = () => {
         moduleId={module.id}
         moduleTitle={module.title}
         lessons={module.lessons}
+        isAuthenticated={isAuthenticated}
       />
     </div>
   );
