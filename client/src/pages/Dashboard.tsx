@@ -65,8 +65,8 @@ const Dashboard: React.FC = () => {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <div className="flex items-center space-x-3">
-                  <img src="/attached_assets/ChatGPT Image Jul 18, 2025, 10_00_21 AM_1752831592573.png" alt="The Stoic Seller Logo" className="w-10 h-10 object-contain" />
-                  <h1 className="text-xl font-bold text-gray-900 dark:text-white">The Stoic Seller</h1>
+                  <img src="/attached_assets/ChatGPT Image Jul 18, 2025, 10_00_21 AM_1752831592573.png" alt="Stoic Seller Logo" className="w-10 h-10 object-contain" />
+                  <h1 className="text-xl font-bold text-gray-900 dark:text-white">Stoic Seller</h1>
                 </div>
               </div>
             </div>

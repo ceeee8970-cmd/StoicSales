@@ -110,8 +110,8 @@ const ModulePage: React.FC = () => {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <Link href="/" className="flex items-center space-x-3">
-                  <img src="/attached_assets/ChatGPT Image Jul 18, 2025, 10_00_21 AM_1752831592573.png" alt="The Stoic Seller Logo" className="w-10 h-10 object-contain" />
-                  <span className="text-xl font-bold text-gray-900 dark:text-white">The Stoic Seller</span>
+                  <img src="/attached_assets/ChatGPT Image Jul 18, 2025, 10_00_21 AM_1752831592573.png" alt="Stoic Seller Logo" className="w-10 h-10 object-contain" />
+                  <span className="text-xl font-bold text-gray-900 dark:text-white">Stoic Seller</span>
                 </Link>
               </div>
             </div>
