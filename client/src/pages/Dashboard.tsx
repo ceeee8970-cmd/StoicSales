@@ -132,32 +132,32 @@ const Dashboard: React.FC = () => {
                   1: {
                     description: "Master the fundamentals of ethical selling and build unshakeable confidence",
                     lessons: "3 comprehensive lessons",
-                    color: "from-blue-500 to-purple-600"
+                    color: "from-green-400 to-green-600"
                   },
                   2: {
                     description: "Develop persuasive communication skills and master the art of influence",
                     lessons: "3 comprehensive lessons",
-                    color: "from-green-500 to-teal-600"
+                    color: "from-green-500 to-green-700"
                   },
                   3: {
                     description: "Transform objections into opportunities with proven handling techniques",
                     lessons: "3 comprehensive lessons",
-                    color: "from-orange-500 to-red-600"
+                    color: "from-emerald-400 to-emerald-600"
                   },
                   4: {
                     description: "Learn advanced closing techniques and decision psychology",
                     lessons: "3 comprehensive lessons",
-                    color: "from-purple-500 to-pink-600"
+                    color: "from-teal-400 to-teal-600"
                   },
                   5: {
                     description: "Build lasting relationships and create sustainable revenue through referrals",
                     lessons: "3 comprehensive lessons",
-                    color: "from-indigo-500 to-blue-600"
+                    color: "from-green-600 to-green-800"
                   },
                   6: {
                     description: "Master strategic account planning and advanced negotiation tactics",
                     lessons: "3 comprehensive lessons",
-                    color: "from-teal-500 to-green-600"
+                    color: "from-emerald-500 to-emerald-700"
                   }
                 };
 
