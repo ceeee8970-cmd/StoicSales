@@ -1,5 +1,6 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
+import { setupAuth, isAuthenticated } from "./replitAuth";
 import Stripe from "stripe";
 import { storage } from "./storage";
 import { createWriteStream, mkdir, existsSync } from "fs";
@@ -39,6 +40,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Auth middleware
+  await setupAuth(app);
+
   const httpServer = createServer(app);
   
   // API error handler
@@ -60,11 +64,58 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // ---------- Module Routes ----------
   
-  // Get all modules
+  // Auth routes
+  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
+      res.json(user);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      res.status(500).json({ message: "Failed to fetch user" });
+    }
+  });
+
+  // Get all modules with personalized progress
   app.get("/api/modules", async (req: Request, res: Response) => {
     try {
       const modules = await storage.getAllModules();
-      res.json(modules);
+      
+      // If user is authenticated, get their progress
+      let userProgress: any[] = [];
+      if (req.isAuthenticated && req.isAuthenticated()) {
+        const userId = (req.user as any)?.claims?.sub;
+        if (userId) {
+          userProgress = await storage.getUserProgress(userId);
+        }
+      }
+      
+      // Enhance modules with progress data
+      const modulesWithProgress = await Promise.all(modules.map(async module => {
+        const lessons = await storage.getLessonsByModule(module.id);
+        const totalLessons = lessons.length;
+        
+        const moduleProgress = userProgress.filter(p => p.moduleId === module.id);
+        const completedLessons = moduleProgress.filter(p => p.completed).length;
+        
+        let status = 'not-started';
+        if (completedLessons === totalLessons && totalLessons > 0) {
+          status = 'completed';
+        } else if (completedLessons > 0) {
+          status = 'in-progress';
+        }
+        
+        return {
+          ...module,
+          status,
+          progress: totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0,
+          isLocked: !req.isAuthenticated() && module.order > 1, // First module is preview
+          totalLessons,
+          completedLessons
+        };
+      }));
+      
+      res.json(modulesWithProgress);
     } catch (err) {
       handleApiError(err, res);
     }

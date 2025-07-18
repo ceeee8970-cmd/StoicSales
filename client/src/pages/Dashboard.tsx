@@ -10,14 +10,12 @@ import EbookBanner from "@/components/dashboard/EbookBanner";
 import { ChevronRightIcon } from "@/assets/icons";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/hooks/useAuth";
+import PreviewBanner from "@/components/auth/PreviewBanner";
+import { Button } from "@/components/ui/button";
 
 const Dashboard: React.FC = () => {
-  // In a real implementation, this user data would come from an API
-  const userData = {
-    username: "Marcus",
-    points: 42,
-    maxPoints: 100
-  };
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   
   // Fetch modules from the API
   const { data: modulesData, isLoading, error } = useQuery({
@@ -30,6 +28,10 @@ const Dashboard: React.FC = () => {
       return response.json();
     }
   });
+
+  const handleLogin = () => {
+    window.location.href = '/api/login';
+  };
   
   // Transform the API data to the format needed by ModuleCard
   const moduleData = modulesData?.map((module: any, index: number) => ({
@@ -37,11 +39,10 @@ const Dashboard: React.FC = () => {
     title: module.title,
     description: module.description,
     image: module.imageUrl || `https://images.unsplash.com/photo-${1506126613408 + index}-eca07ce68773?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300`,
-    status: index === 0 ? "completed" as const : 
-            index === 1 ? "in-progress" as const : 
-            "not-started" as const,
-    completed: index === 1 ? 2 : undefined,
-    total: index === 1 ? 4 : undefined
+    status: module.status || "not-started",
+    completed: module.completedLessons || 0,
+    total: module.totalLessons || 1,
+    isLocked: module.isLocked || false
   })) || [];
   
   const teamChallenge = {
@@ -54,14 +55,72 @@ const Dashboard: React.FC = () => {
     rank: 2
   };
   
+  if (authLoading) {
+    return (
+      <div className="w-full min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+      </div>
+    );
+  }
+
   return (
-    <div className="p-6 md:p-10">
-      {/* User Welcome */}
-      <UserWelcome 
-        username={userData.username}
-        points={userData.points}
-        maxPoints={userData.maxPoints}
-      />
+    <div className="w-full min-h-screen bg-slate-50 dark:bg-slate-900">
+      {/* Top Navigation */}
+      <nav className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white">The Stoic Seller</h1>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              {isAuthenticated ? (
+                <>
+                  <span className="text-sm text-gray-600 dark:text-gray-300">
+                    Welcome, {user?.firstName || user?.email || 'User'}
+                  </span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-medium text-gray-900 dark:text-white">
+                      {user?.points || 0} pts
+                    </span>
+                    <div className="w-24 h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
+                      <div 
+                        className="h-2 bg-blue-600 rounded-full transition-all duration-300"
+                        style={{ width: `${((user?.points || 0) / 100) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => window.location.href = '/api/logout'}
+                  >
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <Button onClick={handleLogin}>
+                  Sign In
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="p-6 md:p-10">
+        {/* Preview Banner for non-authenticated users */}
+        {!isAuthenticated && (
+          <PreviewBanner onLogin={handleLogin} />
+        )}
+
+        {/* User Welcome */}
+        <UserWelcome 
+          username={isAuthenticated ? (user?.firstName || user?.email || 'User') : 'Guest'}
+          points={user?.points || 0}
+          maxPoints={100}
+        />
       
       {/* Featured Ebook Banner */}
       <EbookBanner />
@@ -98,16 +157,35 @@ const Dashboard: React.FC = () => {
             <p>Error loading modules. Please try again.</p>
           ) : moduleData && moduleData.length > 0 ? (
             moduleData.map(module => (
-              <ModuleCard
-                key={module.id}
-                id={module.id}
-                title={module.title}
-                description={module.description}
-                image={module.image}
-                status={module.status}
-                completed={module.completed}
-                total={module.total}
-              />
+              <div key={module.id} className="relative">
+                <ModuleCard
+                  id={module.id}
+                  title={module.title}
+                  description={module.description}
+                  image={module.image}
+                  status={module.status}
+                  completed={module.completed}
+                  total={module.total}
+                />
+                {/* Show lock overlay for locked modules */}
+                {module.isLocked && (
+                  <div className="absolute inset-0 bg-gray-500 bg-opacity-50 rounded-lg flex items-center justify-center">
+                    <div className="text-center text-white">
+                      <svg className="w-8 h-8 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                      </svg>
+                      <p className="text-sm font-medium">Sign in to unlock</p>
+                      <Button 
+                        size="sm" 
+                        className="mt-2"
+                        onClick={handleLogin}
+                      >
+                        Sign In
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
             ))
           ) : (
             <p>No modules found.</p>
@@ -128,16 +206,17 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
       
-      {/* Team Challenge */}
-      <TeamChallenge 
-        title={teamChallenge.title}
-        description={teamChallenge.description}
-        daysRemaining={teamChallenge.daysRemaining}
-        teamMembers={teamChallenge.teamMembers}
-        completion={teamChallenge.completion}
-        teamPoints={teamChallenge.teamPoints}
-        rank={teamChallenge.rank}
-      />
+        {/* Team Challenge */}
+        <TeamChallenge 
+          title={teamChallenge.title}
+          description={teamChallenge.description}
+          daysRemaining={teamChallenge.daysRemaining}
+          teamMembers={teamChallenge.teamMembers}
+          completion={teamChallenge.completion}
+          teamPoints={teamChallenge.teamPoints}
+          rank={teamChallenge.rank}
+        />
+      </div>
     </div>
   );
 };
