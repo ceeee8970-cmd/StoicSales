@@ -13,15 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 // Removed authentication - all modules now accessible
 import PreviewBanner from "@/components/auth/PreviewBanner";
 import { Button } from "@/components/ui/button";
-import { 
-  Module1Illustration, 
-  Module2Illustration, 
-  Module3Illustration, 
-  Module4Illustration, 
-  Module5Illustration, 
-  Module6Illustration 
-} from "@/assets/module-illustrations";
-import { Logo } from "@/components/ui/Logo";
+// Removed module illustrations and logo as per user preference
 
 const Dashboard: React.FC = () => {
   // Removed authentication - all content accessible to everyone
@@ -72,7 +64,7 @@ const Dashboard: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <Logo size="sm" />
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white">The Stoic Seller</h1>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -85,11 +77,11 @@ const Dashboard: React.FC = () => {
       </nav>
 
       <div className="p-6 md:p-10">
-        {/* User Welcome with Logo */}
+        {/* User Welcome */}
         <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
-            <Logo size="lg" />
-          </div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Welcome to The Stoic Seller
+          </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Master the art of sales with ancient wisdom - All 6 modules completely free
           </p>
@@ -138,37 +130,31 @@ const Dashboard: React.FC = () => {
                 // Define module-specific configurations
                 const moduleConfig = {
                   1: {
-                    illustration: Module1Illustration,
                     description: "Master the fundamentals of ethical selling and build unshakeable confidence",
                     lessons: "3 comprehensive lessons",
                     color: "from-blue-500 to-purple-600"
                   },
                   2: {
-                    illustration: Module2Illustration,
                     description: "Develop persuasive communication skills and master the art of influence",
                     lessons: "3 comprehensive lessons",
                     color: "from-green-500 to-teal-600"
                   },
                   3: {
-                    illustration: Module3Illustration,
                     description: "Transform objections into opportunities with proven handling techniques",
                     lessons: "3 comprehensive lessons",
                     color: "from-orange-500 to-red-600"
                   },
                   4: {
-                    illustration: Module4Illustration,
                     description: "Learn advanced closing techniques and decision psychology",
                     lessons: "3 comprehensive lessons",
                     color: "from-purple-500 to-pink-600"
                   },
                   5: {
-                    illustration: Module5Illustration,
                     description: "Build lasting relationships and create sustainable revenue through referrals",
                     lessons: "3 comprehensive lessons",
                     color: "from-indigo-500 to-blue-600"
                   },
                   6: {
-                    illustration: Module6Illustration,
                     description: "Master strategic account planning and advanced negotiation tactics",
                     lessons: "3 comprehensive lessons",
                     color: "from-teal-500 to-green-600"
@@ -176,17 +162,13 @@ const Dashboard: React.FC = () => {
                 };
 
                 const config = moduleConfig[module.id as keyof typeof moduleConfig];
-                const IllustrationComponent = config.illustration;
                 
                 return (
                   <div key={module.id} className="group">
                     <Link href={`/modules/${module.id}`}>
                       <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 group-hover:scale-[1.02] overflow-hidden">
-                        {/* Illustration Header */}
-                        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
-                          <div className="w-full h-full group-hover:scale-105 transition-transform duration-300">
-                            <IllustrationComponent />
-                          </div>
+                        {/* Header with gradient */}
+                        <div className={`relative h-32 overflow-hidden bg-gradient-to-br ${config.color}`}>
                           <div className="absolute top-4 left-4">
                             <div className="bg-white/90 backdrop-blur-sm text-slate-700 px-3 py-1 rounded-full text-sm font-bold border border-slate-200">
                               Module {index + 1}

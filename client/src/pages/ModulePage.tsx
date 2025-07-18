@@ -3,7 +3,6 @@ import { useRoute } from "wouter";
 import { Link } from "wouter";
 import ModuleContent from "@/components/modules/ModuleContent";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Logo } from "@/components/ui/Logo";
 // Removed authentication - all modules accessible
 
 interface Module {
@@ -110,8 +109,8 @@ const ModulePage: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <Link href="/">
-                  <Logo size="sm" />
+                <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white">
+                  The Stoic Seller
                 </Link>
               </div>
             </div>

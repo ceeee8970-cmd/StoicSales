@@ -131,3 +131,5 @@ Changelog:
   * Created comprehensive content for all 6 modules (18 total lessons)
   * Enhanced module preview cards with professional images and engaging design
   * Updated UI to reflect free access model with improved visual appeal
+  * Removed custom logo and module illustrations per user preference
+  * Replaced illustrated cards with clean gradient headers for better visual consistency
