@@ -1,19 +1,8 @@
 import React, { useState } from "react";
-import { BookmarkIcon } from "@/assets/icons";
 import { getRandomQuote } from "@/lib/utils";
-import { useToast } from "@/hooks/use-toast";
 
 const DailyWisdom: React.FC = () => {
   const [quote, setQuote] = useState(getRandomQuote());
-  const { toast } = useToast();
-  
-  const handleSaveQuote = () => {
-    // In a real implementation, this would save to a user's favorites
-    toast({
-      title: "Quote Saved",
-      description: "This quote has been added to your favorites.",
-    });
-  };
   
   return (
     <div 
@@ -31,13 +20,6 @@ const DailyWisdom: React.FC = () => {
           </div>
           <div className="flex items-center justify-between">
             <p className="font-medium">— {quote.author}</p>
-            <button 
-              className="bg-accent bg-opacity-20 hover:bg-opacity-30 text-secondary-light rounded-lg px-4 py-2 text-sm flex items-center transition duration-200"
-              onClick={handleSaveQuote}
-            >
-              <BookmarkIcon className="h-4 w-4 mr-2" />
-              Save
-            </button>
           </div>
         </div>
       </div>

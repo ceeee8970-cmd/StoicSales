@@ -131,7 +131,7 @@ const Dashboard: React.FC = () => {
                 const moduleConfig = {
                   1: {
                     description: "Master the fundamentals of ethical selling and build unshakeable confidence",
-                    lessons: "3 comprehensive lessons",
+                    lessons: "6 comprehensive lessons",
                     color: "bg-primary"
                   },
                   2: {
