@@ -107,39 +107,128 @@ const Dashboard: React.FC = () => {
             </Link>
           </div>
           
-          {/* Module Tabs Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {/* Module Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {isLoading ? (
               Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="animate-pulse bg-gray-200 rounded-lg h-24"></div>
+                <div key={i} className="bg-white rounded-xl border border-gray-200 shadow-sm animate-pulse">
+                  <div className="h-48 bg-gray-300 rounded-t-xl"></div>
+                  <div className="p-6">
+                    <div className="h-6 bg-gray-300 rounded mb-3"></div>
+                    <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+                  </div>
+                </div>
               ))
             ) : error ? (
               <div className="col-span-full text-center text-red-500">
                 Error loading modules. Please try again.
               </div>
             ) : moduleData && moduleData.length > 0 ? (
-              moduleData.slice(0, 6).map((module, index) => (
-                <div key={module.id} className="relative">
-                  <Link 
-                    href={`/modules/${module.id}`}
-                    className="block p-4 rounded-lg border-2 border-primary bg-white hover:bg-primary-50 hover:shadow-md transition-all duration-200"
-                  >
-                    <div className="text-center">
-                      <div className="text-2xl font-bold mb-1 text-primary">
-                        {index + 1}
+              moduleData.slice(0, 6).map((module, index) => {
+                // Define module-specific images and descriptions
+                const moduleConfig = {
+                  1: {
+                    image: "https://images.unsplash.com/photo-1553028826-f4804151e2b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+                    gradient: "from-blue-500 to-purple-600",
+                    icon: "🎯",
+                    description: "Master the fundamentals of ethical selling and build unshakeable confidence",
+                    lessons: "3 comprehensive lessons"
+                  },
+                  2: {
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+                    gradient: "from-green-500 to-teal-600",
+                    icon: "🗣️",
+                    description: "Develop persuasive communication skills and master the art of influence",
+                    lessons: "3 comprehensive lessons"
+                  },
+                  3: {
+                    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+                    gradient: "from-orange-500 to-red-600",
+                    icon: "🛡️",
+                    description: "Transform objections into opportunities with proven handling techniques",
+                    lessons: "3 comprehensive lessons"
+                  },
+                  4: {
+                    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+                    gradient: "from-purple-500 to-pink-600",
+                    icon: "🎯",
+                    description: "Learn advanced closing techniques and decision psychology",
+                    lessons: "3 comprehensive lessons"
+                  },
+                  5: {
+                    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+                    gradient: "from-indigo-500 to-blue-600",
+                    icon: "🤝",
+                    description: "Build lasting relationships and create sustainable revenue through referrals",
+                    lessons: "3 comprehensive lessons"
+                  },
+                  6: {
+                    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+                    gradient: "from-teal-500 to-green-600",
+                    icon: "📈",
+                    description: "Master strategic account planning and advanced negotiation tactics",
+                    lessons: "3 comprehensive lessons"
+                  }
+                };
+
+                const config = moduleConfig[module.id as keyof typeof moduleConfig];
+                
+                return (
+                  <div key={module.id} className="group">
+                    <Link href={`/modules/${module.id}`}>
+                      <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 group-hover:scale-[1.02] overflow-hidden">
+                        {/* Image Header */}
+                        <div className="relative h-48 overflow-hidden">
+                          <img 
+                            src={config.image} 
+                            alt={module.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className={`absolute inset-0 bg-gradient-to-br ${config.gradient} opacity-80`}></div>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="text-center text-white">
+                              <div className="text-4xl mb-2">{config.icon}</div>
+                              <div className="text-2xl font-bold">Module {index + 1}</div>
+                            </div>
+                          </div>
+                          <div className="absolute top-4 right-4">
+                            <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                              FREE
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Content */}
+                        <div className="p-6">
+                          <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                            {module.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                            {config.description}
+                          </p>
+                          
+                          {/* Footer */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center text-gray-500 text-xs">
+                              <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              {config.lessons}
+                            </div>
+                            <div className="flex items-center text-primary group-hover:translate-x-1 transition-transform">
+                              <span className="text-sm font-medium mr-1">Start Learning</span>
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-xs font-medium text-gray-700">
-                        {module.title}
-                      </div>
-                      
-                      {/* Status indicator */}
-                      <div className="mt-2">
-                        <div className="text-xs text-green-600 font-medium">AVAILABLE</div>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              ))
+                    </Link>
+                  </div>
+                );
+              })
             ) : (
               <div className="col-span-full text-center text-gray-500">
                 No modules found.
