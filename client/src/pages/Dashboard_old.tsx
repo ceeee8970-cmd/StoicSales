@@ -126,7 +126,7 @@ const Dashboard: React.FC = () => {
         {!isAuthenticated && (
           <PreviewBanner onLogin={handleLogin} />
         )}
-        
+      
         {/* Featured Ebook Banner */}
         <EbookBanner />
         
@@ -150,101 +150,61 @@ const Dashboard: React.FC = () => {
           
           {/* Module Tabs Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {isLoading ? (
-              Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="animate-pulse bg-gray-200 rounded-lg h-24"></div>
-              ))
-            ) : error ? (
-              <div className="col-span-full text-center text-red-500">
-                Error loading modules. Please try again.
-              </div>
-            ) : moduleData && moduleData.length > 0 ? (
-              moduleData.slice(0, 6).map((module, index) => (
-                <div key={module.id} className="relative">
-                  <Link 
-                    href={module.isLocked ? '#' : `/modules/${module.id}`}
-                    className={`block p-4 rounded-lg border-2 transition-all duration-200 ${
-                      module.isLocked 
-                        ? 'border-gray-300 bg-gray-50 cursor-not-allowed' 
-                        : 'border-primary bg-white hover:bg-primary-50 hover:shadow-md'
-                    }`}
-                    onClick={module.isLocked ? (e) => {
-                      e.preventDefault();
-                      handleLogin();
-                    } : undefined}
-                  >
-                    <div className="text-center">
-                      <div className={`text-2xl font-bold mb-1 ${
-                        module.isLocked ? 'text-gray-400' : 'text-primary'
-                      }`}>
-                        {index + 1}
-                      </div>
-                      <div className={`text-xs font-medium ${
-                        module.isLocked ? 'text-gray-400' : 'text-gray-700'
-                      }`}>
-                        {module.title}
-                      </div>
-                      {module.isLocked && (
-                        <div className="mt-2">
-                          <svg className="w-4 h-4 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 616 0z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                      )}
-                      {!module.isLocked && module.status === 'completed' && (
-                        <div className="mt-2">
-                          <svg className="w-4 h-4 mx-auto text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                      )}
-                      {!module.isLocked && module.status === 'in-progress' && (
-                        <div className="mt-2">
-                          <div className="w-full bg-gray-200 rounded-full h-1">
-                            <div 
-                              className="bg-primary h-1 rounded-full" 
-                              style={{ width: `${module.progress || 0}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                      )}
+          {isLoading ? (
+            <p>Loading modules...</p>
+          ) : error ? (
+            <p>Error loading modules. Please try again.</p>
+          ) : moduleData && moduleData.length > 0 ? (
+            moduleData.map(module => (
+              <div key={module.id} className="relative">
+                <ModuleCard
+                  id={module.id}
+                  title={module.title}
+                  description={module.description}
+                  image={module.image}
+                  status={module.status}
+                  completed={module.completed}
+                  total={module.total}
+                />
+                {/* Show lock overlay for locked modules */}
+                {module.isLocked && (
+                  <div className="absolute inset-0 bg-gray-500 bg-opacity-50 rounded-lg flex items-center justify-center">
+                    <div className="text-center text-white">
+                      <svg className="w-8 h-8 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                      </svg>
+                      <p className="text-sm font-medium">Sign in to unlock</p>
+                      <Button 
+                        size="sm" 
+                        className="mt-2"
+                        onClick={handleLogin}
+                      >
+                        Sign In
+                      </Button>
                     </div>
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <div className="col-span-full text-center text-gray-500">
-                No modules found.
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          
-          {/* Unlock message for non-authenticated users */}
-          {!isAuthenticated && (
-            <div className="text-center mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <p className="text-blue-800 font-medium">
-                Sign in to unlock modules 2-6 and track your progress
-              </p>
-              <Button onClick={handleLogin} className="mt-2">
-                Sign In Now
-              </Button>
-            </div>
+            ))
+          ) : (
+            <p>No modules found.</p>
           )}
         </div>
+      </div>
+      
+      {/* Practice Areas */}
+      <div className="mb-12">
+        <h2 className="font-heading text-xl font-bold text-primary mb-6">Practice Your Skills</h2>
         
-        {/* Practice Areas */}
-        <div className="mb-12">
-          <h2 className="font-heading text-xl font-bold text-primary mb-6">Practice Your Skills</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Sales Call Simulator */}
+          <SalesCallSimulator />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Sales Call Simulator */}
-            <SalesCallSimulator />
-            
-            {/* Journal Reflection */}
-            <JournalEntry />
-          </div>
+          {/* Journal Reflection */}
+          <JournalEntry />
         </div>
-        
+      </div>
+      
         {/* Team Challenge */}
         <TeamChallenge 
           title={teamChallenge.title}
