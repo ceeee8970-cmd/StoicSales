@@ -3,7 +3,7 @@ import { useRoute } from "wouter";
 import { Link } from "wouter";
 import ModuleContent from "@/components/modules/ModuleContent";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useAuth } from "@/hooks/useAuth";
+// Removed authentication - all modules accessible
 
 interface Module {
   id: number;
@@ -21,7 +21,7 @@ const ModulePage: React.FC = () => {
   const [match, params] = useRoute("/modules/:id");
   const [loading, setLoading] = useState(true);
   const [module, setModule] = useState<Module | null>(null);
-  const { isAuthenticated } = useAuth();
+  // All modules accessible to everyone
   
   useEffect(() => {
     if (match && params?.id) {
@@ -107,7 +107,7 @@ const ModulePage: React.FC = () => {
         moduleId={module.id}
         moduleTitle={module.title}
         lessons={module.lessons}
-        isAuthenticated={isAuthenticated}
+        isAuthenticated={true}
       />
     </div>
   );

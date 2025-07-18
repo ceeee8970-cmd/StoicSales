@@ -33,12 +33,7 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
   const { toast } = useToast();
 
   const currentLesson = lessons[currentLessonIndex];
-  const isPreviewModule = moduleId > 1 && !isAuthenticated;
-  const isPreviewLesson = currentLesson?.title.includes('Preview');
-  
-  const handleLogin = () => {
-    window.location.href = '/api/login';
-  };
+  // All modules and lessons are fully accessible
   
   const handleNextLesson = () => {
     // Mark current lesson as completed
@@ -107,32 +102,22 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
         </div>
       </div>
       
-      {/* Preview Module Banner */}
-      {isPreviewModule && (
-        <Card className="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
-          <div className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="bg-blue-100 p-2 rounded-full mr-3">
-                  <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-blue-900">Preview Mode</h3>
-                  <p className="text-sm text-blue-700">You're viewing preview content. Sign in to access all lessons and features.</p>
-                </div>
-              </div>
-              <Button 
-                onClick={handleLogin}
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                Sign In to Unlock Full Access
-              </Button>
+      {/* Welcome message for all users */}
+      <Card className="mb-6 bg-gradient-to-r from-green-50 to-blue-50 border-green-200">
+        <div className="p-4">
+          <div className="flex items-center">
+            <div className="bg-green-100 p-2 rounded-full mr-3">
+              <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="font-semibold text-green-900">Full Access</h3>
+              <p className="text-sm text-green-700">Complete lessons, assignments, and reflections - completely free.</p>
             </div>
           </div>
-        </Card>
-      )}
+        </div>
+      </Card>
       
       <div className="flex mb-8">
         <div className="w-64 hidden md:block pr-6 border-r border-neutral-light">
@@ -177,43 +162,7 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
             </div>
           </div>
           
-          {/* Preview Lesson Upgrade Prompt */}
-          {isPreviewLesson && (
-            <Card className="my-6 bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200">
-              <div className="p-6">
-                <div className="text-center">
-                  <div className="bg-amber-100 p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-amber-900 mb-2">
-                    This is just a preview!
-                  </h3>
-                  <p className="text-amber-800 mb-4">
-                    The complete lesson includes detailed examples, practice exercises, advanced techniques, and actionable assignments.
-                  </p>
-                  <div className="bg-white p-4 rounded-lg border border-amber-200 mb-4">
-                    <h4 className="font-semibold text-amber-900 mb-2">Full lesson includes:</h4>
-                    <ul className="text-sm text-amber-800 space-y-1">
-                      <li>• Complete step-by-step guides</li>
-                      <li>• Real-world case studies and examples</li>
-                      <li>• Interactive exercises and assignments</li>
-                      <li>• Reflection prompts for deeper learning</li>
-                      <li>• Progress tracking and completion certificates</li>
-                    </ul>
-                  </div>
-                  <Button 
-                    onClick={handleLogin}
-                    className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 py-2"
-                    size="lg"
-                  >
-                    Sign In to Access Complete Lesson
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          )}
+          {/* Encouragement for continued learning */}
           
           {currentLesson.assignment && (
             <Card className="p-6 mb-6 bg-secondary bg-opacity-20 border-secondary">

@@ -76,44 +76,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all modules with personalized progress
+  // Get all modules - all accessible to everyone
   app.get("/api/modules", async (req: Request, res: Response) => {
     try {
       const modules = await storage.getAllModules();
       
-      // If user is authenticated, get their progress
-      let userProgress: any[] = [];
-      if (req.isAuthenticated && req.isAuthenticated()) {
-        const userId = (req.user as any)?.claims?.sub;
-        if (userId) {
-          userProgress = await storage.getUserProgress(userId);
-        }
-      }
-      
-      // Enhance modules with progress data
+      // Enhance modules with basic data (no authentication needed)
       const modulesWithProgress = await Promise.all(modules.map(async module => {
         const lessons = await storage.getLessonsByModule(module.id);
         const totalLessons = lessons.length;
         
-        const moduleProgress = userProgress.filter(p => p.moduleId === module.id);
-        const completedLessons = moduleProgress.filter(p => p.completed).length;
-        
-        let status = 'not-started';
-        if (completedLessons === totalLessons && totalLessons > 0) {
-          status = 'completed';
-        } else if (completedLessons > 0) {
-          status = 'in-progress';
-        }
-        
         return {
           ...module,
-          status,
-          progress: totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0,
-          isLocked: !req.isAuthenticated() && module.order > 1, // First module is always free, others need auth
+          status: 'available',
+          progress: 0,
+          isLocked: false, // All modules are accessible
           totalLessons,
-          completedLessons,
-          hasPreview: module.order > 1, // Modules 2-6 have preview content
-          isFullyAccessible: req.isAuthenticated() || module.order === 1 // Module 1 is fully accessible to everyone
+          completedLessons: 0,
+          isFullyAccessible: true // All modules fully accessible
         };
       }));
       
@@ -155,7 +135,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // ---------- Lesson Routes ----------
   
-  // Get all lessons for a module
+  // Get all lessons for a module - all accessible to everyone
   app.get("/api/modules/:id/lessons", async (req: Request, res: Response) => {
     try {
       const moduleId = parseInt(req.params.id);
@@ -169,23 +149,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       const lessons = await storage.getLessonsByModule(moduleId);
-      
-      // Apply access control based on authentication and module
-      if (!req.isAuthenticated()) {
-        if (module.order === 1) {
-          // Module 1: Full access for everyone
-          res.json(lessons);
-        } else {
-          // Modules 2-6: Only preview lessons for non-authenticated users
-          const previewLessons = lessons.filter(lesson => 
-            lesson.title.includes('Preview') || lesson.order === 1
-          );
-          res.json(previewLessons);
-        }
-      } else {
-        // Authenticated users get full access to all lessons
-        res.json(lessons);
-      }
+      // Return all lessons for everyone
+      res.json(lessons);
     } catch (err) {
       handleApiError(err, res);
     }
