@@ -9,10 +9,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ toggleSidebar }) => {
   return (
     <div className="md:hidden bg-primary text-white p-4 flex items-center justify-between">
       <div className="flex items-center">
-        <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary mr-3">
-          <span className="text-sm font-bold">S</span>
-        </div>
-        <h1 className="font-heading text-xl font-bold">Stoic Seller</h1>
+        <img src="/attached_assets/ChatGPT Image Jul 18, 2025, 10_00_21 AM_1752831592573.png" alt="The Stoic Seller Logo" className="w-8 h-8 object-contain mr-3" />
+        <h1 className="font-heading text-xl font-bold">The Stoic Seller</h1>
       </div>
       <button 
         id="sidebar-toggle"
