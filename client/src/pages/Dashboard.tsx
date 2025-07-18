@@ -13,6 +13,14 @@ import { useQuery } from "@tanstack/react-query";
 // Removed authentication - all modules now accessible
 import PreviewBanner from "@/components/auth/PreviewBanner";
 import { Button } from "@/components/ui/button";
+import { 
+  Module1Illustration, 
+  Module2Illustration, 
+  Module3Illustration, 
+  Module4Illustration, 
+  Module5Illustration, 
+  Module6Illustration 
+} from "@/assets/module-illustrations";
 
 const Dashboard: React.FC = () => {
   // Removed authentication - all content accessible to everyone
@@ -126,74 +134,65 @@ const Dashboard: React.FC = () => {
               </div>
             ) : moduleData && moduleData.length > 0 ? (
               moduleData.slice(0, 6).map((module, index) => {
-                // Define module-specific images and descriptions
+                // Define module-specific configurations
                 const moduleConfig = {
                   1: {
-                    image: "https://images.unsplash.com/photo-1553028826-f4804151e2b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-                    gradient: "from-blue-500 to-purple-600",
-                    icon: "🎯",
+                    illustration: Module1Illustration,
                     description: "Master the fundamentals of ethical selling and build unshakeable confidence",
-                    lessons: "3 comprehensive lessons"
+                    lessons: "3 comprehensive lessons",
+                    color: "from-blue-500 to-purple-600"
                   },
                   2: {
-                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-                    gradient: "from-green-500 to-teal-600",
-                    icon: "🗣️",
+                    illustration: Module2Illustration,
                     description: "Develop persuasive communication skills and master the art of influence",
-                    lessons: "3 comprehensive lessons"
+                    lessons: "3 comprehensive lessons",
+                    color: "from-green-500 to-teal-600"
                   },
                   3: {
-                    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-                    gradient: "from-orange-500 to-red-600",
-                    icon: "🛡️",
+                    illustration: Module3Illustration,
                     description: "Transform objections into opportunities with proven handling techniques",
-                    lessons: "3 comprehensive lessons"
+                    lessons: "3 comprehensive lessons",
+                    color: "from-orange-500 to-red-600"
                   },
                   4: {
-                    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-                    gradient: "from-purple-500 to-pink-600",
-                    icon: "🎯",
+                    illustration: Module4Illustration,
                     description: "Learn advanced closing techniques and decision psychology",
-                    lessons: "3 comprehensive lessons"
+                    lessons: "3 comprehensive lessons",
+                    color: "from-purple-500 to-pink-600"
                   },
                   5: {
-                    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-                    gradient: "from-indigo-500 to-blue-600",
-                    icon: "🤝",
+                    illustration: Module5Illustration,
                     description: "Build lasting relationships and create sustainable revenue through referrals",
-                    lessons: "3 comprehensive lessons"
+                    lessons: "3 comprehensive lessons",
+                    color: "from-indigo-500 to-blue-600"
                   },
                   6: {
-                    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-                    gradient: "from-teal-500 to-green-600",
-                    icon: "📈",
+                    illustration: Module6Illustration,
                     description: "Master strategic account planning and advanced negotiation tactics",
-                    lessons: "3 comprehensive lessons"
+                    lessons: "3 comprehensive lessons",
+                    color: "from-teal-500 to-green-600"
                   }
                 };
 
                 const config = moduleConfig[module.id as keyof typeof moduleConfig];
+                const IllustrationComponent = config.illustration;
                 
                 return (
                   <div key={module.id} className="group">
                     <Link href={`/modules/${module.id}`}>
                       <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 group-hover:scale-[1.02] overflow-hidden">
-                        {/* Image Header */}
-                        <div className="relative h-48 overflow-hidden">
-                          <img 
-                            src={config.image} 
-                            alt={module.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                          <div className={`absolute inset-0 bg-gradient-to-br ${config.gradient} opacity-80`}></div>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="text-center text-white">
-                              <div className="text-4xl mb-2">{config.icon}</div>
-                              <div className="text-2xl font-bold">Module {index + 1}</div>
+                        {/* Illustration Header */}
+                        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
+                          <div className="w-full h-full group-hover:scale-105 transition-transform duration-300">
+                            <IllustrationComponent />
+                          </div>
+                          <div className="absolute top-4 left-4">
+                            <div className="bg-white/90 backdrop-blur-sm text-slate-700 px-3 py-1 rounded-full text-sm font-bold border border-slate-200">
+                              Module {index + 1}
                             </div>
                           </div>
                           <div className="absolute top-4 right-4">
-                            <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                            <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-sm">
                               FREE
                             </div>
                           </div>
