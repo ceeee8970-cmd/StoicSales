@@ -3,6 +3,7 @@ import { useRoute } from "wouter";
 import { Link } from "wouter";
 import ModuleContent from "@/components/modules/ModuleContent";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Logo } from "@/components/ui/Logo";
 // Removed authentication - all modules accessible
 
 interface Module {
@@ -102,13 +103,35 @@ const ModulePage: React.FC = () => {
   }
   
   return (
-    <div className="p-6 md:p-10">
-      <ModuleContent 
-        moduleId={module.id}
-        moduleTitle={module.title}
-        lessons={module.lessons}
-        isAuthenticated={true}
-      />
+    <div className="w-full min-h-screen bg-slate-50 dark:bg-slate-900">
+      {/* Top Navigation */}
+      <nav className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <Link href="/">
+                  <Logo size="sm" />
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link href="/" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                ← Back to Dashboard
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="p-6 md:p-10">
+        <ModuleContent 
+          moduleId={module.id}
+          moduleTitle={module.title}
+          lessons={module.lessons}
+          isAuthenticated={true}
+        />
+      </div>
     </div>
   );
 };

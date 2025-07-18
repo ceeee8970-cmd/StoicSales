@@ -21,6 +21,7 @@ import {
   Module5Illustration, 
   Module6Illustration 
 } from "@/assets/module-illustrations";
+import { Logo } from "@/components/ui/Logo";
 
 const Dashboard: React.FC = () => {
   // Removed authentication - all content accessible to everyone
@@ -71,7 +72,7 @@ const Dashboard: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">The Stoic Seller</h1>
+                <Logo size="sm" />
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -84,12 +85,12 @@ const Dashboard: React.FC = () => {
       </nav>
 
       <div className="p-6 md:p-10">
-        {/* User Welcome with custom message */}
+        {/* User Welcome with Logo */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Welcome to The Stoic Seller
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300">
+          <div className="flex justify-center mb-4">
+            <Logo size="lg" />
+          </div>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Master the art of sales with ancient wisdom - All 6 modules completely free
           </p>
         </div>
