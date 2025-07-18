@@ -1,22 +1,39 @@
-import { pgTable, text, serial, integer, boolean, timestamp, json } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, serial, integer, boolean, timestamp, json, jsonb, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-// User model
+// Session storage table for Replit Auth
+export const sessions = pgTable(
+  "sessions",
+  {
+    sid: varchar("sid").primaryKey(),
+    sess: jsonb("sess").notNull(),
+    expire: timestamp("expire").notNull(),
+  },
+  (table) => [index("IDX_session_expire").on(table.expire)],
+);
+
+// User model updated for Replit Auth
 export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
-  displayName: text("display_name"),
+  id: varchar("id").primaryKey().notNull(), // Replit user ID is string
+  email: varchar("email").unique(),
+  firstName: varchar("first_name"),
+  lastName: varchar("last_name"),
+  profileImageUrl: varchar("profile_image_url"),
   points: integer("points").default(0),
   level: integer("level").default(1),
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+export type UpsertUser = typeof users.$inferInsert;
+export type User = typeof users.$inferSelect;
+
 export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
-  displayName: true,
+  email: true,
+  firstName: true,
+  lastName: true,
+  profileImageUrl: true,
 });
 
 // Modules
@@ -55,10 +72,10 @@ export const insertLessonSchema = createInsertSchema(lessons).pick({
   order: true,
 });
 
-// User Progress
+// User Progress updated for string user IDs
 export const userProgress = pgTable("user_progress", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull(),
+  userId: varchar("user_id").notNull(), // Changed to varchar for Replit user ID
   moduleId: integer("module_id").notNull(),
   lessonId: integer("lesson_id").notNull(),
   completed: boolean("completed").default(false),
@@ -71,6 +88,9 @@ export const insertUserProgressSchema = createInsertSchema(userProgress).pick({
   lessonId: true,
   completed: true,
 });
+
+// Export types for user progress (remove duplicate)
+export type UserProgressType = typeof userProgress.$inferSelect;
 
 // Journal Entries
 export const journalEntries = pgTable("journal_entries", {
