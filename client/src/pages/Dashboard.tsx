@@ -127,37 +127,37 @@ const Dashboard: React.FC = () => {
               </div>
             ) : moduleData && moduleData.length > 0 ? (
               moduleData.slice(0, 6).map((module, index) => {
-                // Define module-specific configurations
+                // Define module-specific configurations - using consistent dark green
                 const moduleConfig = {
                   1: {
                     description: "Master the fundamentals of ethical selling and build unshakeable confidence",
                     lessons: "3 comprehensive lessons",
-                    color: "from-green-400 to-green-600"
+                    color: "bg-primary"
                   },
                   2: {
                     description: "Develop persuasive communication skills and master the art of influence",
                     lessons: "3 comprehensive lessons",
-                    color: "from-green-500 to-green-700"
+                    color: "bg-primary"
                   },
                   3: {
                     description: "Transform objections into opportunities with proven handling techniques",
                     lessons: "3 comprehensive lessons",
-                    color: "from-emerald-400 to-emerald-600"
+                    color: "bg-primary"
                   },
                   4: {
                     description: "Learn advanced closing techniques and decision psychology",
                     lessons: "3 comprehensive lessons",
-                    color: "from-teal-400 to-teal-600"
+                    color: "bg-primary"
                   },
                   5: {
                     description: "Build lasting relationships and create sustainable revenue through referrals",
                     lessons: "3 comprehensive lessons",
-                    color: "from-green-600 to-green-800"
+                    color: "bg-primary"
                   },
                   6: {
                     description: "Master strategic account planning and advanced negotiation tactics",
                     lessons: "3 comprehensive lessons",
-                    color: "from-emerald-500 to-emerald-700"
+                    color: "bg-primary"
                   }
                 };
 
@@ -167,8 +167,8 @@ const Dashboard: React.FC = () => {
                   <div key={module.id} className="group">
                     <Link href={`/modules/${module.id}`}>
                       <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 group-hover:scale-[1.02] overflow-hidden">
-                        {/* Header with gradient */}
-                        <div className={`relative h-32 overflow-hidden bg-gradient-to-br ${config.color}`}>
+                        {/* Header with consistent dark green */}
+                        <div className={`relative h-32 overflow-hidden ${config.color}`}>
                           <div className="absolute top-4 left-4">
                             <div className="bg-white/90 backdrop-blur-sm text-slate-700 px-3 py-1 rounded-full text-sm font-bold border border-slate-200">
                               Module {index + 1}
