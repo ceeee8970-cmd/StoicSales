@@ -83,7 +83,7 @@ const Dashboard: React.FC = () => {
             Welcome to The Stoic Seller
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Master the art of sales with ancient wisdom - All 6 modules completely free
+            Master the art of sales with ancient wisdom - All 5 modules completely free
           </p>
         </div>
         
@@ -97,7 +97,7 @@ const Dashboard: React.FC = () => {
         <div className="mb-12">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="font-heading text-xl font-bold text-primary">The 6 Complete Modules</h2>
+              <h2 className="font-heading text-xl font-bold text-primary">The 5 Complete Modules</h2>
               <p className="text-sm text-gray-600 mt-1">
                 All interactive training modules with complete lessons, assignments, and reflections - completely free.
               </p>
@@ -111,7 +111,7 @@ const Dashboard: React.FC = () => {
           {/* Module Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {isLoading ? (
-              Array.from({ length: 6 }).map((_, i) => (
+              Array.from({ length: 5 }).map((_, i) => (
                 <div key={i} className="bg-white rounded-xl border border-gray-200 shadow-sm animate-pulse">
                   <div className="h-48 bg-gray-300 rounded-t-xl"></div>
                   <div className="p-6">
@@ -126,7 +126,7 @@ const Dashboard: React.FC = () => {
                 Error loading modules. Please try again.
               </div>
             ) : moduleData && moduleData.length > 0 ? (
-              moduleData.slice(0, 6).map((module, index) => {
+              moduleData.slice(0, 5).map((module, index) => {
                 // Use dynamic configuration based on the module data from database
                 const config = {
                   description: module.description,
@@ -193,7 +193,7 @@ const Dashboard: React.FC = () => {
           <div className="text-center mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200">
             <div className="mb-3">
               <h3 className="text-lg font-semibold text-green-900 mb-2">
-                All 6 Modules Are Completely Free
+                All 5 Modules Are Completely Free
               </h3>
               <p className="text-green-800">
                 Access all lessons, assignments, and reflections without any registration or payment required. Start your journey to sales excellence today.
