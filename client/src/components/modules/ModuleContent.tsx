@@ -35,11 +35,24 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
   const currentLesson = lessons[currentLessonIndex];
   // All modules and lessons are fully accessible
   
+  // Handle empty lessons array
+  if (!lessons || lessons.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <h2 className="text-2xl font-bold mb-4">No lessons available</h2>
+        <p className="text-gray-600 mb-4">This module doesn't have any lessons yet.</p>
+        <Link href="/">
+          <Button variant="outline">Back to Dashboard</Button>
+        </Link>
+      </div>
+    );
+  }
+  
   const handleNextLesson = () => {
     // Mark current lesson as completed
     setCompletedLessons(prev => ({
       ...prev,
-      [currentLesson.id]: true
+      [currentLesson?.id]: true
     }));
     
     // Move to next lesson if available
@@ -150,11 +163,11 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
         <div className="flex-1 md:pl-8">
           <div className="mb-6">
             <h2 className="font-heading text-2xl font-bold mb-6">
-              {currentLesson.title}
+              {currentLesson?.title}
             </h2>
             
             <div className="prose max-w-none">
-              {currentLesson.content.split('\n\n').map((paragraph, idx) => (
+              {currentLesson?.content?.split('\n\n').map((paragraph, idx) => (
                 <p key={idx} className="mb-4">
                   {paragraph}
                 </p>
@@ -164,11 +177,11 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
           
           {/* Encouragement for continued learning */}
           
-          {currentLesson.assignment && (
+          {currentLesson?.assignment && (
             <Card className="p-6 mb-6 bg-secondary bg-opacity-20 border-secondary">
               <h3 className="font-heading text-lg font-bold mb-3">Assignment</h3>
               <div className="prose max-w-none">
-                {currentLesson.assignment.split('\n\n').map((paragraph, idx) => (
+                {currentLesson?.assignment?.split('\n\n').map((paragraph, idx) => (
                   <p key={idx} className="mb-4">
                     {paragraph}
                   </p>
@@ -177,7 +190,7 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
             </Card>
           )}
           
-          {currentLesson.reflection && (
+          {currentLesson?.reflection && (
             <div 
               className="p-6 mb-6 rounded-lg border shadow-sm" 
               style={{ 
@@ -188,7 +201,7 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
             >
               <h3 className="font-heading text-lg font-bold mb-3" style={{ color: '#166534 !important' }}>Reflect</h3>
               <div className="prose max-w-none" style={{ color: '#14532d !important' }}>
-                {currentLesson.reflection.split('\n\n').map((paragraph, idx) => (
+                {currentLesson?.reflection?.split('\n\n').map((paragraph, idx) => (
                   <p key={idx} className="mb-4 font-medium" style={{ color: '#14532d !important' }}>
                     {paragraph}
                   </p>
@@ -222,7 +235,7 @@ const ModuleContent: React.FC<ModuleContentProps> = ({
               >
                 {currentLessonIndex < lessons.length - 1
                   ? "Next Lesson"
-                  : completedLessons[currentLesson.id]
+                  : completedLessons[currentLesson?.id]
                     ? "Module Completed"
                     : "Complete Module"
                 }
