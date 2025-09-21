@@ -127,41 +127,12 @@ const Dashboard: React.FC = () => {
               </div>
             ) : moduleData && moduleData.length > 0 ? (
               moduleData.slice(0, 6).map((module, index) => {
-                // Define module-specific configurations - using consistent dark green
-                const moduleConfig = {
-                  1: {
-                    description: "Master the fundamentals of ethical selling and build unshakeable confidence",
-                    lessons: "6 comprehensive lessons",
-                    color: "bg-primary"
-                  },
-                  2: {
-                    description: "Develop persuasive communication skills and master the art of influence",
-                    lessons: "3 comprehensive lessons",
-                    color: "bg-primary"
-                  },
-                  3: {
-                    description: "Transform objections into opportunities with proven handling techniques",
-                    lessons: "3 comprehensive lessons",
-                    color: "bg-primary"
-                  },
-                  4: {
-                    description: "Learn advanced closing techniques and decision psychology",
-                    lessons: "3 comprehensive lessons",
-                    color: "bg-primary"
-                  },
-                  5: {
-                    description: "Build lasting relationships and create sustainable revenue through referrals",
-                    lessons: "3 comprehensive lessons",
-                    color: "bg-primary"
-                  },
-                  6: {
-                    description: "Master strategic account planning and advanced negotiation tactics",
-                    lessons: "3 comprehensive lessons",
-                    color: "bg-primary"
-                  }
+                // Use dynamic configuration based on the module data from database
+                const config = {
+                  description: module.description,
+                  lessons: `${module.totalLessons} comprehensive lessons`,
+                  color: "bg-primary"
                 };
-
-                const config = moduleConfig[module.id as keyof typeof moduleConfig];
                 
                 return (
                   <div key={module.id} className="group">
