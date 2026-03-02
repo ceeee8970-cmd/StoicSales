@@ -1,6 +1,6 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
-import { setupAuth, isAuthenticated } from "./replitAuth";
+// import { setupAuth, isAuthenticated } from "./replitAuth";
 import Stripe from "stripe";
 import { storage } from "./storage";
 import { createWriteStream, mkdir, existsSync } from "fs";
@@ -40,8 +40,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  app.use((req, res, next) => next());
   // Auth middleware
-  await setupAuth(app);
+  // await setupAuth(app);
 
   const httpServer = createServer(app);
   
@@ -65,7 +66,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // ---------- Module Routes ----------
   
   // Auth routes
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
+  app.get('/api/auth/user', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);

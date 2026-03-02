@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
@@ -51,20 +52,14 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    // Use our improved static handler that can find files in multiple locations
-    setupStaticServing(app);
-  }
+  await setupVite(app, server);
 
   // Use PORT environment variable for production (Cloud Run) or default to 5000 for development
   // This serves both the API and the client.
   const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
   server.listen({
     port,
-    host: "0.0.0.0",
-    reusePort: true,
+    host: "localhost",
   }, () => {
     log(`serving on port ${port}`);
   });
