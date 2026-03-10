@@ -114,7 +114,9 @@ function App() {
       <LanguageProvider>
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <WouterRouter base="/StoicSales">
+  <Router />
+</WouterRouter>
         </TooltipProvider>
       </LanguageProvider>
     </QueryClientProvider>
