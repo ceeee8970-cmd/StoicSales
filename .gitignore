@@ -1,10 +1,32 @@
+# Dependencies and build artifacts
 node_modules
 dist
 .DS_Store
-server/public
-vite.config.ts.*
 *.tar.gz
 
-# Local environment files
+# Development files
+client/
+server/
+scripts/
+shared/
+uploads/
+
+# Configuration files
+vite.config.ts
+tsconfig.json
+components.json
+drizzle.config.ts
+tailwind.config.ts
+postcss.config.js
+
+# Environment
 .env
 .env.*
+
+# IDE
+.vscode/
+
+# Other
+.local
+.config
+attached_assets/
