@@ -6,17 +6,9 @@
     <script type="text/javascript">
       // Redirect from GitHub Pages 404 to index.html with path info
       // This allows client-side routing to work on GitHub Pages
-      var pathSegments = window.location.pathname
-        .split('/')
-        .filter(function(p) {
-          return p;
-        });
-      var path = '/' + pathSegments.join('/');
-      if (path !== '/' && pathSegments[0] === 'StoicSales') {
-        path = '/' + pathSegments.slice(1).join('/');
-      }
+      var path = window.location.pathname;
       window.sessionStorage.redirect = path;
-      window.location.href = '/StoicSales/';
+      window.location.href = '/';
     </script>
   </head>
   <body></body>
